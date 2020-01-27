@@ -1,58 +1,81 @@
+import pdb
 import threading
 import queue
-import RetroBridgeBBS.devices   # telnet, serial, console device interfaces
+import RetroBridgeBBS.device           # telnet, serial, console device interfaces
+import RetroBridgeBBS.device.manager   # telnet, serial, console device interfaces
+import RetroBridgeBBS.terminal  # ascii, ansi, etc
+import RetroBridgeBBS.rooms  # ascii, ansi, etc
+import RetroBridgeBBS.rooms.main_menu  # ascii, ansi, etc
+import logging
+#logging.basicConfig(filename='RetroBridgeBBS.log',level=logging.DEBUG)
 
 #['Node 0', RetroBridgeBBS.devices.console,  []],
 #['Node 1', RetroBridgeBBS.comms.tty,    ['/dev/ttyUSB0']],
 #['Node 2', RetroBridgeBBS.comms.telnet, ['', 51235]],
 
-node_list = [
-        { 'name':'Node 0', 'class':RetroBridgeBBS.devices.console, 'args':[] },
-        { 'name':'Node 2', 'class':RetroBridgeBBS.devices.telnet, 'args':['', 3030]},
+device_managers_to_start = [
+        { 'name':'Node 0', 'class':RetroBridgeBBS.device.manager.ConsoleManager, 'args':[] },
+        { 'name':'Node 2', 'class':RetroBridgeBBS.device.manager.TelnetManager, 'args':['', 3030]},
 ]
 
 class UserSession(object):
-    def __init__(self, device_object, device_argument_list):
-        self.device_object = device_object
-        self.do_login
 
-    def do_login(self):
-        username = self.device_object.prompt('Username:')
-        print(f"User logged in: {username}")
+    STATES = {
+            'ACCEPTING_CONNECTION' : 0,
+            'USER_LOGGED_IN'       : 1,
+    }
+
+    def __init__(self, bbs, device_io, device_manager):
+        self.state = UserSession.STATES['ACCEPTING_CONNECTION']
+        self.bbs = bbs
+        self.device_io = device_io
+        self.device_manager = device_manager
+        self.bbs.register_session(self)
+
+    def accept_connections(self):
+        logging.debug(f"Creating Terminal Class: {self.device_io.DEFAULT_TERM_CLASS}")
+        self.terminal = self.device_io.DEFAULT_TERM_CLASS(self.bbs, self.device_io, self)
+        logging.debug(f"UserSession.do_login()")
+        logging.info(f"Waiting for login on {self.device_io}")
+        username = self.terminal.string_prompt('Please enter your username')
+        logging.info(f"User logged in: {username}")
         self.username = username
+        RetroBridgeBBS.rooms.main_menu.MainMenu(self)
+        RetroBridgeBBS.rooms.LogOut(self)
+        self.device_manager.disconnect_user_session(self)
 
 class BBS(object):
     """
-    This is the main code that dispatches nodes on devices for callers to connect to.
+    This is the main code that dispatches ___ on devices for callers to connect to.
     """
 
     exit    = False
     devices = []
     queues  = {}
+    sessions = []
 
     def __init__(self):
-        print("In init")
-        self.initialize_nodes(node_list)
-        self.queues['console_queue'] = queue.Queue()
+        logging.debug("RetroBridgeBBS.BBS.__init__()")
+        self.initialize_device_managers(device_managers_to_start)
         return
 
-    def initialize_nodes(self, node_list):
-        print("begin initialize_nodes")
-        self.devices = []
-        for _idx, _n in enumerate(node_list):
-            name = _n['name']
-            dev_class = _n['class']
-            dev_class_args = _n['args']
-            device = dev_class(self, dev_class_args)
-            self.devices.append(device)
-        print("exit initialize_nodes")
-        return
+    def register_session(self, user_session):
+        self.sessions.append(user_session)
 
-    def log(self, message):
-        print(message)
+    def initialize_device_managers(self, managers_to_start):
+        logging.info(f"Launching [{len(managers_to_start)}]device managers...")
+        self.device_managers = []
+        for _idx, _n in enumerate(managers_to_start):
+            _name = _n['name']
+            _class = _n['class']
+            _args = _n['args']
+            logging.info(f"    {_idx}: {_class}")
+            thread = threading.Thread(target=_class,
+                                           args=(self, _args,),
+                                           daemon=True)
+            thread.start()
+            self.device_managers.append(thread)
         return
 
     def initialize_user_session(self, device, arg_list):
         user = UserSession(device, arg_list)
-        
-
