@@ -1,0 +1,10 @@
+#!/bin/sh
+#DEV=/dev/ttyUSB0
+PROTOCOL=$1
+DEV=$2
+#BAUD=57600
+BAUD=$3
+FILE=$4
+stty -F $DEV $BAUD
+sb -$PROTOCOL $FILE > $DEV < $DEV
+

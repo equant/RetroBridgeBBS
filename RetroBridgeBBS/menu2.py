@@ -1,35 +1,35 @@
 
-class Menu(object):
+class Menu2(object):
 
-#            {
-#               "key" : None
-#              "label": "XMODEM Download Test",
-#                "do" : self.x_modem_test,
-#              "test" : DOWNLOAD_CAPABLE
-#            },
-#            {
-#               "key" : None
-#              "label": "YMODEM Download Test",
-#                "do" : self.y_modem_test,
-#              "test" : DOWNLOAD_CAPABLE
-#            },
-#            {
-#               "key" : None
-#              "label": "ZMODEM Download Test",
-#                "do" : self.z_modem_test,
-#              "test" : DOWNLOAD_CAPABLE
-#            },
-#            {
-#               "key" : ['x'],
-#              "label": "Exit",
-#                "do" : "exit",
-#              "test" : None
-#            },
+    global_commands_list = [
+            {
+                   "key" : 'Q',
+                  "label": "Quit",
+                    "do" : "quit",
+                  "test" : None,
+              "category" : 'System',
+            },
+            {
+                   "key" : '?',
+                  "label": "Help",
+                    "do" : 'help',
+                  "test" : None,
+              "category" : 'System',
+            },
+            {
+                   "key" : 'S',
+                  "label": "Settings",
+                    "do" : RetroBridgeBBS.rooms.settings.Settings,
+                  "test" : None,
+              "category" : 'System',
+            },
+    ]
 
-    def __init__(self,user_session, menu_list):
+    def __init__(self,user_session, menu_list, add_global_commands=True):
         self.user_session = user_session
         self.menu_list    = menu_list
         self.terminal     = self.user_session.terminal
+        self.add_global_commands = add_global_commands
         return
 
     def handle_menu(self):
