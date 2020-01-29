@@ -9,13 +9,37 @@ This software will help you transfer software to your classic Macintosh (e.g. Ma
 
 Ultimately I would like this software to be useful to Commodore, Apple ][, Tandy, etc users.  But, I'm developing it mostly for my old macs, so it's not there yet.  If you would like to help connect it to online sources for those platforms, please do!
 
-# Requirements
+# Instalation
+
+## Requirements
 
 For this to be useful, you are expected to have:
 
 1. A host computer with python 3 _and_ a serial port.
 2. A Macintosh with some form of terminal software (e.g. ZTerm, QuickLink)
 3. A null modem cable to connect the Macintosh and the host PC.
+
+## Getting things running
+
+### Steps you may need to do
+```bash
+git clone https://github.com/equant/RetroBridgeBBS
+sudo pip install pyserial
+sudo pip install beautifulsoup4
+```
+
+### Starting the bbs
+```bash
+cd RetroBridgeBBS
+python -i start_bbs.py
+
+### Logging in
+
+You can log in on the console after starting the bbs.  Or you can connect via a serial device.  Or you can telnet.
+
+```
+telnet localhost 3030
+```
 
 
 # Mac Serial Tips and Notes

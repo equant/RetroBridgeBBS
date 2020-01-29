@@ -1,3 +1,8 @@
+import types
+import inspect
+import RetroBridgeBBS.menu as menu
+import logging
+
 class Room(object):
 
     def __init__(self,user_session):
@@ -7,6 +12,51 @@ class Room(object):
         self.run_room()
         return
 
+    def do_menu(self, menu_list=None):
+        if menu_list is None:
+            menu_list = self.menu_list
+        m = menu.Menu(self.user_session, menu_list, title=self.user_session.username)
+
+        command = None
+        while True:
+            command_dict = m.handle_menu()
+            logging.debug(f"Got command_dict from m.handle_menu()...")
+            logging.debug(command_dict)
+            if command_dict['valid']:
+                command = command_dict['command']
+                logging.debug("do_menu() COMMAND is valid")
+                logging.debug(f"do_menu() COMMAND is: {command}")
+                if command is None:
+                    pass
+                elif type(command) == str:
+                    #logging.debug("do_menu() COMMAND is str()")
+                    #if command in ('exit', 'Exit', 'back', 'Back', 'quit', 'Quit'):
+                    should_break = self.do_string_command(command)
+                    if should_break:
+                        break
+                #elif isinstance(command, types.FunctionType):
+                elif inspect.ismethod(command):
+                    logging.debug("do_menu() COMMAND is function")
+                    logging.debug(f"About to use command: [{command}]")
+                    command()
+                elif issubclass(command, Room):
+                    logging.debug("do_menu() COMMAND is subclass of Room")
+                    command(self.user_session)
+                else:
+                    logging.debug("do_menu() COMMAND is unexpected type: {type(command)}")
+                    logging.error_message(f"Command ({command}) appears valid, but I can't figure out what to do with it.")
+            else:
+                logging.debug("do_menu() COMMAND is NOT VALID")
+                # invalid selection.  We just ignore it an reprint the
+                # menu at the beginning of the while loop
+                pass
+            #self.terminal.writeln()
+        return 
+
+    def do_string_command(self, command_string):
+        if command_string in ('exit', 'Exit', 'back', 'Back', 'quit', 'Quit'):
+            logging.debug("do_string_command() thinks we should break")
+            return True
 
 class LogOut(Room):
 

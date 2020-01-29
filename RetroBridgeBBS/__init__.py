@@ -37,6 +37,8 @@ class UserSession(object):
         self.terminal = self.device_io.DEFAULT_TERM_CLASS(self.bbs, self.device_io, self)
         logging.debug(f"UserSession.do_login()")
         logging.info(f"Waiting for login on {self.device_io}")
+        self.terminal.writeln()
+        self.terminal.writeln()
         username = self.terminal.string_prompt('Please enter your username')
         logging.info(f"User logged in: {username}")
         self.username = username

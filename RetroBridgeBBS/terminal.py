@@ -27,16 +27,27 @@ Restore cursor (and attributes) 	DECRC 	ESC 8
 
 class BaseTerminal(object):
 
-    CLRF = "\r\n"
+    FOO = chr(0x0E);
+    CRLF = "\r\n"
+    NL = "\r\n"
     ESCAPE = chr(27)
     CLEAR_SCREEN = ESCAPE + "[2J"
     PROMPT_CHARACTER = ": "
     DO_ECHO = True
 
+    TERM_WIDTH = 64
+
     def __init__(self, bbs, device_io, user_session):
         self.bbs          = bbs
         self.device_io    = device_io
         self.user_session = user_session
+
+    def pause(self):
+        self.write(f" --- press enter to continue ---")
+        typed_character = self.readln()
+        self.writeln()
+        self.writeln()
+        return typed_character
 
     def character_prompt(self, prompt):
         self.write(f"{prompt}" + self.PROMPT_CHARACTER)
@@ -49,13 +60,16 @@ class BaseTerminal(object):
         self.writeln("")
         return typed_string
 
-    def write(self, data):
+    def write(self, data=""):
         self.device_io.write(data)
 
-    def writeln(self, data):
+    def writeln(self, data=""):
         self.device_io.write(data)
-        self.device_io.write(self.CLRF)
+        self.device_io.write(self.CRLF)
         print()
+
+    def get_string_hline(self):
+        return "-"*80
 
     def read(self):
         _chr = self.device_io.read()
@@ -66,8 +80,8 @@ class BaseTerminal(object):
     def readln(self):
         read_string = ""
         _chr = ""
-        #while _chr != self.CLRF:
-        while _chr not in (self.CLRF, '\n', '\r', '\t', '\r\x00'):
+        #while _chr != self.CRLF:
+        while _chr not in (self.CRLF, '\n', '\r', '\t', '\r\x00'):
             logging.debug(f"readln() received [{_chr}] which is type: {type(_chr)}")
             logging.debug(f"    [{_chr.encode()}]")
             _chr = self.read()
@@ -76,19 +90,59 @@ class BaseTerminal(object):
         return read_string
 
     def newline(self):
-        self.device_io.write(self.CLRF)
+        self.device_io.write(self.CRLF)
         return
 
+    #menu_string += "| " + l + " "*(WIDTH-4-len(l)) + " |" + self.term.CRLF
+    #menu_string += "+"+"-"*(WIDTH-2)+"+" + self.term.CRLF
+    #menu_string += "+"+"-"*(WIDTH-2)+"+" + self.term.CRLF
+
+
+    def make_box_title(self, title, crlf=True):
+        padded = title.center(self.TERM_WIDTH-4, " ")
+        return self.make_box_string(padded, crlf=crlf)
+
+
+    def make_box_string(self, data, crlf=True):
+        _s = "| " + data + " "*(self.TERM_WIDTH-4-len(data)) + " |"
+        if crlf:
+            _s += self.CRLF
+        return _s
+
+    def make_box_hr(self, crlf=True):
+        _s = "+"+"-"*(self.TERM_WIDTH-2)+"+"
+        if crlf:
+            _s += self.CRLF
+        return _s
+
+
+
+    def color_test(self):
+        """
+        some code from Michael Alyn Miller and Hermes BBS
+        doesn't work with console.  Does it work with ANSI?
+        """
+
+        for y in range(7):
+            for x in range(7):
+                #self.write('\033[%d;%dm\261\261\033[0m' & (30+x, 40+y))
+                self.write(f'\033[(30+x);(40+y)m\261\261\033[0m')
+
+
+##################################################
+#                    CONSOLE                     #
+##################################################
 
 class ConsoleTerminal(BaseTerminal):
     """
     For linux console.  Not telnet, not serial
     """
 
-    CLRF = "\n"
+    CRLF = "\n"
     ESCAPE = ""
     CLEAR_SCREEN = ""
     DO_ECHO = False
+    NL = "\n"
 
     def readln(self):
         _chr = self.read()
@@ -96,11 +150,10 @@ class ConsoleTerminal(BaseTerminal):
         logging.debug(f"    [{_chr.encode()}]")
         return _chr
 
-    def writeln(self, data):
+    def writeln(self, data=""):
         self.device_io.write(data)
-        #self.device_io.write(self.CLRF)
+        #self.device_io.write(self.CRLF)
         print()
-
 
 #    def text_normal(self):
 #        self.device_io.write(f"{Escape}[m".encode())
