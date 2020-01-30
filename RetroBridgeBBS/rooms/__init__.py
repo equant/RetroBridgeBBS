@@ -1,5 +1,6 @@
 import types
 import inspect
+import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu as menu
 import logging
 
