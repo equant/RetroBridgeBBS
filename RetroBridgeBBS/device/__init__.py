@@ -11,9 +11,13 @@ class BaseDeviceIOClass(object):
     queues = {}
     DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.BaseTerminal
     DOWNLOAD_CAPABLE = True
-    def __init__(self, bbs, dev_args):
+    def __init__(self, bbs, dev_args, comm=None):
         self.bbs = bbs
         self.dev_args = dev_args    # arguments unique to device class
+        if comm is None:
+            self.comm = None
+        else:
+            self.comm = comm
 
     def write(self, data):
         if self.transfer_data_as_bytes:
@@ -29,23 +33,43 @@ class BaseDeviceIOClass(object):
             return input_character
 
 
+class SerialDeviceIO(BaseDeviceIOClass):
+    transfer_data_as_bytes = False
+
+    DOWNLOAD_CAPABLE = True
+    DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.BaseTerminal
+    #def __init__(self, bbs, dev_args, comm):
+        #BaseDeviceIOClass.__init__(self, bbs, dev_args)
+        #self.comm = comm
+        #self.dev_args = dev_args
+        #return
+
+    def write(self, data):
+        self.comm.write(data.encode())
+        return
+
+    def read(self):
+        data = self.comm.read()
+        return data.decode()
+
+
 class TelnetDeviceIO(BaseDeviceIOClass):
     transfer_data_as_bytes = False
 
     DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.BaseTerminal
-    def __init__(self, bbs, dev_args, sock):
-        BaseDeviceIOClass.__init__(self, bbs, dev_args)
-        #DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.BaseTerminal
-        self.sock = sock
-        self.dev_args = dev_args
-        return
+    #def __init__(self, bbs, dev_args, sock):
+        #BaseDeviceIOClass.__init__(self, bbs, dev_args)
+        ##DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.BaseTerminal
+        #self.sock = sock
+        #self.dev_args = dev_args
+        #return
 
     def write(self, data):
-        self.sock.send(data.encode())
+        self.comm.send(data.encode())
         return
 
     def read(self):
-        data = self.sock.recv(1024)
+        data = self.comm.recv(1024)
         return data.decode()
 
 
@@ -53,6 +77,6 @@ class ConsoleDeviceIO(BaseDeviceIOClass):
     transfer_data_as_bytes = False
 
     DEFAULT_TERM_CLASS = RetroBridgeBBS.terminal.ConsoleTerminal
-    def __init__(self, bbs, dev_args):
-        BaseDeviceIOClass.__init__(self, bbs, dev_args)
-        return
+    #def __init__(self, bbs, dev_args):
+        #BaseDeviceIOClass.__init__(self, bbs, dev_args)
+        #return

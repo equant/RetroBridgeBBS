@@ -1,10 +1,12 @@
 import re
+import logging
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu as menu
 import RetroBridgeBBS.rooms.external_sites
 import RetroBridgeBBS.rooms.external_sites.garden as garden
 import requests
 from bs4 import BeautifulSoup
+import pdb
 
 cache = {
 }
@@ -103,11 +105,12 @@ class DownloadPage(rooms.Room):
             #binary_file = 'files/Zippy-S1.5.1.sit' 
             #BAUD = str(self.terminal.comm.baudrate)
             #DEV  = self.terminal.comm.name
-            BAUD = "9600"
-            DEV  = "/dev/ttyUSB0"
+            BAUD = self.terminal.device_io.comm.baudrate
+            DEV  = self.terminal.device_io.comm.name
             protocol = 'ymodem'
             self.terminal.writeln(f'Preparing to send {dl_file} using {protocol}MODEM...')
             #subprocess.call(["sudo", "bash", "shell_scripts/ysend.sh", DEV, BAUD, binary_file])
+            logging.debug(f"subprocess.call(): {protocol}, {DEV}, {BAUD}, {saved_dl}")
             subprocess.call(["bash", "shell_scripts/send.sh", f"-{protocol}", DEV, BAUD, saved_dl])
 
         else:

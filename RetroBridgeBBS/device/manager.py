@@ -60,6 +60,52 @@ class ConsoleManager(BaseManager):
     THREAD_ACCEPT_CONNECTIONS = False
     AssociatedDeviceIOClass = RetroBridgeBBS.device.ConsoleDeviceIO
 
+class SerialManager(BaseManager):
+    sessions = []
+    THREAD_ACCEPT_CONNECTIONS = False
+    AssociatedDeviceIOClass = RetroBridgeBBS.device.SerialDeviceIO
+
+    def device_configuration(self, dev_args):
+        logging.debug(f"SerialManager: device_configuration(): {dev_args}")
+        import serial
+        self.device = dev_args[0]
+        self.baud   = dev_args[1]
+        comm = serial.Serial(self.device, baudrate=self.baud, timeout=900)
+        logging.info(f"Device manager is configureing serial: {comm.name}")
+        self.comm = comm
+
+    def accept_connections(self):
+        while True:
+            if len(self.sessions) == 0:
+                logging.debug(f"Creating DeviceIOClass for manager: {self}")
+                logging.debug(f"    Creating DeviceIOClass for manager: {self.AssociatedDeviceIOClass}")
+                device_io = self.AssociatedDeviceIOClass(self.bbs, self.dev_args, self.comm)
+                user_session = RetroBridgeBBS.UserSession(self.bbs, device_io, self)
+                thread = threading.Thread(target=user_session.accept_connections,
+                                          #args=(self.bbs, self.device_io, self),
+                                          daemon=True)
+                thread.start()
+                self.sessions.append(user_session)
+                #breakpoint()
+            time.sleep(0.1)
+
+
+#    def accept_connections(self):
+#        logging.debug(f"TelnetManager: accept_connections()")
+#        while (True):
+#            comm, address = self.sock.accept()
+#            comm.send(b'\377\375\042\377\373\001');     # put telnet client in character mode.
+#            garbage_from_telnet = comm.recv(1024)       # ignore telnet client's response.
+#            logging.info('%s:%s connected.' % address)
+#
+#            device_io = self.AssociatedDeviceIOClass(self.bbs, self.dev_args, comm)
+#            user_session = RetroBridgeBBS.UserSession(self.bbs, device_io, self)
+#            thread = threading.Thread(target=user_session.accept_connections,
+#                                      #args=(self.bbs, self.device_io, self),
+#                                      daemon=True)
+#            thread.start()
+#            self.sessions.append(comm)
+#            time.sleep(0.5) 
 
 class TelnetManager(BaseManager):
     sessions = []
