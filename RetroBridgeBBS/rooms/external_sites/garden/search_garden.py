@@ -34,9 +34,10 @@ class SearchGarden(rooms.Room):
         for item in url_list:
             _menu.append({'key':None, 'label':item['name'], 'command':item['url']})
         #_menu.append(['Back', 'back'])
+        _menu.append({'key':'B', 'label':'Back to search', 'command':'back'})
 
         # Display and Handle menu
-        m = menu.Menu(self.user_session, _menu)
+        m = menu.Menu(self.user_session, _menu, title='Search results...')
         self.do_menu(_menu)
 
         """
@@ -52,7 +53,7 @@ class SearchGarden(rooms.Room):
         return 
 
     def do_string_command(self, command_string):
-        if command_string == 'Q':
+        if command_string in ('quit', 'back'):
             return True
         else:
             url = command_string
