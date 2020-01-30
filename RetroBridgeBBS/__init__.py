@@ -1,3 +1,4 @@
+import os, pathlib
 import pdb
 import threading
 import queue
@@ -7,6 +8,7 @@ import RetroBridgeBBS.terminal  # ascii, ansi, etc
 import RetroBridgeBBS.rooms  # ascii, ansi, etc
 import RetroBridgeBBS.rooms.main_menu  # ascii, ansi, etc
 import logging
+import pdb
 #logging.basicConfig(filename='RetroBridgeBBS.log',level=logging.DEBUG)
 
 #['Node 0', RetroBridgeBBS.devices.console,  []],
@@ -15,7 +17,7 @@ import logging
 
 device_managers_to_start = [
         { 'name':'Node 0', 'class':RetroBridgeBBS.device.manager.ConsoleManager, 'args':[] },
-        { 'name':'Node 1', 'class':RetroBridgeBBS.device.manager.SerialManager, 'args':['/dev/ttyUSB1', 57600]},
+        #{ 'name':'Node 1', 'class':RetroBridgeBBS.device.manager.SerialManager, 'args':['/dev/ttyUSB1', 57600]},
         { 'name':'Node 2', 'class':RetroBridgeBBS.device.manager.TelnetManager, 'args':['', 3030]},
 ]
 
@@ -57,8 +59,16 @@ class BBS(object):
     queues  = {}
     sessions = []
 
+    DOWNLOAD_ARCHIVE_PATH = None
+    CONFIG_FILES_PATH     = None
+
     def __init__(self):
         logging.debug("RetroBridgeBBS.BBS.__init__()")
+        self.name = 'RetroBridgeBBS'
+        self.config_path = os.path.join(os.path.expanduser("~"), ".RetroBridgeBBS")
+        self.archive_downloads_path = os.path.join(self.config_path, 'downloads')
+        pathlib.Path(self.config_path).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(self.archive_downloads_path).mkdir(parents=True, exist_ok=True)
         self.initialize_device_managers(device_managers_to_start)
         return
 

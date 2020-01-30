@@ -9,14 +9,18 @@ class Room(object):
     def __init__(self,user_session):
         self.terminal     = user_session.terminal
         self.user_session = user_session
-        DOWNLOAD_CAPABLE = user_session.device_io.DOWNLOAD_CAPABLE
+        self.bbs          = user_session.bbs
+        DOWNLOAD_CAPABLE  = user_session.device_io.DOWNLOAD_CAPABLE
         self.run_room()
         return
 
-    def do_menu(self, menu_list=None):
+    def do_menu(self, m=None, menu_list=None, title=None):
+        if title is None:
+            title = self.bbs.name
         if menu_list is None:
             menu_list = self.menu_list
-        m = menu.Menu(self.user_session, menu_list, title=self.user_session.username)
+        if m is None:
+            m = menu.Menu(self.user_session, menu_list, title=title)
 
         command = None
         while True:

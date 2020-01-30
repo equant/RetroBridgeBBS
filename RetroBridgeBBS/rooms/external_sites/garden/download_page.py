@@ -1,4 +1,4 @@
-import re
+import re, os
 import logging
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu as menu
@@ -19,7 +19,7 @@ sit_patterns = [
 ]
 
 
-class DownloadPage(rooms.Room):
+class DownloadPage(garden.Room):
 
     def __init__(self, session, url):
         self.url = url
@@ -52,7 +52,7 @@ class DownloadPage(rooms.Room):
             _notes = []
             if _name[-4:] in ['.sit', '.SIT']:
                 # DL Headers and look at files
-                headers = {"Range": "bytes=0-200", 'User-Agent': garden.USER_AGENT}
+                headers = {"Range": "bytes=0-200", 'User-Agent': self.USER_AGENT}
                 full_url = _url.replace("/sites", "http://mirror.macintosharchive.org")
                 header = requests.get(full_url, headers=headers).content
                 for _p in sit_patterns:
@@ -96,23 +96,30 @@ class DownloadPage(rooms.Room):
         if valid_selection:
             self.terminal.writeln(f"Starting DL of {dl_file}")
             #self.terminal.newline()
+            breakpoint()
             full_url = dl_url.replace("/sites", "http://mirror.macintosharchive.org")
             myfile = requests.get(full_url)
-            saved_dl = f"/tmp/{dl_file}"
+            #saved_dl = f"/tmp/{dl_file}"
+            saved_dl = os.path.join(self.bbs.archive_downloads_path, f"{dl_file}")
             open(saved_dl, 'wb').write(myfile.content)
-            import subprocess
-            # A very small local file useful for testing the client's ability to download
-            #binary_file = 'files/Zippy-S1.5.1.sit' 
-            #BAUD = str(self.terminal.comm.baudrate)
-            #DEV  = self.terminal.comm.name
-            BAUD = self.terminal.device_io.comm.baudrate
-            DEV  = self.terminal.device_io.comm.name
-            protocol = 'ymodem'
-            self.terminal.writeln(f'Preparing to send {dl_file} using {protocol}MODEM...')
-            #subprocess.call(["sudo", "bash", "shell_scripts/ysend.sh", DEV, BAUD, binary_file])
-            logging.debug(f"subprocess.call(): {protocol}, {DEV}, {BAUD}, {saved_dl}")
-            subprocess.call(["bash", "shell_scripts/send.sh", f"-{protocol}", DEV, BAUD, saved_dl])
-
+            try:
+                import subprocess
+                # A very small local file useful for testing the client's ability to download
+                #binary_file = 'files/Zippy-S1.5.1.sit' 
+                #BAUD = str(self.terminal.comm.baudrate)
+                #DEV  = self.terminal.comm.name
+                BAUD = self.terminal.device_io.comm.baudrate
+                DEV  = self.terminal.device_io.comm.name
+                protocol = 'ymodem'
+                self.terminal.writeln(f'Preparing to send {dl_file} using {protocol}MODEM...')
+                #subprocess.call(["sudo", "bash", "shell_scripts/ysend.sh", DEV, BAUD, binary_file])
+                logging.debug(f"subprocess.call(): {protocol}, {DEV}, {BAUD}, {saved_dl}")
+                subprocess.call(["bash", "shell_scripts/send.sh", f"-{protocol}", DEV, BAUD, saved_dl])
+            except:
+                logging.info("Skipped X/Y/ZModem transfer because terminal doesn't support it")
+                self.terminal.writeln()
+                self.terminal.writeln("Skipped X/Y/ZModem transfer because terminal doesn't support it")
+                self.terminal.writeln()
         else:
             self.terminal.writeln(f"[{c}] - Invalid!")
             #self.terminal.newline()
@@ -128,7 +135,7 @@ class DownloadPage(rooms.Room):
             soup = cache[url]
         else:
             #self.terminal.debug(url)
-            page = requests.get(url, headers={'User-Agent': garden.USER_AGENT})
+            page = requests.get(url, headers={'User-Agent': self.USER_AGENT})
             soup = BeautifulSoup(page.content, 'html.parser')
             cache[url] = soup
 

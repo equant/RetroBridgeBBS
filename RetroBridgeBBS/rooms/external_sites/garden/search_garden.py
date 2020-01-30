@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 cache = {
 }
 
-class SearchGarden(rooms.Room):
+class SearchGarden(garden.Room):
 
     def run_room(self):
         self.do_search()
@@ -22,6 +22,7 @@ class SearchGarden(rooms.Room):
         results, soup = self.query_mac_garden(search_term)
         if len(results) >= 2:       # 2, because all results have "Back" appended
             self.terminal.writeln("Here are some applications that match your search term:")
+            self.search_term = search_term
             self.do_link_menu(results)
         else:
             self.terminal.writeln(f"Sorry, no matches found for '{search_term}'")
@@ -37,8 +38,8 @@ class SearchGarden(rooms.Room):
         _menu.append({'key':'B', 'label':'Back to search', 'command':'back'})
 
         # Display and Handle menu
-        m = menu.Menu(self.user_session, _menu, title='Search results...')
-        self.do_menu(_menu)
+        m = menu.Menu(self.user_session, _menu, title=f"Search results for '{self.search_term}'")
+        self.do_menu(m=m, menu_list=_menu)
 
         """
             url = menu_results['fn']
@@ -79,7 +80,7 @@ class SearchGarden(rooms.Room):
         else:
             SEARCH_URL = f"https://macintoshgarden.org/search/node/type%3Aapp%2Cgame%20{search_term}"
             #self.terminal.debug(SEARCH_URL)
-            page = requests.get(SEARCH_URL, headers={'User-Agent': garden.USER_AGENT})
+            page = requests.get(SEARCH_URL, headers={'User-Agent': self.USER_AGENT})
             soup = BeautifulSoup(page.content, 'html.parser')
             cache[search_term] = soup
 
