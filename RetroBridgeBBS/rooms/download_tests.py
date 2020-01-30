@@ -39,6 +39,7 @@ class DownloadTests(rooms.Room):
             self.terminal.writeln(error_message)
             return
 
+        # https://stackoverflow.com/questions/984941/python-subprocess-popen-from-a-thread
         import subprocess
         # A very small local file useful for testing the client's ability to download
         binary_file = 'files/Zippy-S1.5.1.sit' 

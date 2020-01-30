@@ -26,7 +26,7 @@ search for files.  I find it incredibly useful to see that a .sit file is not a
 pre-5.5 before I go through the trouble of getting it on my System 6 Mac only
 to find out I can't uncompress it.  Yes it's slow to do modem transfers
 (although it's fast if you download disk images), but it like to dawdle and
-play with other things while I wait.
+play with other things while I wait; it builds excitement.
 
 Ultimately I would like this software to be useful to Commodore, Apple ][,
 Tandy, etc users.  But, I'm developing it mostly for my old macs, so it's not
