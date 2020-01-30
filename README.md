@@ -18,6 +18,7 @@ For this to be useful, you are expected to have:
 1. A host computer with python 3 _and_ a serial port.
 2. A Macintosh with some form of terminal software (e.g. ZTerm, QuickLink)
 3. A null modem cable to connect the Macintosh and the host PC.
+4. Linux command line transfer tools: sz, sx and sb (for ZMODEM, XMODEM and YMODEM)
 
 ## Getting things running
 
@@ -32,6 +33,7 @@ sudo pip install beautifulsoup4
 ```bash
 cd RetroBridgeBBS
 python -i start_bbs.py
+```
 
 ### Logging in
 
