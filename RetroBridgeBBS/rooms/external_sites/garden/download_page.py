@@ -108,7 +108,7 @@ class DownloadPage(garden.Room):
                 #binary_file = 'files/Zippy-S1.5.1.sit' 
                 #BAUD = str(self.terminal.comm.baudrate)
                 #DEV  = self.terminal.comm.name
-                BAUD = self.terminal.device_io.comm.baudrate
+                BAUD = str(self.terminal.device_io.comm.baudrate)
                 DEV  = self.terminal.device_io.comm.name
                 protocol = 'ymodem'
                 self.terminal.writeln(f'Preparing to send {dl_file} using {protocol}MODEM...')

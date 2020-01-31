@@ -44,9 +44,8 @@ class DownloadTests(rooms.Room):
         # A very small local file useful for testing the client's ability to download
         binary_file = 'files/Zippy-S1.5.1.sit' 
         self.terminal.writeln(f'Preparing to send {binary_file} using {protocol}MODEM...')
-        BAUD = str(self.terminal.comm.baudrate)
-        DEV  = self.terminal.comm.name
-        #subprocess.call(["sudo", "bash", "shell_scripts/ysend.sh", DEV, BAUD, binary_file])
+        BAUD = str(self.terminal.device_io.comm.baudrate)
+        DEV  = self.terminal.device_io.comm.name
         subprocess.call(["bash", "shell_scripts/send.sh", f"-{protocol}", DEV, BAUD, binary_file])
 
     def x_modem_test(self):
