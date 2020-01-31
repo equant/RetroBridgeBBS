@@ -45,7 +45,7 @@ _Some of this is implemented, some is not_
 * .SIT algorithm identification 
     * Examines headers of compressed .SIT files _before_ you download them and lets you know if they use early (pre 5.5) or later StuffIt algorithms so you don't download something you can't uncompress on an old Macintosh.
 * Transfer files to your retro computer
-    * Serial connection using X/Y/ZModem transfers ❌
+    * Serial connection using X/Y/ZModem transfers
     * Write disk images to a floppy drive ❌
 * Supports multiple connections.
     * Console
