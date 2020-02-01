@@ -70,22 +70,28 @@ class DownloadPage(garden.Room):
 
         self.terminal.writeln("+"+"-"*(WIDTH-2)+"+")
 
-        #self.terminal.write("SELECT >> ")
-        #character = self.terminal.comm.read()
-        #c = character.decode()
+        ##################################################
+        #                     PROMPT                     #
+        ##################################################
         c = self.terminal.character_prompt("SELECT")
-        selected_index = int(c) - 1
-
-        try:
-            files[selected_index]
-            valid_selection = True
-            dl_url   = files[selected_index][1]
-            dl_file = files[selected_index][0]
-        except IndexError:
-            valid_selection = False
-            dl_url   = None
-            dl_file = None
-        except TypeError:
+        if c in ('B', 'b', 'Q', 'q'):
+            return
+        if c.isnumeric:
+            selected_index = int(c) - 1
+            try:
+                files[selected_index]
+                valid_selection = True
+                dl_url   = files[selected_index][1]
+                dl_file = files[selected_index][0]
+            except IndexError:
+                valid_selection = False
+                dl_url   = None
+                dl_file = None
+            #except TypeError:
+                #valid_selection = False
+                #dl_url   = None
+                #dl_file = None
+        else:
             valid_selection = False
             dl_url   = None
             dl_file = None

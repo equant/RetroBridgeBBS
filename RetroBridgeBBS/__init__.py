@@ -1,5 +1,6 @@
 import os, pathlib
 import pdb
+import logging
 import threading
 import queue
 import RetroBridgeBBS.device           # telnet, serial, console device interfaces
@@ -7,8 +8,6 @@ import RetroBridgeBBS.device.manager   # telnet, serial, console device interfac
 import RetroBridgeBBS.terminal  # ascii, ansi, etc
 import RetroBridgeBBS.rooms  # ascii, ansi, etc
 import RetroBridgeBBS.rooms.main_menu  # ascii, ansi, etc
-import logging
-import pdb
 #logging.basicConfig(filename='RetroBridgeBBS.log',level=logging.DEBUG)
 
 #['Node 0', RetroBridgeBBS.devices.console,  []],
