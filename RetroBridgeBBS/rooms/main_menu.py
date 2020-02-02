@@ -1,7 +1,7 @@
 from types import ModuleType
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.rooms.download_tests
-import RetroBridgeBBS.rooms.external_sites.garden.search_garden
+import RetroBridgeBBS.rooms.file_area_main_menu
 import subprocess
 #import SearchGarden
 
@@ -10,9 +10,9 @@ class MainMenu(rooms.Room):
     def run_room(self):
         self.menu_list = [
             {
-               "key" : "S",
-              "label": "Search Macintosh Garden Downloads",
-           "command" : RetroBridgeBBS.rooms.external_sites.garden.search_garden.SearchGarden,
+               "key" : "F",
+              "label": "File Transfer Menu",
+           "command" : RetroBridgeBBS.rooms.file_area_main_menu.FileAreaMainMenu,
               "test" : None
             },
             {
@@ -27,12 +27,6 @@ class MainMenu(rooms.Room):
               "command" : self.command_uptime,
               "test" : None
             },
-            #{
-               #"key" : 'X',
-              #"label": "Exit",
-                #"command" : "exit",
-              #"test" : None
-            #},
         ]
         self.do_menu()
         return

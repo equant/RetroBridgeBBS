@@ -47,6 +47,7 @@ _Some of this is implemented, some is not_
 * Transfer files to your retro computer
     * Serial connection using X/Y/ZModem transfers
     * Write disk images to a floppy drive ❌
+* Upload files from your retro computer
 * Supports multiple connections.
     * Console
     * Telnet

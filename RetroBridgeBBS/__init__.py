@@ -66,8 +66,10 @@ class BBS(object):
         self.name = 'RetroBridgeBBS'
         self.config_path = os.path.join(os.path.expanduser("~"), ".RetroBridgeBBS")
         self.archive_downloads_path = os.path.join(self.config_path, 'downloads')
+        self.archive_uploads_path = os.path.join(self.config_path, 'uploads')
         pathlib.Path(self.config_path).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.archive_downloads_path).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(self.archive_uploads_path).mkdir(parents=True, exist_ok=True)
         self.initialize_device_managers(device_managers_to_start)
         return
 

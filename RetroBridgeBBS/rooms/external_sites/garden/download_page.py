@@ -102,7 +102,7 @@ class DownloadPage(garden.Room):
         if valid_selection:
             self.terminal.writeln(f"Starting DL of {dl_file}")
             #self.terminal.newline()
-            breakpoint()
+            #breakpoint()
             full_url = dl_url.replace("/sites", "http://mirror.macintosharchive.org")
             myfile = requests.get(full_url)
             #saved_dl = f"/tmp/{dl_file}"
