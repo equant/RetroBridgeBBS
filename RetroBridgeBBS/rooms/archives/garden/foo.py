@@ -1,9 +1,5 @@
 import re, os
 import logging
-#import RetroBridgeBBS.rooms as rooms
-#import RetroBridgeBBS.menu as menu
-#import RetroBridgeBBS.rooms.external_sites
-#import RetroBridgeBBS.rooms.external_sites.garden as garden
 
 import requests
 from bs4 import BeautifulSoup
@@ -20,6 +16,7 @@ self = foo()
 
 url = 'https://macintoshgarden.org/games/maze-wars'
 url = 'https://macintoshgarden.org/apps/stuffit-expander-55'
+url = 'https://macintoshgarden.org/games/the-oregon-trail-ii'
 
 page = requests.get(url, headers={'User-Agent': self.USER_AGENT})
 # html.parser has issues correctly parsing macintoshgarden div tags.
@@ -51,7 +48,8 @@ if len(meta_data['description']) > 255:
 
 meta_data['page_name'] = soup.find('h1').text
 
-DL_divs = soup.findAll("div", {"class": "note download"})
+DL_divs = soup.find("div", {"class":"descr"}).findAll("div", {"class": "note download"})
+#DL_divs = soup.findAll("div", {"class": "note download"})
 
 download_links = []
 for div in DL_divs:

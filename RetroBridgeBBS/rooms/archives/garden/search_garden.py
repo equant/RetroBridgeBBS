@@ -1,13 +1,10 @@
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu as menu
-import RetroBridgeBBS.rooms.external_sites
-import RetroBridgeBBS.rooms.external_sites.garden as garden
-import RetroBridgeBBS.rooms.external_sites.garden.download_page
-#import RetroBridgeBBS.rooms.external_sites.garden.download_page.DownloadPage
+import RetroBridgeBBS.rooms.archives
+import RetroBridgeBBS.rooms.archives.garden as garden
+import RetroBridgeBBS.rooms.archives.garden.download_page
 import requests
 from bs4 import BeautifulSoup
-
-#USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
 
 cache = {
 }
@@ -34,7 +31,6 @@ class SearchGarden(garden.Room):
         _menu = []
         for item in url_list:
             _menu.append({'key':None, 'label':item['name'], 'command':item['url']})
-        #_menu.append(['Back', 'back'])
         _menu.append({'key':'B', 'label':'Back to search', 'command':'back'})
 
         # Display and Handle menu
@@ -58,8 +54,7 @@ class SearchGarden(garden.Room):
             return True
         else:
             url = command_string
-            RetroBridgeBBS.rooms.external_sites.garden.download_page.DownloadPage(self.user_session, url)
-            #self.terminal.writeln(url)
+            RetroBridgeBBS.rooms.archives.garden.download_page.DownloadPage(self.user_session, url)
             return False
 
 
@@ -80,7 +75,6 @@ class SearchGarden(garden.Room):
             soup = cache[search_term]
         else:
             SEARCH_URL = f"https://macintoshgarden.org/search/node/type%3Aapp%2Cgame%20{search_term}"
-            #self.terminal.debug(SEARCH_URL)
             page = requests.get(SEARCH_URL, headers={'User-Agent': self.USER_AGENT})
             soup = BeautifulSoup(page.content, 'html.parser')
             cache[search_term] = soup

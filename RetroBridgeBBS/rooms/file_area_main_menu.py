@@ -2,7 +2,7 @@ from types import ModuleType
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu  as menu
 import RetroBridgeBBS.file_transfer as transfer
-import RetroBridgeBBS.rooms.external_sites.garden.search_garden
+import RetroBridgeBBS.rooms.archives.garden.search_garden
 
 class FileAreaMainMenu(rooms.Room):
 
@@ -12,7 +12,7 @@ class FileAreaMainMenu(rooms.Room):
             {
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
-           "command" : RetroBridgeBBS.rooms.external_sites.garden.search_garden.SearchGarden,
+           "command" : RetroBridgeBBS.rooms.archives.garden.search_garden.SearchGarden,
               "test" : None
             },
             {

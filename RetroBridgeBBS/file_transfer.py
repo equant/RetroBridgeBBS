@@ -8,7 +8,7 @@ import logging
 def send_file(user_session, file_path, protocol=None):
 
     if protocol is None:
-        protocol = 'ymodem'
+        protocol = user_session.bbs.default_transfer_protocol
 
     if protocol not in ['xmodem', 'ymodem', 'zmodem']:
         error_message = f"Error with test_modem_transfer(), unknown protocol: '{protocol}'"
@@ -26,7 +26,7 @@ def send_file(user_session, file_path, protocol=None):
 def receive_file(user_session, file_name=None, protocol=None):
 
     if protocol is None:
-        protocol = 'zmodem'
+        protocol = user_session.bbs.default_transfer_protocol
 
     if protocol not in ['xmodem', 'ymodem', 'zmodem']:
         error_message = f"Error with test_modem_transfer(), unknown protocol: '{protocol}'"

@@ -71,6 +71,7 @@ class BBS(object):
         pathlib.Path(self.archive_downloads_path).mkdir(parents=True, exist_ok=True)
         pathlib.Path(self.archive_uploads_path).mkdir(parents=True, exist_ok=True)
         self.initialize_device_managers(device_managers_to_start)
+        self.default_transfer_protocol = 'zmodem'
         return
 
     def register_session(self, user_session):
