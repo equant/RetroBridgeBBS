@@ -7,7 +7,7 @@ This software runs on your modern PC and acts as a bridge BBS interface. Connect
 
 # What is it?
 
-_This software is still in development, not everything is implemented!_
+_This software is still in development, not everything is implemented, but it is useful as is._
 
 This software will help you transfer software to your classic Macintosh (e.g.
 MacOS System 6, 7, 68k Macs, etc) using the serial port.  Very simply, this
