@@ -1,4 +1,8 @@
 RetroBridgeBBS.log
+*.swp
+*.swo
+tags
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
