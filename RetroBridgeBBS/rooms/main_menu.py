@@ -11,13 +11,13 @@ class MainMenu(rooms.Room):
         self.menu_list = [
             {
                "key" : "F",
-              "label": "File Transfer Menu",
+              "label": "Files (Search, DL, etc)",
            "command" : RetroBridgeBBS.rooms.file_area_main_menu.FileAreaMainMenu,
               "test" : None
             },
             {
                "key" : "D",
-              "label": "Download Tests",
+               "label": "Download Tests (Test X/Y/ZModem transfer)",
                 "command" : RetroBridgeBBS.rooms.download_tests.DownloadTests,
               "test" : None
             },

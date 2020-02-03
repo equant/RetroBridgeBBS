@@ -19,15 +19,12 @@ class foo(object):
 self = foo()
 
 url = 'https://macintoshgarden.org/games/maze-wars'
+url = 'https://macintoshgarden.org/apps/stuffit-expander-55'
 
 page = requests.get(url, headers={'User-Agent': self.USER_AGENT})
 # html.parser has issues correctly parsing macintoshgarden div tags.
 #soup = BeautifulSoup(page.content, 'html.parser')
 soup = BeautifulSoup(page.content, 'html5lib')
-
-# Extract Table with ratings, year, and download links
-T = soup.find("table")
-table_rows = T.find_all("tr")
 
 descr = soup.findAll("div", {"class": "descr"})
 descr_rows = soup.findAll("tr")
@@ -48,19 +45,39 @@ for row in descr_rows[1:]:      #first row has rating info, and we handle it aft
         meta_data[cell_name] = cell_info
 
 
-meta_data['rating'] = float(table_rows[0].find_all('div')[-1].find_all('span')[2].find('span').text)
-
 meta_data['description'] = soup.find("p").text
 if len(meta_data['description']) > 255:
     meta_data['description'] = meta_data['description'][0:255] + '...'
+
+meta_data['page_name'] = soup.find('h1').text
 
 DL_divs = soup.findAll("div", {"class": "note download"})
 
 download_links = []
 for div in DL_divs:
+    file_dict = {}
+
+    # <a href="/sites/macintoshgarden.org/files/games/mazewarsplus.zip">www</a>
     href = div.find('a')
     _url = href.attrs['href']
     _name = _url.split('/')[-1]
-    download_links.append([_name, _url])
+    file_dict['url'] = _url
+    file_dict['name'] = _name
+
+    # <small>mazewarsplus.zip <i>(1.61 MB</i>)</small>
+    _size = " ".join(div.findAll('small')[-2].text.split()[1:])[1:-1]
+    file_dict['size'] = _size
+
+    # compatibility text is after last <br>
+    _compat = ''.join(div.findAll('br')[-1].next_siblings)
+    # strip tabs, newlines and extraspace
+    _compat = " ".join(_compat.split(sep=None))
+    _compat = _compat.replace("For ", "")
+    _compat = _compat.replace("System ", "")
+    system_list = _compat.split('-')
+    condensed = system_list[0] + '-' + system_list[-1]
+    file_dict['compatibility'] = "System " + condensed
+
+    download_links.append(file_dict)
 
 #return download_links, meta_data, soup

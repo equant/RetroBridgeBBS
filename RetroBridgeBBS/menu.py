@@ -37,7 +37,7 @@ class Menu(object):
 
     def make_command_entry_string(self, key, label):
         if label[0] == key:
-            command_entry_string = f"[{key}]"+label[1:]
+            command_entry_string = f"[{key}]-"+label[1:]
         else:
             command_entry_string = f"[{key}] {label}"
         return command_entry_string
@@ -116,6 +116,7 @@ class Menu(object):
 
         if valid_selection:
             logging.debug(f"User entered: {command_entry['label']}")
+            self.terminal.writeln()
             self.terminal.writeln(f"{command_entry['label']}")
             command_entry['valid'] = True
         else:

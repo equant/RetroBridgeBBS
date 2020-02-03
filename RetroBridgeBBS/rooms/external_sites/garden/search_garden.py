@@ -20,7 +20,7 @@ class SearchGarden(garden.Room):
     def do_search(self):
         search_term = self.get_search_term()
         results, soup = self.query_mac_garden(search_term)
-        if len(results) >= 2:       # 2, because all results have "Back" appended
+        if len(results) >= 1:       # 2, because all results have "Back" appended
             self.terminal.writeln("Here are some applications that match your search term:")
             self.search_term = search_term
             self.do_link_menu(results)
@@ -68,7 +68,8 @@ class SearchGarden(garden.Room):
         self.terminal.newline()
         self.terminal.write('Enter Search Term: ')
         search_term = self.terminal.readln()
-        self.terminal.newline()
+        self.terminal.writeln()
+        self.terminal.writeln()
         self.terminal.writeln(f'Searching for {search_term}...')
         return search_term
 
@@ -101,4 +102,3 @@ class SearchGarden(garden.Room):
                     search_result_webpages.append({'name':name,'url':url})
 
         return search_result_webpages, soup
-

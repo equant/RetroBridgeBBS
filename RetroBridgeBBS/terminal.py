@@ -87,7 +87,7 @@ class BaseTerminal(object):
             _chr = self.read()
             #read_string.append(_chr)
             read_string += _chr
-        return read_string
+        return read_string[:-1]
 
     def newline(self):
         self.device_io.write(self.CRLF)

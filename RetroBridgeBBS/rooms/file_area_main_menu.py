@@ -10,7 +10,7 @@ class FileAreaMainMenu(rooms.Room):
 
         self.menu_list = [
             {
-               "key" : "S",
+               "key" : "G",
               "label": "Search Macintosh Garden Downloads",
            "command" : RetroBridgeBBS.rooms.external_sites.garden.search_garden.SearchGarden,
               "test" : None
