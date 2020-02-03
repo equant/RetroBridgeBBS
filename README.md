@@ -1,8 +1,8 @@
 <!--
 [![HitCount](http://hits.dwyl.io/equant/RetroBridgeBBS.svg)](http://hits.dwyl.io/equant/RetroBridgeBBS)
 -->
-<a href=''><img align='right' width='50%' src='https://img.youtube.com/vi/VK541GMzuaE/0.jpg'><br>
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VK541GMzuaE&feature=youtu.be) 
+<a href='https://www.youtube.com/watch?v=VK541GMzuaE&feature=youtu.be'><img align='right' width='50%' src='https://img.youtube.com/vi/VK541GMzuaE/0.jpg'><br>
+
 # RetroBridgeBBS
 This software runs on your modern PC and acts as a bridge BBS interface. Connect your retro computers to it (via serial) and download software from the internet using a period approriate interface!
 
