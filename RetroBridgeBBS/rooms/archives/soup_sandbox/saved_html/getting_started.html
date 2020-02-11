@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.savagetaylor.com/xmlrpc.php">
+
+<title>Setting up your vintage (classic) 68k Macintosh – Creating a 
+bootable hard drive starting with a image file and an emulator – David 
+and Steve's Blog</title>
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="David and Steve's Blog » Feed" href="http://www.savagetaylor.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="David and Steve's Blog » Comments Feed" href="http://www.savagetaylor.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="David and Steve's Blog » Setting up your vintage (classic) 68k Macintosh – Creating a bootable hard drive starting with a image file and an emulator Comments Feed" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.savagetaylor.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.2"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="getting_started_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="getting_started_files/style_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="icomoon-css" href="getting_started_files/style_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="dazzling-bootstrap-css" href="getting_started_files/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="dazzling-icons-css" href="getting_started_files/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="dazzling-style-css" href="getting_started_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="getting_started_files/jquery.js"></script>
+<script type="text/javascript" src="getting_started_files/jquery-migrate.js"></script>
+<script type="text/javascript" src="getting_started_files/bootstrap.js"></script>
+<link rel="https://api.w.org/" href="http://www.savagetaylor.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.savagetaylor.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.savagetaylor.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320" href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/">
+<link rel="next" title="Setting up your vintage (classic) 68k Macintosh – Initializing and Partitioning your Hard Drive" href="http://www.savagetaylor.com/2018/08/19/setting-up-your-vintage-classic-68k-macintosh-partitioning-your-hard-drive/">
+<meta name="generator" content="WordPress 5.3.2">
+<link rel="canonical" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/">
+<link rel="shortlink" href="http://www.savagetaylor.com/?p=403">
+<link rel="alternate" type="application/json+oembed" href="http://www.savagetaylor.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.savagetaylor.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F&amp;format=xml">
+<style type="text/css">a, #infinite-handle span {color:#0a0a0a}a:hover {color: #6e0187;}.entry-content {font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px; font-weight: normal; color:#6B6B6B;}div.entry-content a:link {text-decoration:underline}
+div.entry-content a:visited {text-decoration:underline}</style><style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><!--[if lt IE 9]>
+<script src="http://www.savagetaylor.com/wp-content/themes/dazzling/inc/js/html5shiv.min.js"></script>
+<script src="http://www.savagetaylor.com/wp-content/themes/dazzling/inc/js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body class="post-template-default single single-post postid-403 single-format-standard">
+<div id="page" class="hfeed site">
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+			    <span class="sr-only">Toggle navigation</span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			  </button>
+
+				<div id="logo">
+
+					<span class="site-title">
+						
+						
+							<a class="navbar-brand" href="http://www.savagetaylor.com/" title="David and Steve's Blog" rel="home">David and Steve's Blog</a>
+
+						
+					</span><!-- end of .site-name -->
+
+				</div><!-- end of #logo -->
+
+				
+											<p class="site-description">Just another WordPress site</p>
+					
+										
+			</div>
+				<div id="navbar" class="collapse navbar-collapse navbar-ex1-collapse"><ul id="menu-about" class="nav navbar-nav"><li id="menu-item-62" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-62"><a title="About Us" href="http://www.savagetaylor.com/about-us/">About Us</a></li>
+</ul></div>		</div>
+	</nav><!-- .site-navigation -->
+
+        <div class="top-section">
+				        </div>
+        <div id="content" class="site-content container">
+
+            <div class="container main-content-area">                <div class="row ">
+	<div id="primary" class="content-area col-sm-12 col-md-8">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-403" class="post-403 post type-post status-publish format-standard hentry category-macintosh_68k category-oldcomputersandgames category-setting-up-68k tag-booting tag-linux tag-os-x tag-windows">
+	<header class="entry-header page-header">
+
+		
+		<h1 class="entry-title ">Setting up your vintage (classic) 68k Macintosh – Creating a bootable hard drive starting with a image file and an emulator</h1>
+
+		<div class="entry-meta">
+			<span class="posted-on"><i class="fa fa-calendar"></i> <a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/" rel="bookmark"><time class="entry-date published" datetime="2018-05-28T15:10:37-04:00">May 28, 2018</time><time class="updated" datetime="2020-02-04T21:46:46-05:00">February 4, 2020</time></a></span><span class="byline"> <i class="fa fa-user"></i> <span class="author vcard"><a class="url fn n" href="http://www.savagetaylor.com/author/steve/">Steve</a></span></span>		</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<ul class="kiwi-article-bar rect kiwi-article-bar-center "><li><a data-class="popup" data-network="facebook" class="kiwi-nw-facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F" target="_blank" rel="nofollow"><span class="kicon-facebook"></span> </a></li><li><a data-class="popup" data-network="twitter" class="kiwi-nw-twitter" href="http://twitter.com/intent/tweet?text=Setting%20up%20your%20vintage%20(classic)%2068k%20Macintosh%20%E2%80%93%20Creating%20a%20bootable%20hard%20drive%20starting%20with%20a%20image%20file%20and%20an%20emulator&amp;url=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F" target="_blank" rel="nofollow"><span class="kicon-twitter"></span> </a></li><li><a data-class="popup" data-network="google-plus" class="kiwi-nw-google-plus" href="http://plus.google.com/share?url=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F" target="_blank" rel="nofollow"><span class="kicon-google-plus"></span> </a></li><li><a data-class="popup" data-network="pinterest" class="kiwi-nw-pinterest" href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.savagetaylor.com%2F2018%2F05%2F28%2Fsetting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image%2F&amp;description=With+SCSI+being+essentially+obsolete%2C+and+the+fact+that+Macintosh+systems+%28since+OS+X+10.6+I+think%29+can+no+longer+write+to+HFS+formatted+disks%2C+the+best+way+to+use+modern+systems+when+setting+up+your+classic+68k+system+is+to+create+a+bootable+disk+image+using+a+Macintosh+68k+or+PowerPC+emulator+then+writing+that+disk+image+to+a+real+or+emulated+disk+drive.+Disk+images+are+essentially+binary+%28bit+for+bit%29+copies+of+the+contents+of+a+storage+device+or+medium+such+as+your+Hard+Drive%2C+removable+drive%2C+memory+card+or+CD-ROM+%28ISO+files%29.%26nbsp%3B+There+are+several+types" target="_blank" rel="nofollow"><span class="kicon-pinterest"></span> </a></li></ul>
+<p>With SCSI being essentially obsolete, and the fact that Macintosh 
+systems (since OS X 10.6 I think) can no longer write to HFS formatted 
+disks, the best way to use modern systems when setting up your <a href="http://www.savagetaylor.com/topics/oldcomputersandgames/">classic 68k system</a>
+ is to create a bootable disk image using a Macintosh 68k or PowerPC 
+emulator then writing that disk image to a real or emulated disk drive.</p>
+
+
+
+<span id="more-403"></span>
+
+
+
+<p>Disk images are essentially binary (bit for bit) copies of the 
+contents of a storage device or medium such as your Hard Drive, 
+removable drive, memory card or CD-ROM (ISO files).&nbsp; There are 
+several types of disk images you’ll come across working with 68k 
+systems:</p>
+
+
+
+<ul><li><strong>Disk Copy 4.2 images</strong>, typically of floppy 
+disks.&nbsp; &nbsp;These were created by Disk Copy 4.2 a program provide
+ by Apple, and were the most common images for sharing Macintosh 
+software.&nbsp; &nbsp;Now under emulation they are less popular, but 
+they can be <a href="https://www.bigmessowires.com/2013/12/16/macintosh-diskcopy-4-2-floppy-image-converter/">converted to standard “raw” disk images</a></li><li><a href="http://www.savagetaylor.com/2017/12/28/setting-up-your-vintage-classic-68k-macintosh-using-a-floppy-drive/"><strong>Raw Disk Images of Floppy disks</strong></a>:
+ contain a binary copy of a floppy disk.&nbsp; The file size is the same
+ size in bytes as the maximum amount that can be stored on the disk, 
+e.g. 400k, 800k or 1440k.&nbsp; These images can be used with 
+Floppy-Emu, and can be read by emulators.</li><li><strong>A Partition Image</strong>:
+ contain a binary copy of a single partition from a hard drive or 
+removable drive.&nbsp; When emulators refer to a hard drive file, a 
+Partition Image is typically what they are actually referring to and 
+support.&nbsp; These images lack both the boot sector, partition map.</li><li><strong>A Hard Drive or Removable Drive Image</strong> : contain a binary copy of the complete contents of an <strong>initialized drive</strong> including the drive’s boot and partition information.&nbsp;&nbsp; vMac can NOT read these files, <a href="http://www.savagetaylor.com/2018/01/19/setting-up-your-vintage-classic-68k-macintosh-using-basilisk-ii/">Basilisk II</a>
+ can read and update the the first partition of these files, but not 
+initialize them (partition them).&nbsp; &nbsp;So far I’ve found 3 
+emulators that can initialize and image: MAME, PCE/macplus, 
+SoftMac,&nbsp;I’ve created a separate <a href="http://www.savagetaylor.com/2018/08/19/setting-up-your-vintage-classic-68k-macintosh-partitioning-your-hard-drive/">blog entry for comparing what emulators can initialize and partition image files</a>.</li></ul>
+
+
+
+<p>I use Hard Drive or Removable Drive Images to back up my old scsi drives and to setup from both real and emulated (e.g. <a href="http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/">SCSI2SD</a>) drives.</p>
+
+
+
+<p>This blog entry covers:</p>
+
+
+
+<ol><li>reasons for using disk images,</li><li>images I’ve created for you to use,</li><li>how to create your own images from a real a real or emulated (memory card) hard drive or removable drive (e.g. zip disk)</li><li>initializing your own images using an emulator,</li><li>modifying the contents of disk images (mine or yours), and</li><li>writing an image back to a real or emulated (memory card) hard drive or removable drive (e.g. zip disk)</li></ol>
+
+
+
+<h2>1. Reasons for using disk images</h2>
+
+
+
+<p>There are typically three main reasons for creating a disk image:</p>
+
+
+
+<ol><li>I want to backup an existing hard drive or removable drive’s contents that I’ve managed to connect to a modern system (<a href="http://www.savagetaylor.com/2015/11/15/setting-up-your-vintage-classic-68k-macintosh/">see my blog entry for Setting up your vintage (classic) 68k Macintosh for a list of connection methods</a>)</li><li>I want to create an image from an existing <a href="http://www.savagetaylor.com/2015/11/15/setting-up-your-vintage-classic-68k-macintosh/">hard drive, removable drive, or memory card I’ve connected to a modern system</a> so I can:
+<ul>
+<li>initialize and format the image using an Emulator</li>
+<li>copy the System Folder and / or other files to the image</li>
+<li>write the image back to the <a href="http://www.savagetaylor.com/2015/11/15/setting-up-your-vintage-classic-68k-macintosh/">physical drive or a memory card for an emulated drive</a></li>
+</ul>
+</li><li>I want to image an existing hard drive, removable drive, or 
+memory card’s contents so I can edit the contents of the image then 
+write the image back to the drive or card</li></ol>
+
+
+
+<h2>2. Using one of the disk images I’ve already created</h2>
+
+
+
+<p>As I have time I am creating basic initialized and boot-able images formatted with <a href="https://en.wikipedia.org/wiki/Hierarchical_File_System">Hierarchical File System</a>&nbsp;(HFS), containing both System 6.0.8 and System 7.5.5 for <a href="http://www.savagetaylor.com/my-classic-68k-macintosh-computer-collection/">the different removable drives or modern replacements that I own</a>, and blog entries to explain any specific details for how to use the images, <strong>note the image files are compressed, and are typically around 30MB in size to download.</strong></p>
+
+
+
+<p>If you want to use one of these images you need to first determine <a href="http://www.savagetaylor.com/2015/11/17/setting-up-your-vintage-classic-68k-macintosh-selecting-your-system-software/">which operating system you can, or want to run on your classic Macintosh</a>, and check that your drive/card/media can hold the contents of the image (see note 1 under the table).</p>
+
+
+
+<ol><li>The OS 6.0.8 Bootable image is for older 68k systems that may 
+only have 1MB of memory installed.&nbsp; The SE/30, Classic, Classic II,
+ Portable, II, IIx, IIcx, IIci, IIsi, LC typically shipped with only 1 
+MB of memory.&nbsp; I’ve managed to track down a scan of the&nbsp;<a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Setup/Hardware/memguide.pdf">Apple Memory Guide from November 2000</a>&nbsp;(pdf) that shows how to upgrade the memory for these and other 68k systems.</li><li>The OS 7.5.5 Bootable image is for the remaining 68k systems that have 2MB or more memory installed.</li></ol>
+
+
+
+<figure class="wp-block-table is-style-stripes"><table class=""><thead><tr><th>&nbsp;</th><th>System 6.0.8</th><th>System 7.5.5</th><th>Apple IIe<sup>1</sup></th><th>Size (bytes)<sup>2</sup></th><th>Block Count<sup>3</sup></th></tr></thead><tbody><tr><td>CD-ROM</td><td>N/A</td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_650MBCD.zip">650MB</a></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>FloppyEMU<sup>3</sup></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_HD20_1GB.zip">HD20 1GB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_HD20_1GB.zip">HD20 1GB</a></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><a href="http://www.savagetaylor.com/2017/12/28/setting-up-your-vintage-classic-68k-macintosh-using-a-floppy-drive/">Floppy Disk</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_boot.dsk.zip">1.44MB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_750_boot.dsk.zip">1.44MB</a>&nbsp;(7.5.0)</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><a href="http://www.savagetaylor.com/2017/12/31/setting-up-your-vintage-classic-68k-macintosh-using-a-100mb-scsi-iomega-zip-drive/">Iomega Zip Drive</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_100MB.zip">100MB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_100MB.zip">100MB</a></td><td>100MB</td><td>94,371,840</td><td>90</td></tr><tr><td>Iomega Jazz Drive</td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_1GB.zip">1GB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_1GB.zip">1GB</a></td><td>1GB</td><td>985,661,440</td><td>940</td></tr><tr><td>&nbsp;</td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_2GB.zip">2GB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_2GB.zip">2GB</a></td><td>2GB</td><td>1,971,322,880</td><td>1880</td></tr><tr><td><a href="http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/">SCSI2SD</a><sup>5</sup></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_500MB.zip">500MB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_500MB.zip">500MB</a></td><td>500MB</td><td>492,830,720</td><td>470</td></tr><tr><td>&nbsp;</td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_1GB.zip">1GB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_1GB.zip">1GB</a></td><td>1GB</td><td>985,661,440</td><td>940</td></tr><tr><td>&nbsp;</td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_608_2GB.zip">2GB</a></td><td><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/OS_755_2GB.zip">2GB</a></td><td>2GB</td><td>1,971,322,880</td><td>1880</td></tr></tbody></table></figure>
+
+
+
+<ol><li>The Apple IIe images have been pre-configured to support the 
+Apple IIe Card.&nbsp; &nbsp;They have System 7.5.5 as the “blessed” 
+System (in 24bit mode), and they have been partitioned to include two 
+32MB ProDOS partitions with the remaining space containing an HFS 
+formatted partition.&nbsp; &nbsp;See my entry on using an Apple IIe Card
+ for more information (coming soon)</li><li>You need to confirm that the
+ device you plan to write the image to has enough space to hold the 
+image file (bytes).&nbsp; Unfortunately media may have “bad sectors” so 
+the available space on your media may not be enough to hold the image 
+file.</li><li>Used with DD: BS=1M count=## for extracting the first portion of your SD card to an image file to edit/update.</li><li>You
+ do not need to use DD with this file, simply rename to HD20.dsk and 
+copy the file to the SD card you are using with FloppyEMU</li><li>See my entry on <a href="http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/">using SCSI2SD cards</a>
+ for more detailed instructions on how to use these image files if your 
+card isn’t an exact match, or if you want to set up SCSI2SD as multiple 
+virtual drives.&nbsp; I haven’t created any image files larger than 2GB,
+ I’m assuming if you have a drive larger than 2GB, you are using <a href="http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/">SCSI2SD</a>, and you plan to setup your SD card as multiple virtual drives.</li></ol>
+
+
+
+<p><strong>Each image contains:</strong></p>
+
+
+
+<ul><li>The system folders for <strong>both System 6.0.8 and System 7.5.5</strong>,
+ each containing the “minimal” files to boot, see section 5 below for 
+instructions on how to copy files on to these images, and where to get 
+the full version of system 7.5.5.&nbsp; You can select which version you
+ want to use using System Picker (see below)</li><li>Utilities for for getting setup: <ul><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/SystemPicker1.sit.bin">System Picker</a>
+ by Kevin Aitken that allows you to select which System Folder is active
+ (blessed) on restart (so you can boot with 7.5.5 then switch to 6.0.8 
+to reduce the memory overhead)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/scsi-probe-43.hqx">SCSIProbe 4.3</a> by Robert Polic will tell you the device type, vendor, product and version for any device connected to your SCSI bus.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/TattleTech.sit.bin">TattleTech</a>&nbsp;2.59 and 2.17 by Decision Maker’s Software, Inc that provides detailed information on your system’s configuration.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/HD_SC_Setup_7.3.5_Patched.bin">A patched version of HD SC Setup 7.3.5</a> for formatting your&nbsp;<a href="http://www.savagetaylor.com/2015/11/15/setting-up-your-vintage-classic-68k-macintosh/">SCSI drive, device or equivalent</a>&nbsp;once you’ve booted your Macintosh (patched to support non-Apple SCSI Drives)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/Lido_7.56.sea">Lido 7.56</a> by Surfcity Software, an alternative utility for initializing and formatting drives.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/Disk_First_Aid_7.2.2.sea.bin">Disk First Aid 7.2.2</a> by Apple a tool to verify and repair issues with your hard drive</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/ResEdit_2.1.3.sea.bin">ResEdit 2.1.3</a>&nbsp;lets you change creator/type codes </li></ul></li><li>Utilities for installing Applications: <ul><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/disinfectant-371.hqx">Disinfectant 3.7.1</a>&nbsp;by
+ John Norstad a virus scan software for checking files you’ve been 
+downloading off the web.&nbsp; All files on this drive image have been 
+scanned.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/Disk_Copy_4.2.sea.bin">Disk Copy 4.2</a> by Steve Christensen (for Apple) for creating image files from floppy disks, or writing images back to floppy disks</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/DropDisk.sit.hqx">DropDisk</a>
+ by Mike Wiese and Chris Cotton that allows you to quickly mount and use
+ disk images created with Disk Copy or ShrinkWrap (drag image on to Drop
+ Disk’s icon)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/StuffIt_1.5.image.bin">StuffIt 1.5.1</a> by <a href="http://www.raylau.com/biography.html">Raymond Lau</a> (the last shareware release before becoming an Aladdin product)</li><li>StuffIt
+ Expander 5.5 (freeware, installed and installer) by Aladdin Systems, 
+for opening StuffIt and other archive files (.arc, .bzip, .bin, .cpt, 
+.dd, .gz, .hqx, .lha, .img, .lhz,&nbsp;.pkg, .sea, .sit, .smi, 
+.tar,&nbsp; taz, .uu, .Z, .zip)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/MacBinary_II_1.0.2.sit.hqx">MacBinary II+ 1.0.2</a> (freeware) by Peter Lewis, for encoding/decoding files as MacBinary (.bin)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/shrink_wrap_21.sit">ShrinkWrap Version 2.1</a>
+ (last release before becoming an Aladdin product) by Chad Magendanz, 
+for creating files that you can mount that emulate a floppy disk or hard
+ disk.&nbsp; I use this program to create 32MB ProDos image files that I
+ can use to transport and backup the contents of my ProDos partitions I 
+use with my Apple IIe card.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/Acrobat_Reader_302.bin">Adobe Acrobat Reader 3.02</a> for viewing PDF files (manuals) </li></ul></li><li>Drivers and extensions (included, but not installed): <ul><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/PrintToPDF-2.4.5.sit">Print2PDF</a> a printer driver that let’s you create a virtual printer that generates PDF files.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/IomegaZipTools.sit.bin">Iomega Zip Tools 4.2</a> (includes extension)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/AppleCDROM.sit.bin">Apple CD-ROM drivers</a> versions 5.0.1, 5.3.1 and 5.3.2</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/CD-Sunrise_v2.2c.bin">CD-Sunrise v2.2c</a> seems to be a generic CD-ROM driver</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/NEC_CDROMv5.3.1.sit.bin">NEC CD-ROM v5.3.1</a> (I use this with my NEC MultiSpin 8x)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/MODE32.HQX">Mode 32 extension</a> allows 32-bit dirty Macintosh II ROMs<br>to boot up 32-bit clean. &nbsp;This extension is only for use with Macintosh IIx,&nbsp;IIcx, and SE/30 ROMs.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/TRANSFER.HQX">SoftMac transfer utility</a>, only for use under SoftMac emulator, used to transfer files between the host system and the emulator. </li></ul></li><li>Utilities for creating your own disk images / guides <ul><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/BurnIt_1.5.sit.bin">Burn 2.5</a> by <a href="http://www.thenextwave.com/">Next Wave Software</a> that allows you to fully erase deleted files.&nbsp; This can drastically improve the compression of drive images.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/flashit3.02.sit.hqx">Flash-it 3.0.2</a> for doing screen captures</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/GIFConverter_2.4.3.sit.hqx">GifConverter 2.4.3</a> can be used to convert the Flash-it .pic images to .gif files. </li></ul></li><li>Network and the Internet (included but not installed) <ul><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/AsanteEtheTalkInstaller.img.bin">Asanté EtherTalk installer v5.5.4</a> that came with my Desktop EN/SC (SCSI to Ethernet) adapter.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/AsanteFASTInstaller.img.bin">AsantéFAST Nubus driver</a> (untested)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/MacTCP206.sit.bin">MacTCP 2.0.6</a> by Apple, let’s you configure your TCP-IP settings to connect to the internet</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/opentransport13.sit">OpenTransport 1.3</a>&nbsp; by Apple, replaces MacTCP, faster, but requires more memory.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/AppleShare_Client_3.7.4.img.bin">AppleShare Client 3.7.4</a>.&nbsp;
+ &nbsp;Note:&nbsp;The installation of AppleShare Client 3.7.4 inhibits 
+the use of Classic Networking in 7.5.3-7.5.5, because while ASC 3.7.4 is
+ installed, OT 1.1.2 or later must be installed for it to be active. If 
+you wish to use MacTCP in 7.5.3+, then do not install AS 3.7.4..</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/internetconfig-202.sit">Internet Config 2.0.2</a>&nbsp;used
+ by some applications to centrally manage your internet configuration so
+ you don’t need to re-enter information multiple times</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/LW_8.5.1.zip">LaserWriter 8.5.1 updater</a>,
+ adds support for IP printing and installs the&nbsp;CFM-68k Runtime 
+Enabler 4.0 required by Netscape Navigator 4.0 and some other software.</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Utilities/Fetch_211.hqx">Fetch 2.1.2</a>
+ by Dartmouth College a very simple FTP client.&nbsp; I use this and 
+my&nbsp;Asanté EN/SC to move files to and from my Windows PC. </li></ul></li></ul>
+
+
+
+<p><strong>The Apple IIe images also contain:</strong></p>
+
+
+
+<ul><li>On the HFS Partition <ul><li>Apple IIe Card software <a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Apple_IIe_card/Apple_IIe_Card_2.2.1.sea.bin">version 2.2.1</a> updated to <a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Apple_IIe_card/iie_startup_2.2.2d1.sea.bin">version 2.2.2d1</a></li><li>ProDOS
+ File System extension, required to create and edit ProDOS partitions 
+for use with an Apple IIe Card (found in the System folder of the Apple 
+IIe Card software version 2.2.1 disk image)</li><li><a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Apple_IIe_card/Color_Classic_Update_1.0.sea.bin">Color Classic Update</a>,
+ I don’t think this is needed for the version 2.2.2d1 software.&nbsp; 
+&nbsp;This extension fixes a bug that kept Apple IIe cards from working 
+on systems running system software 7.5. When running an Apple IIe card, 
+the system software must provide the video mode used by Apple IIe 
+computers. The extension adds this video mode to the video driver.</li><li><a href="http://ivanx.com/ivanx/unforkit/">ProDOSTyper by Ivan X</a>
+ drag and drop files on to ProDOSTyper before copying them to a ProDOS 
+value to prevent creating resource forks.&nbsp; &nbsp;I avoid this issue
+ by using ShrikWrap to create ProDOS disk images to store my ProDOS 
+files. </li><li>A blank ProDos 32MB ShrinkWrap image file you can mount and use to backup the contents of your ProDOS disks and partitions.</li></ul></li><li>On the first ProDOS Partition (the second is blank) <ul><li>ProDOS (I suggest updating to <a href="https://prodos8.com/">Prodos 2.4.2</a>)</li><li>Apple DOS 3.3</li><li>DOS 3.3 Launcher by&nbsp;John MacLean and&nbsp;Andrew Roughan let’s you launch Apple DOS 3.3 programs from within ProDOS.</li><li><a href="http://ivanx.com/ivanx/unforkit/">UnForkIT by Ivan X</a>&nbsp;is
+ a ProDOS 8 program that will convert extended (forked) files stored on a
+ ProDOS volume, such as those created by GS/OS or classic Mac OS, into 
+one or two standard files, allowing you to happily work with them in 
+ProDOS.&nbsp;&nbsp;It is of particular benefit to users of the IIe Card 
+for Mac, because Mac OS will usually create extended files when copying 
+to a ProDOS volume.</li><li>ShrinkIt 1.1 by Andy Nicholas and Dave Lyons for compressing/decompressing files/disk images</li><li>DiskMaker8&nbsp; to create disk images</li><li>Dsk2File58 to open .dsk, .do and .po disk images and copy files to a volume</li></ul></li><li>&nbsp;Suggested additions to your ProDos partitions:<ul><li><a href="https://prodos8.com/">Prodos 2.4.2</a> by <a href="https://prodos8.com/about/#johnbrooks">John Brooks</a> for an more user friendly experience.</li><li><a href="https://www.brutaldeluxe.fr/products/apple2/imfEDDup/index.html">imfEDDup 2.3 by Brutal Deluxe Software</a> for creating .dsk and .nib files, great for backing up your original disks </li><li>The <a href="http://www.whatisthe2gs.apple2.org.za/time-out-for-some-8-bit-fun-iigs-style/">8 bit games collection</a> by Alex Lee</li><li>The <a href="https://archive.org/details/TotalReplay">Total Replay project</a> by  qkumba and 4am.</li></ul></li></ul>
+
+
+
+<h2>3. Creating your own hard drive / removable drive images (to initialize, edit or just as a backup)</h2>
+
+
+
+<p>You’ll need to create a hard drive / removable drive image that 
+represents the the drive you want to work with and then you’ll need to 
+then initialize and partition the image using an emulator (see section 
+4)</p>
+
+
+
+<p>Disk Duplicator (DD) is a standard application that can be used for 
+imaging hard drives, removable drives, memory cards, usb keys, and CD 
+ROMs.&nbsp;&nbsp; This guide is written for DD, an application included 
+with Macintosh OS X, and Linux, but not with MS Windows.&nbsp;&nbsp; For
+ MS Windows you can download <a href="http://www.chrysocome.net/downloads/dd-0.6beta3.zip">version 0.6beta3</a> or the <a href="http://www.chrysocome.net/downloads/ddrelease64.exe">newer 64bit beta</a> created by <a href="http://blog.chrysocome.net/">John Newbigin</a>.</p>
+
+
+
+<p>If I don’t want to use DD, any application that creates “raw” disk 
+images can be used, on MS Windows, I often use a program called <a href="http://www.alexpage.de/usb-image-tool/">the USB Image Tool by&nbsp;Alexander Beug</a>, specifically <a href="http://www.alexpage.de/usb-image-tool/download/">version 1.72</a>
+ (for some reason the latest version did not work for me), to create and
+ write the image files for my iomega Zip Disks (I have a SCSI and a USB 
+version of the drive), or memory cards attached to my modern system via 
+USB.</p>
+
+
+
+<p>The steps I follow when using DD to create the drive image from a physical drive / card:</p>
+
+
+
+<ol><li>If I’m using windows, <a href="http://www.chrysocome.net/dd">download dd for windows</a></li><li>I
+ attach or insert the hard drive, removable drive (Zip Drive, Jazz Disk 
+etc), memory card (SD, Compact Flash etc.) that I want to image (<a href="http://www.savagetaylor.com/2015/11/15/setting-up-your-vintage-classic-68k-macintosh/">see options 6 to 8 from my blog entry for Setting up your vintage (classic) 68k Macintosh for a list of connection methods</a>)</li><li>open the terminal / command line window</li><li>Type&nbsp;<code>dd --list</code> (windows), <code>diskutil list</code> (linux and mac OS) and press return</li><li>You
+ should see a list of all attached drives for your system with their 
+names, you should see the name or your micro SD, SD or CF card, you want
+ the identifier of the floppy drive eg. <ul><li>for linux or mac OS something like <code>/dev/disk2</code></li><li>for windows something like&nbsp;<code>\\.\Volume{bc8eb0e4-a23d-11e8-9982-00e18c7bb83e}\</code> </li></ul></li><li>Use dd with the correct input and output options, “<code>dd if=INPUTFILE of=OUTPUTFILE bs=BLOCKSIZE</code>”: <ul><li>INPUTFILE = {identifier from step 5}, e.g. /dev/disk2 or \\.\Volume{GUID}</li><li>OUTPUTFILE =&nbsp; the location and name of the image you would like to create.</li><li>BLOCKSIZE, if dd is taking a long time, you can <a href="https://serverfault.com/questions/650086/does-the-bs-option-in-dd-really-improve-the-speed">set the block size to speed things up</a>,
+ but what you set it at is dependent on the speed of the device you are 
+working with, and the size of the device you are working with,&nbsp; if 
+you are working with an SD card try setting it to bs=1M (instead of the 
+default of 512).</li><li>e.g: <ul><li>linux or mac OS type “<code><strong>sudo</strong> dd if=/dev/disk2 of=OS_755_2GB.dsk bs=1M</code></li><li>for windows type “<code>dd if=\\.\Volume{bc8eb0e4-a23d-11e8-9982-00e18c7bb83e} of=OS_755_2GB.dsk bs=1M --progress</code>” </li></ul></li><li>press return</li><li>wait…. if you’ve connected via SCSI 1, USB 1 or USB 2, this could take some time for larger drives </li></ul></li></ol>
+
+
+
+<p>If I just want to create a “blank” file that I will use an emulator to initialize, then write to a portion of an SD/CF card:</p>
+
+
+
+<p><code>dd if=/dev/zero of=my.img bs=1M count=1880</code> results in an ~ 2GB image. </p>
+
+
+
+<h2>4. Using an emulator to initialize the drive image</h2>
+
+
+
+<p>If you plan is to write back the disk image to a real or emulated 
+drive, and then boot your 68k Macintosh from that drive, the image will 
+have to be initialized to add the boot block and partition 
+table.&nbsp;&nbsp; <strong>Most emulators can not do this</strong>, they
+ do not treat drive images as actual drives, instead they treat them as 
+partitions, when these “partition” images are written back to you real 
+or emulated drive they are missing the boot block and partition table 
+and will not boot.</p>
+
+
+
+<p>I’ve created a separate <a href="http://www.savagetaylor.com/2018/08/19/setting-up-your-vintage-classic-68k-macintosh-partitioning-your-hard-drive/">blog entry for comparing what emulators can initialize and partition image files</a>.</p>
+
+
+
+<h2>5. Copying files to and setting up your drive image</h2>
+
+
+
+<p>Once you either downloaded one of the drive images I’ve created 
+(section 2), or created your own (section 3 and 4), you’re probably 
+going to want add files to the image before you write the image back to 
+your drive, disk or memory card.&nbsp; &nbsp;You can also always update 
+the again later on by creating a new image file from you media after 
+you’ve worked with it for awhile.</p>
+
+
+
+<p>Also if you haven’t already, you’ll want to confirm <a href="http://www.savagetaylor.com/2017/11/17/setting-up-your-vintage-classic-68k-macintosh-selecting-your-system-software/">which operating system you can, or want to run on your classic Macintosh</a>.</p>
+
+
+
+<ol><li>The System 6.0.8 Bootable image is for older 68k systems that 
+may only have 1MB of memory installed.&nbsp; The SE/30, Classic, Classic
+ II, Portable, II, IIx, IIcx, IIci, IIsi, LC typically shipped with only
+ 1 MB of memory.&nbsp; I’ve managed to track down a scan of the&nbsp;<a href="http://www.savagetaylor.com/wwwroot/wp-content/uploads/Vintage_Computing/Macintosh_System_Hardware/memguide.pdf">Apple Memory Guide from November 2000</a>&nbsp;(pdf) that shows how to upgrade the memory for these and other 68k systems.&nbsp;&nbsp; <strong>This image will NOT boot under Basalisk II you will need to use the System 7.5.5 image to boot in to the emulator.</strong></li><li>The System 7.5.5 Bootable image is for the remaining 68k systems that have 2MB or more memory installed.</li></ol>
+
+
+
+<p>Many tools for copying files to and from disk images will NOT work with drive images:</p>
+
+
+
+<ul><li>Will NOT work: HFVExplorer, Mini vMac</li><li>Will work: MAME, PCE/macplus, SoftMac, Basilisk II (will read/write to the first partition, ignores the rest)</li></ul>
+
+
+
+<p>Way’s to copy files on to these drive images:</p>
+
+
+
+<ol><li>Use <a href="http://www.savagetaylor.com/2018/09/02/setting-up-your-vintage-classic-68k-macintosh-installing-the-full-version-of-system-7-5-5-or-6-0-8/">Basilisk II with the My Computer Icon enabled</a> to move files between Basilisk II and the host system.</li><li>Use <a href="http://www.savagetaylor.com/2018/09/10/setting-up-your-vintage-classic-68k-macintosh-using-softmac/">SoftMac’s Transfer Utility</a> to move files between SoftMac and the host system.</li><li>Use HFVExplorer
+<ul>
+<li>create a blank partition image (see <a href="https://www.emaculation.com/doku.php/basilisk_ii">E-maculation’s guide for using Basilisk II for a link to HFVExplorer and instructions on how to use it</a>),</li>
+<li>copy files on to the partition image using HFVExplorer</li>
+<li>set up either SoftMac,&nbsp;Basilisk II, MAME etc. to point to two files:
+<ol>
+<li>A bootable drive image</li>
+<li>the second file should be the partition file you just created</li>
+</ol>
+</li>
+</ul>
+</li></ol>
+
+
+
+<p>If you used one of my images you will probably want to <a href="http://www.savagetaylor.com/2018/09/02/setting-up-your-vintage-classic-68k-macintosh-installing-the-full-version-of-system-7-5-5-or-6-0-8/">install the full version of System 7.5.5 or System 6.0.8</a>.&nbsp;
+ &nbsp;Unfortunately due to copyright restrictions I could not include 
+the full versions of this software on my images, but you can <a href="http://www.savagetaylor.com/2018/09/02/setting-up-your-vintage-classic-68k-macintosh-installing-the-full-version-of-system-7-5-5-or-6-0-8/">download and then install complete versions from the internet archive</a>.</p>
+
+
+
+<h2>6. Writing your or my disk image to your drive, disk or memory card.</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>You can NOT simply copy my images files on to a formatted SD card or drive.</p><p>You
+ must use one of the methods listed below.&nbsp;&nbsp; The contents of 
+the image file must be copied bit by bit on to the target 
+drive/card/disk, these bits replace whatever was already on the target 
+for the section that is over written.&nbsp; Typically after this is done
+ your computer will report that the drive or card is no longer 
+formatted.&nbsp;&nbsp; That’s ok.&nbsp;&nbsp; All that means is that is 
+it now formatted in a way your computer doesn’t recognize.</p><p>Also 
+the actual capacity of memory cards is not standard ( I&nbsp;have two 
+4GB cards, one that has a capacity of 4,024,434,688 bytes, and another 
+that has a capacity of 3,965,186,048) so please confirm the image you 
+want to write will fit on the target.</p></blockquote>
+
+
+
+<p>If you are using the CD-ROM image, any image burning software should write it to a blank CD-R, suggest writing at a slow speed.</p>
+
+
+
+<p>If I’m writing the entire image to the SD or USB attached drive, instead of using dd, I now use  <a href="https://www.balena.io/etcher/">balenaEtcher</a>.</p>
+
+
+
+<p>I still use dd when I want to modify a portion of an image file, e.g. <a href="http://www.savagetaylor.com/2019/12/19/how-ive-setup-the-scsi2sd-that-i-use-in-my-lc-475/">to update a single partition or the second drive etc. on the SD card</a>, or when I want to write to a non USB device, e.g. <a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/">a drive attached to my SCSI card</a>.</p>
+
+
+
+<p>If you are going to use dd, please be careful when running the 
+following commands, if you accidentally “write” the image to the wrong 
+disk you will overwrite data on that disk:</p>
+
+
+
+<ol><li>Open the terminal / command line window</li><li>Type&nbsp;<code>dd --list</code> (windows), <code>diskutil list</code> (linux and mac OS) and press return</li><li>You
+ should see a list of all attached drives for your system, with their 
+names, you should see the name or your micro SD, SD or CF card, you want
+ the identifier of the floppy drive eg. /disk2</li><li><strong>For linux and mac OS:</strong> type&nbsp;<code>diskutil unmountDisk /dev/{identifier from step 3}</code>, e.g.&nbsp;&nbsp;<code>diskutil unmountDisk /dev/disk2</code>&nbsp;and press return</li><li>You should see a message: “Unmount of all volumes on&nbsp;<code>{identifier from step 3}</code>&nbsp;was successful”,</li><li><strong>The
+ micro SD, SD or CF drive icon should disappear from your desktop (if it
+ did not you may not have the correct device name, check to see if any 
+of your other drives have stopped working)&nbsp;</strong>(I say should, because I’m unsure of this step, I believe unmounting the drive should cause it’s icon to disappear)</li><li>Use dd with the correct input and output options (read points below), “<code>dd&nbsp;if=INPUTFILE of=OUTPUTFILE bs=BLOCKSIZE</code>” <ul><li>INPUTFILE
+ = the location and name of the image you downloaded or created, you can
+ optionally type “dd if=” then drag the disk image file on to the 
+terminal server, this “should” insert the text you need for the input 
+file.</li><li>OUTPUTFILE =&nbsp; {identifier from step 3}, e.g. /dev/disk2 or for windows&nbsp;\\.\Volume{GUID}</li><li>BLOCKSIZE, if dd is taking a long time, you can <a href="https://serverfault.com/questions/650086/does-the-bs-option-in-dd-really-improve-the-speed">set the block size to speed things up</a>,
+ but what you set it at is dependent on the speed of the device you are 
+working with, and the size of the image file you are working with,&nbsp;
+ if you are working with an SD card try setting it to bs=1M.</li><li>e.g. <ul><li>linux or mac OS type “<code><strong>sudo</strong> dd if=OS_755_2GB.dsk of=/dev/disk2 bs=1M</code>”</li><li>for windows type “<code>dd if=OS_755_2GB.dsk of=\\.\Volume{bc8eb0e4-a23d-11e8-9982-00e18c7bb83e} bs=1M --size --progress</code>” </li></ul></li><li>press return </li></ul></li><li>When
+ your Modern System is done writing the image, exit the terminal / 
+command line window and remove your card (or USB adapter and card)</li><li>Insert your&nbsp;your SD, microSD or CF Card in to your SCSI adapter</li><li>Turn on your Classic 68k Macintosh and it should boot</li></ol>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		<i class="fa fa-folder-open-o"></i> <a href="http://www.savagetaylor.com/topics/oldcomputersandgames/macintosh_68k/" rel="category tag">Macintosh 68k</a>, <a href="http://www.savagetaylor.com/topics/oldcomputersandgames/" rel="category tag">Old Computers and Games</a>, <a href="http://www.savagetaylor.com/topics/oldcomputersandgames/macintosh_68k/setting-up-68k/" rel="category tag">Setting Up your 68k Macintosh</a> <i class="fa fa-tags"></i> <a href="http://www.savagetaylor.com/tags/booting/" rel="tag">Booting</a>, <a href="http://www.savagetaylor.com/tags/linux/" rel="tag">Linux</a>, <a href="http://www.savagetaylor.com/tags/os-x/" rel="tag">OS X</a>, <a href="http://www.savagetaylor.com/tags/windows/" rel="tag">Windows</a>. <i class="fa fa-link"></i> <a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/" rel="bookmark">permalink</a>.
+						<hr class="section-divider">
+	</footer><!-- .entry-meta -->
+</article><!-- #post-## -->
+
+				<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links">
+			<div class="nav-previous"><a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/" rel="prev"><i class="fa fa-chevron-left"></i> SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320</a></div><div class="nav-next"><a href="http://www.savagetaylor.com/2018/08/19/setting-up-your-vintage-classic-68k-macintosh-partitioning-your-hard-drive/" rel="next">Setting up your vintage (classic) 68k Macintosh – Initializing and Partitioning your Hard Drive <i class="fa fa-chevron-right"></i></a></div>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+			
+<div id="comments" class="comments-area">
+
+	
+			<h3 class="comments-title">
+			19 thoughts on “<span>Setting up your vintage (classic) 68k Macintosh – Creating a bootable hard drive starting with a image file and an emulator</span>”		</h3>
+
+		
+		<ol class="comment-list">
+			
+	<li id="comment-1912" class="comment even thread-even depth-1 parent">
+		<article id="div-comment-1912" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/b409a30831e044b8c7f7bad68b50d34f.jpeg" srcset="http://2.gravatar.com/avatar/b409a30831e044b8c7f7bad68b50d34f?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Brent</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-1912">
+						<time datetime="2018-08-18T14:26:13-04:00">
+							August 18, 2018 at 2:26 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>This blog has been insanely helpful, but there’s just one thing I’d like to ask.</p>
+<p>After I get the image onto the SD card (and it now works in my 
+MacSE30) let’s say in a month or two I want to take the image off the SD
+ card and run in Basilisk?</p>
+<p>My question is: how do I copy the image from the SD card back to my 
+computer?  This would ensure I could make backups of my MacSE30’s 
+contents (for example: word documents, saved games, keep my settings, 
+etc.)</p>
+<p>Thanks so much, I look forward to your reply.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=1912#respond" data-commentid="1912" data-postid="403" data-belowelement="div-comment-1912" data-respondelement="respond" aria-label="Reply to Brent">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-1916" class="comment byuser comment-author-steve bypostauthor odd alt depth-2">
+		<article id="div-comment-1916" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-1916">
+						<time datetime="2018-08-18T16:39:14-04:00">
+							August 18, 2018 at 4:39 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>You can create an image file of everything on your SD card 
+following the steps for “Creating your own disk images” in section 3 of 
+this page and create an image of the entire SD.<br>
+But as you’ve likely already read Basilisk will only be able to read the first partition of the image.<br>
+There is a way to access the other partitions, but it’s tricky.  You 
+should be able to set the start and end position for dd to line up the 
+the start and end location of the partition in the file, but if you get 
+things wrong it will be a mess, so I just use the first partition in the
+ image to add files, or use SoftMac instead (as described in section 5 
+of this entry)</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=1916#respond" data-commentid="1916" data-postid="403" data-belowelement="div-comment-1916" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-4329" class="comment even thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-4329" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/5deb92bec9b1dac58b3985ccf7782351.jpeg" srcset="http://2.gravatar.com/avatar/5deb92bec9b1dac58b3985ccf7782351?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Dean Aceto</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-4329">
+						<time datetime="2019-05-19T14:03:42-04:00">
+							May 19, 2019 at 2:03 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Awesome guide here.</p>
+<p>So at its core we can just download one of your .dsk images and write
+ that to a CF using the USBtool and that should be it right? I have an 
+LC580 and it uses an IDE drive so im using an IDE to CF adapter.</p>
+<p>Thanks for the help.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=4329#respond" data-commentid="4329" data-postid="403" data-belowelement="div-comment-4329" data-respondelement="respond" aria-label="Reply to Dean Aceto">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-4330" class="comment byuser comment-author-steve bypostauthor odd alt depth-2">
+		<article id="div-comment-4330" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-4330">
+						<time datetime="2019-05-19T14:49:07-04:00">
+							May 19, 2019 at 2:49 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi Dean, I’m not sure.  The SD2SCSI adapter lets you define the 
+portion of the card that contains the image file, so if the file isn’t 
+the exact same size of the card the extra “space” is ignored.  I don’t 
+think that’s an option with your IDE to CF adapter.  So the best way to 
+find out is try it with a file that is close to the the size of you CF 
+card, once/if it boots run a repair tool on the disk to see if there are
+ any errors.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=4330#respond" data-commentid="4330" data-postid="403" data-belowelement="div-comment-4330" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-5006" class="comment even thread-even depth-1 parent">
+		<article id="div-comment-5006" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/b904a6e664e9ecb2afcc31205a019508.jpeg" srcset="http://2.gravatar.com/avatar/b904a6e664e9ecb2afcc31205a019508?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Jason</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5006">
+						<time datetime="2019-07-23T22:50:40-04:00">
+							July 23, 2019 at 10:50 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Is the SD card supposed to be formatted in a specific file system?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5006#respond" data-commentid="5006" data-postid="403" data-belowelement="div-comment-5006" data-respondelement="respond" aria-label="Reply to Jason">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-5010" class="comment byuser comment-author-steve bypostauthor odd alt depth-2 parent">
+		<article id="div-comment-5010" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5010">
+						<time datetime="2019-07-24T08:54:30-04:00">
+							July 24, 2019 at 8:54 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>HI Jason, no it doesn’t have to be formatted in any specific file
+ system.   I suggested formatting your SD card at least once to ensure 
+that it is functional.   Writing one of my files to your card will 
+overwrite any formatting on your card for the section of your card it is
+ written to.   Don’t be surprised if after you’ve written one of my 
+files your computer reports that the card is no longer “formatted”.  
+That’s fine and expected.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5010#respond" data-commentid="5010" data-postid="403" data-belowelement="div-comment-5010" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-5014" class="comment even depth-3">
+		<article id="div-comment-5014" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/b904a6e664e9ecb2afcc31205a019508.jpeg" srcset="http://2.gravatar.com/avatar/b904a6e664e9ecb2afcc31205a019508?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Jason</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5014">
+						<time datetime="2019-07-24T14:56:49-04:00">
+							July 24, 2019 at 2:56 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Thanks!<br>
+Also, just a note…..on OSX the command “bs=1M” returns an error. I had to replace it with “bs=1m”</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5014#respond" data-commentid="5014" data-postid="403" data-belowelement="div-comment-5014" data-respondelement="respond" aria-label="Reply to Jason">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-5053" class="comment odd alt thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-5053" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/b904a6e664e9ecb2afcc31205a019508.jpeg" srcset="http://2.gravatar.com/avatar/b904a6e664e9ecb2afcc31205a019508?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Jason</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5053">
+						<time datetime="2019-07-29T21:28:34-04:00">
+							July 29, 2019 at 9:28 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>I really appreciate all of the effort that you put into these 
+guides, but I absolutely cannot my Macintosh SE to boot from the 
+SCSI2SD.</p>
+<p>I formatted the 2GB SD card. Set it up as 2, 1 GB partitions. Loaded 
+your 1GB image into Basilisk. Installed System 7 as you described. Used 
+OSX dd to copy the image to the SD card.</p>
+<p>A long time later the writing is done, I insert the SD card into the 
+SCSI2SD….boot and nothing happens. Just a floppy disk with a flashing ?</p>
+<p>I have to be missing something, right? I’ve repeated the steps over and over again. I can’t find what I’m missing.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5053#respond" data-commentid="5053" data-postid="403" data-belowelement="div-comment-5053" data-respondelement="respond" aria-label="Reply to Jason">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-5100" class="comment even depth-2 parent">
+		<article id="div-comment-5100" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/8392d7342df216461551651a2bdf7deb.jpeg" srcset="http://2.gravatar.com/avatar/8392d7342df216461551651a2bdf7deb?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">davewongillies</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5100">
+						<time datetime="2019-08-05T01:11:39-04:00">
+							August 5, 2019 at 1:11 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>I’m in the same boat as you with my Quadra 700. Tried and tried but all I get is a floppy disk with a flashing ?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5100#respond" data-commentid="5100" data-postid="403" data-belowelement="div-comment-5100" data-respondelement="respond" aria-label="Reply to davewongillies">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-5102" class="comment byuser comment-author-steve bypostauthor odd alt depth-3">
+		<article id="div-comment-5102" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5102">
+						<time datetime="2019-08-05T14:51:20-04:00">
+							August 5, 2019 at 2:51 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi Dave, not sure, the Quadra 700 should be supported by my 7.5.5
+ image.  Have you tested it as working with something other than the 
+SCSI2SD?  You luckily have the option of creating a bootable floppy as a
+ test.<br>
+<a href="http://www.savagetaylor.com/2017/12/28/setting-up-your-vintage-classic-68k-macintosh-using-a-floppy-drive/" rel="nofollow ugc">http://www.savagetaylor.com/2017/12/28/setting-up-your-vintage-classic-68k-macintosh-using-a-floppy-drive/</a><br>
+A cheap usb floppy drive should let you make a bootable disk with a 
+modern pc… I’m hopping you have some disks kicking around with your 
+Quadra.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5102#respond" data-commentid="5102" data-postid="403" data-belowelement="div-comment-5102" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-5096" class="comment even thread-even depth-1 parent">
+		<article id="div-comment-5096" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/8a0c0ad43ae8b66f0ab304030b9563c5.jpeg" srcset="http://2.gravatar.com/avatar/8a0c0ad43ae8b66f0ab304030b9563c5?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Pentti</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5096">
+						<time datetime="2019-08-04T13:27:05-04:00">
+							August 4, 2019 at 1:27 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Is there a way to prepare bootable SD using MacOS and USB-attached SD Card writer?</p>
+<p>For example using TI Book, MacOS 9, Disk Copy etc. The bootable stuff
+ is located on Zip100 or on Jaz 1 GB Disks (Which can be attached TI 
+Book via USB or FireWire.</p>
+<p>Or using Pismo or a PowerMac with USB-card?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5096#respond" data-commentid="5096" data-postid="403" data-belowelement="div-comment-5096" data-respondelement="respond" aria-label="Reply to Pentti">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-5103" class="comment byuser comment-author-steve bypostauthor odd alt depth-2">
+		<article id="div-comment-5103" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5103">
+						<time datetime="2019-08-05T14:57:31-04:00">
+							August 5, 2019 at 2:57 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi Pentti.  Filling in some gaps in what you said… yes if you 
+have a USB Zip 100, or USB Jaz 1 GB you’ll be able to image a disk from 
+one of those using DD, then write that image file using DD to an SD 
+card.<br>
+Then in the SCSI2SD set up you can set the size of device 1 to match the size of the image file you wrote.<br>
+If it is a zip drive you’ll likely want to set the SCSI2SD to pretend 
+it’s a zip drive… not sure what the settings are for the Jaz 1GB I only 
+have a Jaz 2GB.<br>
+Vendor IOMEGA<br>
+Product ID ZIP 100<br>
+Revision D.09<br>
+I also have a Iomega Zip 100, I’ll write a blog post with the step when I have a chance.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5103#respond" data-commentid="5103" data-postid="403" data-belowelement="div-comment-5103" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-5976" class="comment even thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-5976" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/f700af626ad3b793d373f173aa83ed38.jpeg" srcset="http://0.gravatar.com/avatar/f700af626ad3b793d373f173aa83ed38?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Frank</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-5976">
+						<time datetime="2019-10-04T06:53:15-04:00">
+							October 4, 2019 at 6:53 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>can you re-upload the zip disk files? <a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Setup/Bootdisks/OS_608_OS_755_100MB.zip" rel="nofollow ugc">http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Setup/Bootdisks/OS_608_OS_755_100MB.zip</a> is not working 🙂</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=5976#respond" data-commentid="5976" data-postid="403" data-belowelement="div-comment-5976" data-respondelement="respond" aria-label="Reply to Frank">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-6036" class="comment byuser comment-author-steve bypostauthor odd alt depth-2">
+		<article id="div-comment-6036" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-6036">
+						<time datetime="2019-10-11T09:41:45-04:00">
+							October 11, 2019 at 9:41 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Fixed, it should have been: <a href="http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Setup/Bootdisks/OS_608_100MB.zip" rel="nofollow ugc">http://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Setup/Bootdisks/OS_608_100MB.zip</a></p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=6036#respond" data-commentid="6036" data-postid="403" data-belowelement="div-comment-6036" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-6751" class="comment even thread-even depth-1 parent">
+		<article id="div-comment-6751" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/99b6b3538ec74a2c51494eec40936f4d.jpeg" srcset="http://0.gravatar.com/avatar/99b6b3538ec74a2c51494eec40936f4d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://retrotechsquad.ru/" rel="external nofollow ugc" class="url">Mihhru</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-6751">
+						<time datetime="2019-11-28T09:14:31-05:00">
+							November 28, 2019 at 9:14 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hello.<br>
+I don’t understand how to write the second disk image via dd on macos. 
+Diskutil does not show the second partition after using scsi2sd-util.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=6751#respond" data-commentid="6751" data-postid="403" data-belowelement="div-comment-6751" data-respondelement="respond" aria-label="Reply to Mihhru">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-6753" class="comment byuser comment-author-steve bypostauthor odd alt depth-2 parent">
+		<article id="div-comment-6753" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-6753">
+						<time datetime="2019-11-28T16:49:03-05:00">
+							November 28, 2019 at 4:49 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi Mihhru, not sure what you mean by writing the second disk 
+image via dd?   Do you mean the second image I refer to in Step 6 of: <a href="http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/" rel="nofollow ugc">http://www.savagetaylor.com/2018/01/05/setting-up-your-vintage-classic-68k-macintosh-using-a-scsi2sd-adapter/</a>?</p>
+<p>If so, I use that second image in an emulator to get it set up, once 
+it’s set up and bootable, I write it as the first image to my SD card 
+(as drive 0 under the SCSI2SD control panel).   I then set up the 
+remaining empty portion of the card as one or more drives.   I then boot
+ my mac and use my patched HD SC Setup to initialize and partition that 
+empty space…. not sure if that helps?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=6753#respond" data-commentid="6753" data-postid="403" data-belowelement="div-comment-6753" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7776" class="comment even depth-3">
+		<article id="div-comment-7776" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/99b6b3538ec74a2c51494eec40936f4d.jpeg" srcset="http://0.gravatar.com/avatar/99b6b3538ec74a2c51494eec40936f4d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://retrotechsquad.ru/" rel="external nofollow ugc" class="url">Mihhru</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-7776">
+						<time datetime="2020-02-07T20:38:38-05:00">
+							February 7, 2020 at 8:38 pm						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Thank you very much. I finally read Step 6 more carefully. =)<br>
+Everything is fine. Both of my Mac Classic and Mac SE load games and software.<br>
+I don’t know what I would do without information on this site. Thank you for your unique work.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=7776#respond" data-commentid="7776" data-postid="403" data-belowelement="div-comment-7776" data-respondelement="respond" aria-label="Reply to Mihhru">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7046" class="comment odd alt thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-7046" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/0505624ae88c74655b44322916f08eb5.jpeg" srcset="http://0.gravatar.com/avatar/0505624ae88c74655b44322916f08eb5?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn">Dave</cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-7046">
+						<time datetime="2019-12-21T08:35:09-05:00">
+							December 21, 2019 at 8:35 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi,</p>
+<p>This is just what I’m looking for so thanks for taking the time to 
+write it up and provide the images. I am having issues in downloading 
+the 2GB imahes for 6.0.8 ans 7.5.5 – in both cases the transfer stops 
+after 1.5MB. Have you pulled the images?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=7046#respond" data-commentid="7046" data-postid="403" data-belowelement="div-comment-7046" data-respondelement="respond" aria-label="Reply to Dave">Reply</a></div>		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7047" class="comment byuser comment-author-steve bypostauthor even depth-2">
+		<article id="div-comment-7047" class="comment-body">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="getting_started_files/104b15fb817e56bae7def37102928362.jpeg" srcset="http://1.gravatar.com/avatar/104b15fb817e56bae7def37102928362?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" width="60" height="60">					<cite class="fn"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></cite> <span class="says">says:</span>				</div><!-- .comment-author -->
+
+				<div class="comment-metadata">
+					<a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-7047">
+						<time datetime="2019-12-21T10:11:07-05:00">
+							December 21, 2019 at 10:11 am						</time>
+					</a>
+									</div><!-- .comment-metadata -->
+
+							</footer><!-- .comment-meta -->
+
+			<div class="comment-content">
+				<p>Hi Dave, I just tried to download, and both worked for me, I’n 
+not sure why the transfer is stopping for you.  Try again and let me 
+know, perhaps there was a temporary issue with my server, or your ISP.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-default" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/?replytocom=7047#respond" data-commentid="7047" data-postid="403" data-belowelement="div-comment-7047" data-respondelement="respond" aria-label="Reply to Steve">Reply</a></div>		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#respond" style="display:none;">Cancel reply</a></small></h3><form action="http://www.savagetaylor.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" size="30" maxlength="200"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit btn btn-default" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="403" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="9a4b1c468f"></p><p style="display: none;"></p><input type="hidden" id="ak_js" name="ak_js" value="1581265851377"></form>	</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>
+</div><!-- #comments -->
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<div id="secondary" class="widget-area col-sm-12 col-md-4" role="complementary">
+				<aside id="search-2" class="widget widget_search"><form method="get" class="form-search" action="http://www.savagetaylor.com/">
+	<div class="form-group">
+		<div class="input-group">
+	  		<span class="screen-reader-text">Search for:</span>
+	    	<input type="text" class="form-control search-query" placeholder="Search..." name="s">
+	    	<span class="input-group-btn">
+	      		<button type="submit" class="btn btn-default" name="submit" id="searchsubmit" value="Search"><span class="glyphicon glyphicon-search"></span></button>
+	    	</span>
+	    </div>
+	</div>
+</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+											<li>
+					<a href="http://www.savagetaylor.com/2020/01/12/sierra-256-colour-and-sci-games-for-the-macintosh-68k-and-ppc/">Sierra 256 colour and SCI games for the Macintosh 68k and PPC</a>
+									</li>
+											<li>
+					<a href="http://www.savagetaylor.com/2019/12/19/how-ive-setup-the-scsi2sd-that-i-use-in-my-lc-475/">How I’ve setup the SCSI2SD that I use in my LC 475</a>
+									</li>
+											<li>
+					<a href="http://www.savagetaylor.com/2019/12/16/technical-note-qd01-32-bit-quickdraw-version-1-2-features/">Technical Note QD01 – 32-Bit QuickDraw: Version 1.2 Features</a>
+									</li>
+											<li>
+					<a href="http://www.savagetaylor.com/2019/12/15/68k-macintosh-and-sierra-agi-games/">68k Macintosh and Sierra AGI games</a>
+									</li>
+											<li>
+					<a href="http://www.savagetaylor.com/2019/12/11/connecting-your-68k-macintosh-to-a-real-or-emulated-mt-32/">Connecting your 68k Macintosh to an emulated MT-32</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href="http://retrotechsquad.ru/" rel="external nofollow ugc" class="url">Mihhru</a></span> on <a href="http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/#comment-7776">Setting up your vintage (classic) 68k Macintosh – Creating a bootable hard drive starting with a image file and an emulator</a></li><li class="recentcomments"><span class="comment-author-link">Michel</span> on <a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/#comment-7704">SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320</a></li><li class="recentcomments"><span class="comment-author-link"><a href="http://www.savagetaylor.com/" rel="external nofollow ugc" class="url">Steve</a></span> on <a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/#comment-7691">SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320</a></li><li class="recentcomments"><span class="comment-author-link">Michel</span> on <a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/#comment-7687">SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320</a></li><li class="recentcomments"><span class="comment-author-link">Josel</span> on <a href="http://www.savagetaylor.com/2018/02/11/scsi-on-windows-10-adaptec-aha-2940-adaptec-29xx-ultra-or-aic-7870-adaptec-78xx/#comment-7667">SCSI on Windows 10 64-bit: Adaptec AHA-2940 (29xx) Ultra, AIC-7870 (78xx), or 29320LPE Ultra 320</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+				<li><a href="http://www.savagetaylor.com/2020/01/">January 2020</a></li>
+	<li><a href="http://www.savagetaylor.com/2019/12/">December 2019</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/12/">December 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/09/">September 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/08/">August 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/05/">May 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/02/">February 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2018/01/">January 2018</a></li>
+	<li><a href="http://www.savagetaylor.com/2017/12/">December 2017</a></li>
+	<li><a href="http://www.savagetaylor.com/2015/11/">November 2015</a></li>
+		</ul>
+			</aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+				<li class="cat-item cat-item-4"><a href="http://www.savagetaylor.com/topics/oldcomputersandgames/apple_iie_emulator_card/" title="Apple IIe Emulator Card">Apple IIe Emulator Card</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.savagetaylor.com/topics/oldcomputersandgames/macintosh_68k/">Macintosh 68k</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="http://www.savagetaylor.com/topics/oldcomputersandgames/" title="One of my (Steve) hobbies is experimenting with old computers to see if I can get them working, and max out what they are capable of.
+
+My collection collection currently consists of:
+
+ 	Apple IIc
+ 	Macintosh IIx
+ 	Macintosh Color Classic
+ 	Macintosh LC III
+ 	Macintosh LC 475
+ 	Macintosh SE
+
+With the following add-ons
+
+ 	ASANTÉ Desktop EC/SC SCSI to Ethernet Adapter
+ 	Apple IIe Emulator Cards (2 of them, with y cables)
+ 	Apple II 5.25&quot; Drive (A9M0107) (2 of them)
+ 	Apple CD SC SCSI CD-ROM drive
+ 	MidiMan MacMan midi interface
+ 	FloppyEMU Adapter
+ 	Iomega Zip Drives (100 MB SCSI, 250MB usb)
+ 	Iomega Jaz Drive (2GB)
+ 	SCSI2SD Adapter (2 of them)
+ 	NEC External SCSI CD-ROM drive (8x speed)
+ 	Several PCIe SCSI adapters for connecting SCSI devices to my Windows PC
+">Old Computers and Games</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="http://www.savagetaylor.com/topics/oldcomputersandgames/macintosh_68k/setting-up-68k/">Setting Up your 68k Macintosh</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://www.savagetaylor.com/topics/oldcomputersandgames/sierra_80s_and_early_90s/">Sierra (80s and early 90s)</a>
+</li>
+		</ul>
+			</aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+			Manual registration is disabled			<li><a href="http://www.savagetaylor.com/wp-login.php">Log in</a></li>
+			<li><a href="http://www.savagetaylor.com/feed/">Entries feed</a></li>
+			<li><a href="http://www.savagetaylor.com/comments/feed/">Comments feed</a></li>
+			<li><a href="https://en-ca.wordpress.org/">WordPress.org</a></li>			</ul>
+			</aside>	</div><!-- #secondary -->
+                </div><!-- close .row -->
+            </div><!-- close .container -->
+        </div><!-- close .site-content -->
+
+	<div id="footer-area">
+		<div class="container footer-inner">
+			
+			</div>
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+			<div class="site-info container">
+								<nav role="navigation" class="col-md-6">
+					<ul id="menu-about-1" class="nav footer-nav clearfix"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-62"><a href="http://www.savagetaylor.com/about-us/">About Us</a></li>
+</ul>				</nav>
+				<div class="copyright col-md-6">
+					dazzling					Theme by <a href="http://colorlib.com/wp/" target="_blank">Colorlib</a> Powered by <a href="http://wordpress.org/" target="_blank">WordPress</a>				</div>
+			</div><!-- .site-info -->
+			<div class="scroll-to-top" style="display: block;"><i class="fa fa-angle-up"></i></div><!-- .scroll-to-top -->
+		</footer><!-- #colophon -->
+	</div>
+</div><!-- #page -->
+
+<link rel="stylesheet" id="kiwi_social_sharing-frontend-css" href="getting_started_files/frontend.css" type="text/css" media="all">
+<script type="text/javascript" src="getting_started_files/main.js"></script>
+<script type="text/javascript" src="getting_started_files/comment-reply.js"></script>
+<script type="text/javascript" src="getting_started_files/wp-embed.js"></script>
+<script type="text/javascript" src="getting_started_files/kiwi.js"></script>
+<script type="text/javascript" src="getting_started_files/frontend.js"></script>
+<script async="async" type="text/javascript" src="getting_started_files/form.js"></script>
+
+
+
+
+
+
+</body></html>
+<!-- Dynamic page generated in 1.274 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2020-02-09 11:30:51 -->
+<!-- super cache -->

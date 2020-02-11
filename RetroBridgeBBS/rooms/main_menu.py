@@ -10,6 +10,12 @@ class MainMenu(rooms.Room):
     def run_room(self):
         self.menu_list = [
             {
+               "key" : None,
+              "label": "Test New Archive System",
+           "command" : RetroBridgeBBS.rooms.archives.Room,
+              "test" : None
+            },
+            {
                "key" : "F",
               "label": "Files (Search, DL, etc)",
            "command" : RetroBridgeBBS.rooms.file_area_main_menu.FileAreaMainMenu,

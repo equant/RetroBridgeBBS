@@ -10,6 +10,12 @@ class FileAreaMainMenu(rooms.Room):
 
         self.menu_list = [
             {
+               "key" : None,
+              "label": "Test New Archive System",
+           "command" : RetroBridgeBBS.rooms.archives.Room,
+              "test" : None
+            },
+            {
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
            "command" : RetroBridgeBBS.rooms.archives.garden.search_garden.SearchGarden,

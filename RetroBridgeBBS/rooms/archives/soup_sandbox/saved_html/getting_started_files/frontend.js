@@ -1,0 +1,1 @@
+jQuery(document).ready(function(a){try{kiwi.frontend.highlightShare(a),kiwi.frontend.modalPopup(a),kiwi.frontend.handleFloatingBarDisplay(a)}catch(a){console.warn(a)}});

@@ -1,0 +1,633 @@
+/mac/game/arcade/00index.txt
+ 
+This list is intended to include all and only the files within this
+directory.  You may find that some of the paths listed here do not
+point to this directory.  That is ok; the physical paths are given here
+but there may be a link in another location.
+ 
+If you find any problems or you wish to add to or change the
+descriptions given here, please do not hesitate to write
+comments@mac.archive.umich.edu.
+ 
+SIZE      DATE
+(KBYTES)  ARCHIVED  COMPRESSION FORMAT(S)
+-----------------------------------------------------------------------
+/mac/game/arcade/3dbrickbash1.11.sit.hqx
+ 149     8/25/94    BinHex4.0,StuffIt3.50
+ 
+   A 3d break-out type game.  Requires Color QuickDraw.
+ 
+/mac/game/arcade/3dpaddlebash1.05.sit.hqx
+ 121     10/2/94    BinHex4.0,StuffIt3.50
+ 
+   A 3d version of pong with customizable computer opponents;
+   requires Color Quickdraw, System 6.0.5+ or 7.0+, 68020 CPU or
+   greater, and ,000K free memory to run in 8-bit color (700K for
+   4-bit or less.); v1.05 fixes several bugs.
+ 
+/mac/game/arcade/3dscreamers1.0bd.sit.hqx
+  201   8/20/95   BihHex4.0,StuffIt3.5
+
+   3D Screamers is a very fast game in which a spaceship flies around
+   a full "virtual" 3-D world, it shows DOOM-like situations in
+   tunnels but also supports flight-simulator movements with full 6
+   degres of freedom. 3D Screamers works at very high frame rates and
+   features texture-mapping, shading, explosions and more, it runs on
+   Macs with an FPU and has been accelerated for PowerMacs.
+
+/mac/game/arcade/acquire1.0.cpt.hqx
+  90    11/27/93    BinHex4.0,Compact1.51
+ 
+   Click on good things to gain points.  Click on bad things to lose
+   points.  The point, you ask?  Good point...
+ 
+/mac/game/arcade/apeiron1.02.sea.hqx
+3248     12/4/95    BinHex4.0,SelfExtractingArchive
+   
+   Snazzy, slightly psychadelic version of the arcade game Centipede.
+   The object is to kill the 'pede as it marches down from the top
+   of the screen, and of course you can knock off the mushrooms and
+   other assorted nasties in the way.  Due to the exceptionally
+   piggish size of this file, it'll be removed from the archive
+   pretty soon after 2/4/96.
+
+/mac/game/arcade/arashi1.11.cpt.hqx
+ 319     10/2/94    BinHex4.0,Compact1.51
+ 
+   Remember Atari's old arcade game Tempest?  This  very polished
+   game is based directly on it.  Move your pointer/ship around a
+   grid and shoot at the nasties as they head up towards you.
+ 
+/mac/game/arcade/bachman2.0.cpt.hqx
+ 295     10/7/93    BinHex4.0,Compact1.51
+ 
+   Pseudo-3d PacMan.  You maneuver your gobbling man around a grid,
+   gathering pellets, food and treasure chests.  There are walking
+   heads chasing after you.  New version adds color, and uses less 
+   memory.
+ 
+/mac/game/arcade/balderdoush1.04i.sit.hqx
+ 311     2/24/95    BinHex4.0,StuffIt3.50
+ 
+   Based on Balderdash, and lotsa fun!
+
+/mac/game/arcade/barneycarnage2.0.sit.hqx
+ 330      8/8/95    BinHex4.0,StuffIt3.50
+
+   A rather pathetically put-together game where you get to
+   machine-gun, knife, lightening-bolt or just plain nuke
+   the rather pathetic purple children's TV host.
+ 
+/mac/game/arcade/battletanks2.12.cpt.hqx
+  75     3/17/95    BinHex4.0,Compact1.51
+ 
+   A nice little 'kill the other guy' game.  Small, addictive.
+ 
+/mac/game/arcade/bedlam1.1.sit.hqx
+1285      9/8/95    BinHex4.0,StuffIt3.50
+ 
+   Bedlam is a good "shoot'em up" game for the Macintosh *somewhat*
+   similar to an old arcade favorite, Galaga, but with many additions.
+   It has good graphics (for b/w), including over 40 sprites, and about
+   600k worth of sounds.
+ 
+/mac/game/arcade/bikaka1.4.cpt.hqx
+ 177     6/14/95    BinHex4.0,Compact1.51
+ 
+   Tetris on a hexagonal grid.
+ 
+/mac/game/arcade/billiardparlour0.5.cpt.hqx
+  64     6/15/93    BinHex4.0,Compact1.51
+ 
+   Billiards, straight pool, 8-ball, 9-ball, snooker, slop, and lag.
+ 
+/mac/game/arcade/blobbolite1.0.sit.hqx
+  390    10/20/94   BinHex4.0,StuffIt3.50
+ 
+   Blobbo 1.0 Lite is a game of strategy - you must pick up all the
+   toy chests in each level without falling victim to various 
+   interlocking traps and pitfalls.  Lots of sound, animation, and 
+   general sillyness combine with addictive puzzles that will provide 
+   many hours of entertainment.  The full 25 levels are included,
+   along with a couple saved games to help you along.  If you like
+   Sokoban, you'll like this too.
+ 
+/mac/game/arcade/blobbopatch1.01.sit.hqx
+  19     10/20/94   BinHex4.0,StuffIt3.50
+ 
+   A bug fix for Blobbo 1.0 Lite.  Allows you to finish the 18th level.
+ 
+/mac/game/arcade/bloodsuckers.cpt.hqx
+ 664     12/6/93    BinHex4.0,Compact1.51
+ 
+   A tasteless game in the vein of Bonk, also found on mac.archive.
+   Move your hand around the playing field, trying to keep bugs
+   from lunching off your outstretched arm.  Very colorful, requires
+   a 13"+ monitor and System 7.
+ 
+/mac/game/arcade/bloxarcade1.02.sit.hqx
+ 512     3/3/96     BinHex4.0,StuffIt3.50
+ 
+   Blox Arcade 1.02 is four games in one application -- a Tetris clone 
+   and three original and exciting variations.
+ 
+/mac/game/arcade/bonk1.42.sit.hqx
+ 226     7/26/92    BinHex4.0,StuffIt3.50
+ 
+   Like the old penny arcade game, a stupid looking head pops out of
+   the hole and it's up to you to "bonk" the head back down with your
+   mouse before it laughs at you...  You can also "bomb" all the
+   heads at once.  Two versions: one for B/W, one for 256 colors.
+ 
+/mac/game/arcade/bricklesplus3.0.sit.hqx
+  56     2/23/94    BinHex4.0,StuffIt3.50
+ 
+   The classic paddle game in color for 1 or more players.
+ 
+/mac/game/arcade/burglar1.1.cpt.hqx
+ 150     3/20/94    BinHex4.0,Compact1.51
+ 
+   You are a burglar trying to gather gold, but it's almost enough
+   just to try to stay alive by jumping, climbing, digging and pushing
+   your way clear of the enemies.  Similar to Lode Runner.
+ 
+/mac/game/arcade/bunnykiller2.11.sit.hqx
+  51    2/16/95     BinHex4.0,StuffIt3.50
+ 
+   A game to impress your girlfriends with, simply point and click
+   and shoot as many of the 20 pink bunnies scrambling across the 
+   screen as you can.
+ 
+/mac/game/arcade/cheesetoast1.01.sit.hqx
+ 702     3/12/94    BinHex4.0,StuffIt3.50
+ 
+   An asteroids-inspired game similar to Maelstrom, except your ship
+   is a teapot; requires Color QuickDraw; v1.01 fixed to work on 12",
+   13" monitors and larger.
+ 
+/mac/game/arcade/chipsanddips.sit.hqx
+ 100    10/25/93    BinHex4.0,StuffIt3.50
+ 
+   Collect memory chips from a warehouse. 5 levels. Similar to Lode
+   Runner(tm).
+  
+/mac/game/arcade/chiracattack.sit.hqx
+  63    10/24/95    BinHex4.0,StuffIt3.5
+
+   A game with a blatant political theme - a response to the French
+   prime minister's approval of nuclear bomb tests.  Similar to Pac Man.
+
+/mac/game/arcade/chiral1.04.hqx
+2109      6/1/97    BinHex4.0
+ 
+   Form bonds between atoms to create inert molecules before
+   the atoms overflow from a vial; a tetris-like game with a
+   chemical twist; fun.
+ 
+/mac/game/arcade/colorfall1.1.sit.hqx
+ 127    10/11/95    BinHex4.0,StuffIt3.50
+ 
+   Blocks of 4 colors (or patterns for B&W) drop down; you position 
+   and rotate them where you want them and let 'em drop!  Try to get 
+   4 or more in a row down, across, diagonally or in a block... But 
+   that's not all: random things happen during play to either help or 
+   hinder your progress, such as a falling weight, a bomb and other 
+   strange things.  
+ 
+/mac/game/arcade/columnsppc.cpt.hqx
+ 255     5/31/95    BinHex4.0,Compact1.50
+ 
+   A simple columns game with nifty dragons in the background watching
+   their jewels bombard down the screen.
+ 
+/mac/game/arcade/dalekset2.0.sit.hqx
+ 144      9/7/97    BinHex4.0,StuffIt3.50
+
+   A simple implementation of the game Daleks.  Avoid the robots.
+
+/mac/game/arcade/delirium1.2.cpt.hqx
+ 395     7/16/97    BinHex4.0,Compact1.51
+ 
+   Fast-paced color action gives opportunity to save humankind,
+   destroy Zorgons, fight mutant assassins, etc...  the usual day's
+   work for heroes like us (aka: Defender); requires color Mac with
+   68020 or better, 16 colors/grays, PowerMac compatible.
+
+/mac/game/arcade/deskfighter1.1.sit.hqx
+ 180     12/8/95    BinHex4.0,StuffIt3.50
+
+   Another fighting ninja-type game with decent graphics, cool
+   moves for up to 5 players (or player may herself play all
+   5 at once--just call up 'kickbutt' *heh*); v1.1 fixes bug
+   in lifebars; requires HyperCard or HyperCard player.
+ 
+/mac/game/arcade/deskinvaders2.3gaelic.cpt.hqx
+ 104     5/15/95    BinHex4.0,Compact1.50
+ 
+   Irish Gaelic version of "Desk Invaders" (Desk Invaders
+   can be found in /mac/game/arcade/deskinvaderstwo.sit.hqx).
+ 
+/mac/game/arcade/deskinvaderstwo.sit.hqx
+  92     12/5/94    BinHex4.0,Compact1.51
+ 
+   The classic Space Invaders arcade game in a small app; requires
+   ColorQuickDraw, 256 colors, 68030 or better cpu to play; update
+   to older DA.
+ 
+/mac/game/arcade/digven.sit.hqx
+ 776     11/8/95   BinHex4.0,StuffIt3.50
+ 
+   Two players shoot at each other with cannons. 
+ 
+/mac/game/arcade/f1gp0.31.sit.hqx
+  99     8/19/95   BinHex4.0,StuffIt3.50
+ 
+   A simple formula 1/Grand Prix racing game in the spirit of
+   Virtua Racing.  Two players, each can see the other
+   in their field of view.  Minimal but impressive.
+
+/mac/game/arcade/factory1.1.cpt.hqx
+ 528     9/9/95    BinHex4.0,Compact1.51
+
+   Here's a game that lets you practice for the job most of us
+   get straight out of high school.  You spend your virtual week
+   clicking on control switches (in the right order) to put
+   various manufactured things (toothpaste, shoes, burgers) 
+   together.  You can control the speed, so things can be as
+   monotonous, or crazy, as you can handle it.  Just don't get fired!
+ 
+/mac/game/arcade/fantasticvoyage1.1a.cpt.hqx
+ 193     8/6/95    BinHex4.0,StuffIt3.50
+  
+   A game based on the book by Isaac Asimov; take a
+   trip through the cardiovascular system and see red
+   cells, glands and even cholesterol!
+ 
+/mac/game/arcade/frogxing1.0.sit.hqx
+ 816     8/23/95    BinHex4.0,StuffIt3.50
+ 
+   Frog Xing is a well-paced arcade game in which you guide a 
+   frog across a highway and a river to dock on the other side.  
+   You can catch bonuses along the way to score extra points.
+
+/mac/game/arcade/gammazee2.51b.sit.hqx
+ 696     8/28/93    BinHex4.0,StuffIt3.50
+
+   A maze game designed to keep you playing for hours on end.
+
+/mac/game/arcade/glimmer3d1.2.sit.hqx
+1436     7/18/97    BinHex4.0,StuffIt3.50
+
+   Glimmer is a commercial quality arcade game featuring genuine
+   stereoscopic 3-D. You actually wear red-blue movie glasses to play.
+   According to Ben Haller, author of Solarian II, Glimmer is "the most
+   fabulous video game the Macintosh has ever seen!"
+ 
+/mac/game/arcade/golddigger1.21.sit.hqx
+ 900     8/23/95    BinHex4.0,StuffIt3.50
+ 
+   Collect gold while evading enemies.  Includes level editor.
+   Basically like Lode Runner.
+ 
+/mac/game/arcade/goldpusher1.3.cpt.hqx
+ 699     12/22/95   BinHex4.0,Compact1.51
+
+   Push the pot-o'-gold to the rainbow.  Something similar to
+   Leprechaun, but different.  Similar to Sokoban and Blobbo
+   in gameplay.
+ 
+/mac/game/arcade/gravityballs1.0.sit.hqx
+ 182      3/9/95    BinHex4.0,StuffIt3.50
+ 
+   Keep a ball balanced within a ever-shrinking area for 8 seconds.
+ 
+/mac/game/arcade/guysmiley1.01.sit.hqx
+  37      9/3/95    BinHex4.0,StuffIt3.50
+ 
+   Reach the other side of the playing field before being eaten
+   by the monsters/demons; difficulty, number of demons adjustable.
+ 
+/mac/game/arcade/hail0.77.cpt.hqx
+  17     11/3/93    BinHex4.0,Compact1.51
+ 
+   Climb unto blocks which fall from the "sky" to reach happiness and
+   harmony. You are smoooshed if you fail.
+ 
+/mac/game/arcade/happyweed1.2.cpt.hqx
+ 288     7/12/93    BinHex4.0,Compact1.51
+ 
+   Just like PacMan, except here you're collecting marijuana leaves.
+   Written by somebody with a wry sense of humor, when your character
+   uses the "superdrugs" power pellet, it gets to bash on the campus
+   police chasing it.
+ 
+/mac/game/arcade/heartquest0.81.cpt.hqx
+  81     2/20/94    BinHex4.0,Compact1.51
+ 
+   Control a butterfly with the mouse, collecting hearts while trying
+   to avoid the sticky flypapers.  Like Crystal Quest: mouse controls
+   acceleration, not velocity.
+ 
+/mac/game/arcade/ingemarsskiinggame1.01u.sit.hqx
+ 237      9/26/95    BinHex4.0,Compact1.51
+ 
+   Take the role of a skier in a slalom championship.
+ 
+/mac/game/arcade/killhappy0.8b2.sit.hqx
+  42      1/2/95    BinHex4.0,StuffIt3.50
+ 
+   Simple arcade shoot-em up game involving shooting a
+   floating happy face.
+ 
+/mac/game/arcade/lawyers1.0.sit.hqx
+  94     8/3/95    BinHex4.0,StuffIt3.50
+  
+   Spiffy little game with a deformed sense of humor: player 
+   is the robot trying to evade the evil blood-sucking 
+   suitcase-carrying lawyers.
+
+/mac/game/arcade/loderunnersneakylevels.sit.hqx
+   4      2/4/96    BinHex4.0,StuffIt3.50
+
+   30 very tough and interesting levels for Lode Runner.
+ 
+/mac/game/arcade/macavenger0.1b.sit.hqx
+ 154      6/7/93    BinHex4.0,StuffIt3.50
+ 
+   Zap the baddies and save the humans.  A faithrul port of Robotron
+   2084.  Does not require Color QuickDraw, but pretty unplayable
+   without it.
+ 
+/mac/game/arcade/macbrickout3.1.sit.hqx
+ 413     12/8/95    BinHex4.0,StuffIt3.50
+  
+   Knock out the bricks and don't let the ball go off the bottom of
+   the screen; watch out--evil bubbles can deflect the ball, possibly
+   foiling attempts to win; v3.1 has MANY new features; requires
+   System 7 and Color QuickDraw.
+
+/mac/game/arcade/macpipes2.1.sit.hqx
+ 304      3/5/96    Binhex4.0,Stuffit3.50
+
+   Put the pipes into a pattern such that you can make the water
+   stay contained as long as possible. Kind of like the Windows Pipes
+   game, although this is modeled after an old Amiga game.
+   Requires: System 7, 256 colors. Sound Manager recommended.
+ 
+/mac/game/arcade/macski1.6.sit.hqx
+1226    1/17/96    BinHex4.0,StuffIt3.50
+
+   Ski down various courses, avoiding critters and other skiiers (and
+   snow bunnies), exploding snowmen, adjustable weather conditions, 
+   different types of skiis, etc.  A fat binary game.
+ 
+/mac/game/arcade/majora1.1b.cpt.hqx
+ 148     9/1/95    BinHex4.0,CompactPro1.51
+
+   Run around a maze and collect the money while avoiding traps.
+   Includes a level editor.
+
+/mac/game/arcade/mazer3.24.cpt.hqx
+ 100     8/27/95    BinHex4.0,Compact1.51
+ 
+   Generate a maze to a tiny orb through and touch three corners
+   --trouble is, a person could get blown to kingdom come if'n
+   not careful.
+ 
+/mac/game/arcade/mazeworldcatacombs1.03.cpt.hqx
+ 517     4/25/95    BinHex4.0,Compact1.51
+ 
+   Mazeworld Catacombs is a fast-paced arcade-style game based on the 
+   original Mazeworld 3D adventure.  It has many features that people 
+   have requested, such as sound, keyboard controls, auto-mapping, 
+   and smoother graphics.  The monsters are smarter, the colors are 
+   brighter, the action is more intense, and the objective is more 
+   understandable:  make lots of points before you finally get blown 
+   away.
+ 
+/mac/game/arcade/megapong.sit.hqx
+ 776     8/29/95    BinHex4.0,StuffIt3.50
+ 
+   Pong was the first electronic video game EVER!  So... it's really 
+   a classic! This game is kind of electronic Ping-Pong.  Each 
+   player controls a "paddle" and uses it to hit the ball.  No weird
+   frills, just cool graphics and good background music.  Requires
+   System 7.1 or better, Sound Manager 3.0, 256-color monitor with
+   at least 640x480 resolution.
+ 
+/mac/game/arcade/mongopong1.0.sit.hqx
+ 172      6/5/94    BinHex4.0,StuffIt3.50
+ 
+   Like the ancient computer game "Pong", two players (or one against
+   the computer) use paddles to keep balls out of their goals.  Adds
+   bumpers, tubes, moving goals, multiple balls, opponent freezing and
+   a whole lot more to breathe new life into this classic genre.
+
+/mac/game/arcade/patriotcommand1.1.sit.hqx
+ 408    12/30/95    BinHex4.0,StuffIt3.50
+
+   A modern version of the arcade classic 'Missile Command'.
+   Shoot down the enemy missiles before they destroy your cities.
+ 
+/mac/game/arcade/polybrid1.0.cpt.hqx
+ 227     8/3/95    BinHex4.0,Compact1.50
+ 
+   Remove the falling blocks, a cross between Polytris and 
+   Poly-RC.
+ 
+/mac/game/arcade/polykin1.0.sit.hqx
+ 221    12/31/95    BinHex4.0,StuffIt3.50
+ 
+   Another falling blocks game, only more than one block may drop
+   at a time, and if 4 or more blocks are connected in any way
+   except diagonal, they will be removed; nifty variant.
+ 
+/mac/game/arcade/polyrc1.06.cpt.hqx
+ 232    11/6/94    BinHex4.0,Compact1.51
+ 
+   Beware falling rows and columns; a fun columns-type game
+   with configurable elements like number of blocks and colors
+   in a column, degree of difficulty changing when more blocks
+   are added.
+ 
+/mac/game/arcade/polytris1.04.cpt.hqx
+ 244     11/2/94    BinHex4.0,Compact1.51
+ 
+   Like Tetris, but with many more features: pieces with 5 blocks,
+   water ballons, bombs, and more. Very customizable.
+ 
+/mac/game/arcade/pong.cpt.hqx
+  12    12/28/92    BinHex4.0,Compact1.51
+ 
+   The world's oldest arcade game (this implementation was written 
+   in 1985 and the included source code has been ported to Think C).
+ 
+/mac/game/arcade/pushpush.sit.hqx
+  35     7/22/94    BinHex4.0,StuffIt3.50
+ 
+   A simple game of manuvering creatures out of a room by sliding them
+   around.
+ 
+/mac/game/arcade/reflex0.090a.cpt.hqx
+  17     8/11/95    BinHex4.0,CompactPro1.51
+
+   This game is intended to help improve hand-eye (mouse-eye?) 
+   coordination.  Click on the randomly appearing dots while 
+   staring at the red center dot.  Harder than it sounds.
+
+/mac/game/arcade/sailaway1.0.cpt.hqx
+  46     3/22/94    BinHex4.0,Compact1.51
+ 
+   A sailboat simulator.
+ 
+/mac/game/arcade/sargonoidz.sit.hqx
+ 161     10/2/94    BinHex4.0,StuffIt3.50
+ 
+   Capture the king on a chessboard...
+ 
+/mac/game/arcade/scruffyii.sit.hqx
+1523     7/13/95   BinHex4.0,StuffIt3.50
+
+   Musical, 4-bit color sequel to the original Scruffy.  Basic premise:
+   shoot the aliens and rescue your girlfriend.  Great arcade-style
+   action.
+
+/mac/game/arcade/scssnake1.31fat.sit.hqx
+ 456    11/27/95    BinHex4.0,StuffIt3.50
+ 
+   The classic arcade game in color; v1.31 fixes minor bugs, makes
+   alternate graphics files easier to make, more; requires Color
+   QuickDraw and System 7 or greater.
+ 
+/mac/game/arcade/shatterball0.29a.cpt.hqx
+ 281     10/1/94    BinHex4.0,Compact1.51
+ 
+   Three-dimensional breakout.  Never seen anything like it.  Check it
+   out!
+ 
+/mac/game/arcade/siliconvolleyball.sit.hqx
+ 183      6/28/94    BinHex4.0,StuffIt3.50
+ 
+   A variation of paddleball/breakout; "fat binary" runs on both
+   classics and powermacs; requires System 7.
+ 
+/mac/game/arcade/skydive1.0.cpt.hqx
+ 206    10/25/95    BinHex4.0,CompactPro1.51
+
+   Shoot down planes, rockets, and other skydivers as you plummet
+   towards the ground.  And when you get tired of that, take a few moments
+   to mangle the leader of our favorite software supercorporation.  Two
+   games in one!
+
+/mac/game/arcade/slickwillie2.0.sit.hqx
+ 478     6/28/95    BinHex4.0,StuffIt3.50
+ 
+   Move a animated, chomping head of the President of the United
+   States around the game board, gobbling down cheeseburgers,
+   fries and bikini-clad women, all while avoiding Whitewater,
+   the Press and Ross Perot.
+
+/mac/game/arcade/snavely1.02.sit.hqx
+1263      1/2/96    BinHex4.0,StuffIt3.50
+
+   A cross between Tron's light cycles and Centipede, you control two
+   snakes inching around across a board.  Everytime the two snakes cross
+   paths, they create an egg.  Once you lay enough eggs for that level,
+   a snake hole appears and you can move on to the next level.  
+   Of course, there are bad guys... and you have to watch where you're
+   going (i.e. don't fall off the edge of the screen).
+ 
+/mac/game/arcade/superrobots1.0.sit.hqx
+ 159      1/2/95    BinHex4.0,StuffIt3.50
+ 
+   Lure stupid robots to their doom by moving around a closed grid
+   and causing robots to run into each other or into heaps of already
+   dead robots.  Just like Daleks, eh?
+ 
+/mac/game/arcade/swoop1.01.sit.hqx
+3228      9/10/95    BinHex4.0,StuffIt3.50
+ 
+   Swoop is an arcade classic combining pulse-quickening game play with 
+   state of the art computer animation and audio effects. Smooth flowing 
+   action, detailed full color graphics, and custom sound effects all 
+   provide for exciting game play. Clone of the old Galaxian arcade game.
+ 
+/mac/game/arcade/tankrun1.20.sit.hqx
+ 360     10/2/94    BinHex4.0,StuffIt3.50
+ 
+   Drive a tank through the maze to get to the flag placed within.
+   Requires monitor set at 256 colors.
+ 
+/mac/game/arcade/tetrad0.2.cpt.hqx
+ 112      9/9/94    BinHex4.0,Compact1.51
+ 
+   Another minimal implementation of Tetris.  Includes instructions
+   on how to modify the resources with ResEdit.  Playable on color
+   or black and white.
+ 
+/mac/game/arcade/tetrislight1.0.cpt.hqx
+  50     8/14/93    BinHex4.0,Compact1.51
+ 
+   A very minimal implementation of Tetris.  Comes with only one
+   speed:  too slow.
+ 
+/mac/game/arcade/tetrismax2.6.sit.hqx
+1183      8/23/95   BinHex4.0,StuffIt3.50
+ 
+   Implementation of the classic game Tetris, featuring 256-color
+   art (cool space pictures!), an original music soundtrack, etc.;
+   smooth, professional animation.  Honorably mentioned in
+   the 1993 MacUser Shareware Awards.  Version 2.6 includes new
+   music, several enhancements, and bug fixes.  Fat Binary.
+ 
+/mac/game/arcade/tetrisplus1.0.sit.hqx
+ 656     8/29/95    BinHex4.0,StuffIt3.50
+ 
+   Tetris Plus is a step above Tetris.  The goal is to arrange red, 
+   green, and blue blocks of the same color horizontally or vertically, 
+   three or more in a row. Once this is done, the blocks will explode.
+ 
+/mac/game/arcade/tetristwothou1.5.cpt.hqx
+  74     3/13/93    BinHex4.0,Compact1.51
+ 
+   A freeware color Tetris game.  Pretty snazzy and smooth.
+ 
+/mac/game/arcade/tetronix1.0.cpt.hqx
+ 103     2/24/95    BinHex4.0,Compact1.51
+ 
+   Another tetris-like game.
+
+/mac/game/arcade/tron95.sit.hqx
+ 218     1/17/96    BinHex4.0,StuffIt3.50
+
+   A Tron/light-cycle type game for two players.  You can drop
+   mines or ice patches, too.
+
+/mac/game/arcade/tronish1.32.cpt.hqx
+ 297     7/10/95    BinHex4.0,Compact1.51
+
+   One of those speeding-light-cycle games.  Knock the other guy
+   into the wall (one or two players).
+ 
+/mac/game/arcade/vickombat4.1.sit.hqx
+1285     8/17/95    BinHex4.0,StuffIt3.50
+ 
+   A "Mortal Kombat" type game, except with live actors instead
+   of computer animation.  Computer simulated blood.  Not for
+   the squeamish.
+ 
+/mac/game/arcade/woden1.0.sit.hqx
+1700     11/6/95    BinHex4.0,StuffIt3.50
+ 
+   You are a pilot of space ship 'Woden' and fly in space avoiding 
+   enemies and missiles. You destroy the big and hard boss and then 
+   clear the stage. There are 5 stages.  Requires Powermac, 5.3 MB 
+   free RAM.
+ 
+/mac/game/arcade/zaptballs.sit.hqx
+1890     7/18/95    BinHex4.0,StuffIt3.50
+  
+   Blast the balls that come onto the screen and the two 
+   that appear after that; addicting sorta like asteroids
+   but with great background pictures.
+  

@@ -4,6 +4,10 @@ import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu as menu
 import logging
 
+"""
+RetroBridgeBBS/rooms/__init__.py
+"""
+
 class Room(object):
 
     def __init__(self,user_session):
@@ -66,7 +70,7 @@ class Room(object):
 class LogOut(Room):
 
     def run_room(self):
-        username = self.user_session.username
+        username = self.user_session.user.username
         self.terminal.writeln("")
         self.terminal.writeln(f"Goodbye {username}")
         self.terminal.writeln("")
