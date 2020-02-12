@@ -24,10 +24,6 @@ disk_copy_pattens = [
 
 class DownloadPage(garden.Room):
 
-    def __init__(self, session, url):
-        self.url = url
-        rooms.Room.__init__(self, session)
-
     def run_room(self):
         url=self.url
         files, meta, soup = self.get_page(url)
