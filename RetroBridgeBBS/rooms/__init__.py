@@ -47,7 +47,10 @@ class Room(object):
                 elif inspect.ismethod(command):
                     logging.debug("do_menu() COMMAND is function")
                     logging.debug(f"About to use command: [{command}]")
-                    command()
+                    if 'args' in command_dict.keys():
+                        command(**command_dict['args'])
+                    else:
+                        command()
                 elif issubclass(command, Room):
                     logging.debug("do_menu() COMMAND is subclass of Room")
                     command(self.user_session)
@@ -70,7 +73,14 @@ class Room(object):
 class LogOut(Room):
 
     def run_room(self):
-        username = self.user_session.user.username
-        self.terminal.writeln("")
-        self.terminal.writeln(f"Goodbye {username}")
-        self.terminal.writeln("")
+
+        # [HACK TODO]
+        try:
+            username = self.user_session.user.username
+            self.terminal.writeln("")
+            self.terminal.writeln(f"Goodbye {username}.")
+            self.terminal.writeln("")
+        except AttributeError:
+            self.terminal.writeln("")
+            self.terminal.writeln(f"Goodbye whoever you are.")
+            self.terminal.writeln("")

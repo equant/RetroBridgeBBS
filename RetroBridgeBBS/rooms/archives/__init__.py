@@ -66,21 +66,34 @@ class Room(rooms.Room):
         rooms.Room.__init__(self, session)
 
     def run_room(self):
-        url=self.url
-        self.get_page(url)
-        links, metadata = self.parse_soup(soup)
+        self.get_page(self.url)
+        self.parse_soup(self.soup)
 
-        self.print_report(url, files, meta, soup)
+        self.menu_list = []
+        for link in self.extracted_links_dict['files']:
+            self.menu_list.append(self.create_menu_entry(link))
+        self.do_menu(menu_list=self.menu_list)
         return
 
     def parse_soup(self, soup):
-        extracted_links_dict = self.extract_links(soup)
-        #files = []
-        #for link, regex in extracted_links_dict['files']:
-            #f = File(self.massage_download_url(link))
-            #files.append(f)
+        self.extracted_links_dict = self.extract_links(self.soup)
+
+    def create_menu_entry(self, link):
+        """
+        link is a Link instance
+        """
+        entry = {
+               "key" : None,
+              "label": link.filename,
+           "command" : self.follow_link,
+              "args" : { 'link':link },
+              "test" : None
+        }
+        return entry
+
+    def follow_link(self, link):
+        logging.debug(f"Here we are, following the link for {link}!")
         breakpoint()
-        self.do_menu(menu_list=menu_list)
 
     def extract_links(self, soup):
         """
@@ -144,7 +157,6 @@ class Room(rooms.Room):
         dl_file = file_metadata['name']
         self.terminal.writeln(f"Starting DL of {dl_file}")
         #self.terminal.newline()
-        #breakpoint()
         #full_url = dl_url.replace("/sites", "http://mirror.macintosharchive.org")
         full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
         myfile = requests.get(full_url)
