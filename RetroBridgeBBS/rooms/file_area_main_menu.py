@@ -3,6 +3,7 @@ import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.menu  as menu
 import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives.garden.search_garden
+import RetroBridgeBBS.rooms.archives.user_entered_url
 
 class FileAreaMainMenu(rooms.Room):
 
@@ -19,6 +20,12 @@ class FileAreaMainMenu(rooms.Room):
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
            "command" : RetroBridgeBBS.rooms.archives.garden.search_garden.SearchGarden,
+              "test" : None
+            },
+            {
+               "key" : "W",
+              "label": "Enter a website URL",
+           "command" : RetroBridgeBBS.rooms.archives.user_entered_url.UserEnteredUrl,
               "test" : None
             },
             {

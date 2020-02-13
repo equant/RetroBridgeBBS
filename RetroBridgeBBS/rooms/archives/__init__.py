@@ -1,6 +1,6 @@
 import os, pathlib, re
 import requests
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 import logging
 import RetroBridgeBBS.rooms as rooms
@@ -12,36 +12,52 @@ RetroBridgeBBS/rooms/archives/__init__.py
 All archive rooms expect to be created with a url argument in addition to the user_session.
 """
 
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+
 class Patterns(object):
-    #file_url_patterns  = ['^[^/\\&\?]+\.(?=\w{3,4})[^php|html|htm|]']
-    #file_url_patterns  = ['\.(?=\w{3,4})[^php|html|htm]$']
     file_url_patterns  = ['^.*\.(?!html$|htm$|php$|pdf$)[^\.]+$']
-    #file_url_patterns  = ['.*\.\w{3,4}$']
-    # https://stackoverflow.com/questions/14473180/regex-to-get-a-filename-from-a-url
-    #file_url_patterns  = ['[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))']
-    #file_url_patterns  = ['(?:.+\/)([^#?]+)']
     file_text_patterns = []
 
 class Link(object):
     """
     metadata:
-        name
-        category
-        description
+        url             string
+        filename        string
+        label           string
+        category        string
+        description     string
+        file_size       string
+        notes           array of strings
     """
 
-    metadata = None
+    filesize = None
+    header_loaded = False
+    notes = []
+    description = None
+    category = None
+    category = None
+    label = None
 
-    def __init__(self, soup_link, metadata=None, files=None, massage_download_url_function=None):
-        self.filename    = soup_link.attrs['href'].split("/")[-1]
-        self.description = soup_link.text
-        self.soup_link = soup_link
-        if massage_download_url_function is not None:
-            self.url = massage_download_url_function(soup_link.attrs['href'])
+    def __init__(self, soup_link, base_url, translate_url_function=None, filename=None, label=None, description=None, notes=None, filesize=None, category=None):
+        self.soup_link   = soup_link
+        self.base_url    = base_url
+        if filename is not None:
+            self.filename = filename
         else:
-            self.url = soup_link.attrs['href']
-        if metadata is not None:
-            self.metadata = metadata
+            self.filename = soup_link.attrs['href'].split("/")[-1]
+        if category is not None:
+            self.category = category
+        if filesize is not None:
+            self.filesize = filesize
+        if notes is not None:
+            self.notes = notes
+        if description is not None:
+            self.description = description
+        if label is not None:
+            self.label = label
+        else:
+            self.label = soup_link.text
+        self.url = urljoin(base_url, soup_link.attrs['href'])
 
     def __repr__(self):
         return self.filename
@@ -52,18 +68,44 @@ class Directory(Link):
 class File(Link):
     TYPE = 'File'
 
+    sit_patterns = [
+            [b"^SIT!",  "StuffIt pre 5.5"],
+            [b"^StuffIt", "StuffIt 5.5 or later"],
+    ]
+
+    def load_header_info(self):
+        logging.debug("load_header_info()")
+        if self.header_loaded is False:
+            logging.debug(f"Loading header... Checking extension of {self.filename}")
+            self.header_loaded = True
+            if self.filename[-4:] in ['.sit', '.SIT']:
+                logging.debug(f"Filename: {self.filename} matches!")
+                # DL Headers and look at files
+                headers = {"Range": "bytes=0-200", 'User-Agent': USER_AGENT}
+                #full_url = _url.replace("/sites", "http://mirror.macintosharchive.org")
+                header = requests.get(self.url, headers=headers).content
+                for p in self.sit_patterns:
+                    r = re.compile(p[0])
+                    m = r.match(header)
+                    if m:
+                        self.notes.append(p[1])
+            if self.filesize is None:
+                size_in_bytes = int(requests.head(self.url, headers={'User-Agent': USER_AGENT}).headers['Content-Length'])
+                self.filesize = f"{round(size_in_bytes / 1000)}k"
+
 
 class Room(rooms.Room):
-    USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+    #USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+    USER_AGENT = USER_AGENT
     archive_name = 'archive'    # used in filepath, so no weird characters
 
     done = False
 
-    def __init__(self, session, url=None):
+    def __init__(self, user_session, url=None):
         if url is None:
             url = 'http://www.savagetaylor.com/2018/05/28/setting-up-your-vintage-classic-68k-macintosh-creating-your-own-boot-able-disk-image/'
         self.url = url
-        rooms.Room.__init__(self, session)
+        rooms.Room.__init__(self, user_session)
 
     def run_room(self):
         self.get_page(self.url)
@@ -82,18 +124,21 @@ class Room(rooms.Room):
         """
         link is a Link instance
         """
+        import RetroBridgeBBS.rooms.archives.generic_app_page as generic_app_page
         entry = {
                "key" : None,
               "label": link.filename,
-           "command" : self.follow_link,
-              "args" : { 'link':link },
+           "command" : generic_app_page.GenericAppPage,
+              "args" : { 'files':[link] },
               "test" : None
         }
         return entry
 
     def follow_link(self, link):
         logging.debug(f"Here we are, following the link for {link}!")
-        breakpoint()
+        link.load_header_info()
+        logging.debug(f"{link} size: {link.filesize}")
+        logging.debug(f"{link} notes: {link.notes}")
 
     def extract_links(self, soup):
         """
@@ -111,15 +156,14 @@ class Room(rooms.Room):
                 r = re.compile(p)
                 m = r.match(parsed_url.path.split('/')[-1])
                 if m:
-                    #file_links.append([link, p])
-                    f = File(link, self.massage_download_url)
+                    f = File(link, base_url=self.url)
                     files.append(f)
                     break
             for p in Patterns.file_text_patterns:
                 r = re.compile(p)
                 m = r.match(link.text)
                 if m:
-                    f = File(link, self.massage_download_url)
+                    f = File(link, base_url=self.url)
                     files.append(f)
                     break
             ignored_links.append(link)
@@ -134,33 +178,17 @@ class Room(rooms.Room):
         return
 
     def get_page(self, url=None):
-        page = requests.get(url, headers={'User-Agent': self.USER_AGENT})
-        # html.parser has issues correctly parsing macintoshgarden div tags.
-        #soup = BeautifulSoup(page.content, 'html.parser')
-        #soup = BeautifulSoup(page.content, 'html5lib')
+        page      = requests.get(url, headers={'User-Agent': self.USER_AGENT})
         self.soup = BeautifulSoup(page.content, 'lxml')
         self.parse_soup(self.soup)
-
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/getting_started.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _archive.info-mac.org__Art_&_Info.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _archive.info-mac.org__Game.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _archive.info-mac.org.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _~archive_mac_game_arcade.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _~archive_mac_game.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _~archive_mac.html'
-        #test_path = '/home/equant/projects/68k/macintosh_garden_bbs/RetroBridgeBBS/RetroBridgeBBS/rooms/archives/soup_sandbox/saved_html/Index of _max1zzz.co.uk_+Mac OS Classic_Games.html'
-        #soup = BeautifulSoup(open(test_path), "lxml")
         return
 
     def get_file_from_archive(self, file_metadata=None, send_over_modem=True):
         dl_url  = file_metadata['url']
         dl_file = file_metadata['name']
         self.terminal.writeln(f"Starting DL of {dl_file}")
-        #self.terminal.newline()
-        #full_url = dl_url.replace("/sites", "http://mirror.macintosharchive.org")
         full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
         myfile = requests.get(full_url)
-        #saved_dl = f"/tmp/{dl_file}"
         local_save_dir = os.path.join(self.bbs.archive_downloads_path, self.archive_name)
         pathlib.Path(local_save_dir).mkdir(parents=True, exist_ok=True)
         saved_dl = os.path.join(local_save_dir, f"{dl_file}")
@@ -172,6 +200,10 @@ class Room(rooms.Room):
             self.terminal.writeln()
             self.terminal.writeln("Skipped X/Y/ZModem transfer because terminal doesn't support it")
             self.terminal.writeln()
+
+
+
+# parse_web_tree isn't used.  It's here for reference.
 
 def parse_web_tree(soup):
 

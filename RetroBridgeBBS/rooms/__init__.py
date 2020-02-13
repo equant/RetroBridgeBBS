@@ -53,7 +53,10 @@ class Room(object):
                         command()
                 elif issubclass(command, Room):
                     logging.debug("do_menu() COMMAND is subclass of Room")
-                    command(self.user_session)
+                    if 'args' in command_dict.keys():
+                        command(self.user_session, **command_dict['args'])
+                    else:
+                        command(self.user_session)
                 else:
                     logging.debug("do_menu() COMMAND is unexpected type: {type(command)}")
                     logging.error_message(f"Command ({command}) appears valid, but I can't figure out what to do with it.")
