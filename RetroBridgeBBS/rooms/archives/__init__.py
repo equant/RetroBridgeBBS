@@ -178,16 +178,21 @@ class Room(rooms.Room):
         return
 
     def get_page(self, url=None):
+        self.user_session.terminal.writeln("Connecting to archive...")
         page      = requests.get(url, headers={'User-Agent': self.USER_AGENT})
         self.soup = BeautifulSoup(page.content, 'lxml')
         self.parse_soup(self.soup)
         return
 
-    def get_file_from_archive(self, file_metadata=None, send_over_modem=True):
-        dl_url  = file_metadata['url']
-        dl_file = file_metadata['name']
+    #def get_file_from_archive(self, file_metadata=None, send_over_modem=True):
+    def get_file_from_archive(self, link, send_over_modem=True):
+        #dl_url  = file_metadata['url']
+        #dl_file = file_metadata['name']
+        dl_url   = link.url
+        dl_file  = link.filename
+        full_url = link.url
         self.terminal.writeln(f"Starting DL of {dl_file}")
-        full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
+        #full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
         myfile = requests.get(full_url)
         local_save_dir = os.path.join(self.bbs.archive_downloads_path, self.archive_name)
         pathlib.Path(local_save_dir).mkdir(parents=True, exist_ok=True)

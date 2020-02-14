@@ -17,7 +17,11 @@ class GenericAppPage(archives.Room):
 
     def run_room(self):
         logging.debug(f"Running a GenericAppPage for the file/s: {self.files}")
+        self.menu_list = []
+        for link in self.files:
+            self.menu_list.append(self.create_menu_entry(link))
         breakpoint()
+        self.do_menu(menu_list=self.menu_list, title="Available Downloads")
         return
 
     def create_menu_entry(self, link):
@@ -27,7 +31,7 @@ class GenericAppPage(archives.Room):
         entry = {
                "key" : None,
               "label": link.filename,
-           "command" : self.follow_link,
+           "command" : self.get_file_from_archive,
               "args" : { 'link':link },
               "test" : None
         }

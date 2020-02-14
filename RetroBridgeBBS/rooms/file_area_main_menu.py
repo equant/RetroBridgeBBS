@@ -4,6 +4,7 @@ import RetroBridgeBBS.menu  as menu
 import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives.garden.search_garden
 import RetroBridgeBBS.rooms.archives.user_entered_url
+import RetroBridgeBBS.rooms.archives.setting_up_your_68k_mac_savagetaylor
 
 class FileAreaMainMenu(rooms.Room):
 
@@ -20,6 +21,12 @@ class FileAreaMainMenu(rooms.Room):
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
            "command" : RetroBridgeBBS.rooms.archives.garden.search_garden.SearchGarden,
+              "test" : None
+            },
+            {
+               "key" : None,
+              "label": "Setting up your vintage (classic) 68k Mac",
+           "command" : RetroBridgeBBS.rooms.archives.setting_up_your_68k_mac_savagetaylor.Savagetaylor,
               "test" : None
             },
             {
@@ -40,7 +47,7 @@ class FileAreaMainMenu(rooms.Room):
             },
         ]
 
-        self.do_menu()
+        self.do_menu(title="Online Macintosh Archives")
 
     def receive_file(self):
         transfer.receive_file(self.user_session)
