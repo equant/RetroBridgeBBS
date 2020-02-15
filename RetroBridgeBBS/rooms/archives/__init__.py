@@ -12,6 +12,11 @@ RetroBridgeBBS/rooms/archives/__init__.py
 All archive rooms expect to be created with a url argument in addition to the user_session.
 """
 
+"""
+Macintosh garden won't accept whatever the default python requests user agent is, so I
+grabbed this off of stack exchange.  I would like to modify it so that it identifies
+itself as RetroBridgeBBS someday [TODO]
+"""
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
 
 class Patterns(object):
@@ -20,25 +25,26 @@ class Patterns(object):
 
 class Link(object):
     """
-    metadata:
-        url             string
-        filename        string
-        label           string
-        category        string
-        description     string
-        file_size       string
-        notes           array of strings
+    Links is a base class to create File and Directory objects.
     """
 
-    filesize = None
+    filesize      = None
     header_loaded = False
-    notes = []
-    description = None
-    category = None
-    category = None
-    label = None
+    notes         = []
+    description   = None
+    category      = None
+    category      = None
+    label         = None
 
-    def __init__(self, soup_link, base_url, translate_url_function=None, filename=None, label=None, description=None, notes=None, filesize=None, category=None):
+    def __init__(self, soup_link, base_url,
+                       translate_url_function = None,
+                       filename               = None,
+                       label                  = None,
+                       description            = None,
+                       notes                  = None,
+                       filesize               = None,
+                       category               = None):
+
         self.soup_link   = soup_link
         self.base_url    = base_url
         if filename is not None:
@@ -63,6 +69,9 @@ class Link(object):
         return self.filename
 
 class Directory(Link):
+    """
+    Unused.  Deprecated?
+    """
     TYPE = 'Directory'
 
 class File(Link):
@@ -90,12 +99,15 @@ class File(Link):
                     if m:
                         self.notes.append(p[1])
             if self.filesize is None:
-                size_in_bytes = int(requests.head(self.url, headers={'User-Agent': USER_AGENT}).headers['Content-Length'])
-                self.filesize = f"{round(size_in_bytes / 1000)}k"
+                _r = requests.head(self.url, headers={'User-Agent': USER_AGENT})
+                if 'Content-Length' in _r.headers:
+                    size_in_bytes = int(_r.headers['Content-Length'])
+                    self.filesize = f"{round(size_in_bytes / 1000)}k"
+                else:
+                    self.filesize = 'Unk'
 
 
 class Room(rooms.Room):
-    #USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
     USER_AGENT = USER_AGENT
     archive_name = 'archive'    # used in filepath, so no weird characters
 
@@ -208,9 +220,11 @@ class Room(rooms.Room):
 
 
 
-# parse_web_tree isn't used.  It's here for reference.
 
 def parse_web_tree(soup):
+    """
+    parse_web_tree isn't used.  It's here for reference.
+    """
 
     all_links = soup.findAll('a')
 

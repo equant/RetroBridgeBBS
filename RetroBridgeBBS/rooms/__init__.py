@@ -18,13 +18,13 @@ class Room(object):
         self.run_room()
         return
 
-    def do_menu(self, m=None, menu_list=None, title=None):
+    def do_menu(self, m=None, menu_list=None, title=None, menu_type=None):
         if title is None:
             title = self.bbs.name
         if menu_list is None:
             menu_list = self.menu_list
         if m is None:
-            m = menu.Menu(self.user_session, menu_list, title=title)
+            m = menu.Menu(self.user_session, menu_list, title=title, menu_type=menu_type)
 
         command = None
         while True:

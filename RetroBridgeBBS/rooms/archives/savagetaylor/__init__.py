@@ -7,8 +7,8 @@ import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives as archives
 
-class Savagetaylor(archives.Room):
-    archive_name = 'savagetaylor_blog'    # used in filepath, so no weird characters
+class Room(archives.Room):
+    archive_name = 'savagetaylor'    # used in filepath, so no weird characters
 
     def __init__(self, user_session, url=None):
         if url is None:

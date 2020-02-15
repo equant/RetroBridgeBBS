@@ -26,13 +26,18 @@ class Menu(object):
             },
     ]
 
-    def __init__(self,user_session, commands_list, title=None, add_global_commands=True):
-        self.user_session = user_session
-        self.commands_list    = commands_list
-        self.terminal     = self.user_session.terminal
+    def __init__(self,user_session, commands_list, 
+                      title=None, add_global_commands=True, menu_type=None,
+                      menu_text=None, menu_intro=None, menu_outro=None):
+        self.user_session        = user_session
+        self.commands_list       = commands_list
+        self.terminal            = self.user_session.terminal
         self.add_global_commands = add_global_commands
-        self.menu_text = None
-        self.title = title
+        self.menu_text           = menu_text
+        self.title               = title
+        self.menu_type           = menu_type
+        self.menu_intro          = menu_intro
+        self.menu_outro          = menu_outro
         return
 
     def make_command_entry_string(self, key, label):
@@ -44,6 +49,12 @@ class Menu(object):
 
 
     def generate_menu_text(self):
+        if self.menu_type == 'Download':
+            return self.generate_download_menu_text()
+        else:
+            return self.generate_basic_menu_text()
+
+    def generate_basic_menu_text(self):
 
         self.validate_menu_keys()   # doesn't just validate, but fixes them too.
         menu_text = self.terminal.make_box_hr()
@@ -69,6 +80,79 @@ class Menu(object):
         menu_text += self.terminal.make_box_string(", ".join(global_command_strings))
         menu_text += self.terminal.make_box_hr()
         return menu_text
+
+    def generate_download_menu_text(self):
+
+        self.validate_menu_keys()   # doesn't just validate, but fixes them too.
+        menu_text = self.terminal.make_box_hr()
+
+        if self.title is not None:
+            menu_text += self.terminal.make_box_title(self.title)
+            menu_text += self.terminal.make_box_hr()
+
+        if self.menu_intro is not None:
+            import textwrap
+            from textwrap import wrap, dedent
+            intro_text = self.menu_intro
+            intro_as_list = wrap(raw_desc, WIDTH-4)
+            for line in desc_list:
+                menu_text += self.terminal.make_box_string(line)
+            menu_text += self.terminal.make_box_hr()
+
+        for _idx, command_entry in enumerate(self.commands_list):
+            if command_entry['key'] is None:
+                command_entry['key'] = str(_idx)
+
+            if self.command_entry_is_link(command_entry):
+                link = command_entry['args']['link']
+
+                first_line = self.make_command_entry_string(command_entry['key'], command_entry['label'])
+                command_length = len(first_line)
+                first_line += f" : {link.label}"
+                menu_text  += self.terminal.make_box_string(first_line)
+
+                if len(link.notes) > 0:
+                    notes_string = " : ".join(link.notes)
+                    menu_text  += self.terminal.make_box_string(" " * (command_length+3) + notes_string)
+            else:
+                _string = self.make_command_entry_string(command_entry['key'], command_entry['label'])
+                menu_text += self.terminal.make_box_string(_string)
+
+        if self.menu_outro is not None:
+            import textwrap
+            from textwrap import wrap, dedent
+            outro_text = self.menu_outro
+            outro_as_list = wrap(raw_desc, WIDTH-4)
+            for line in desc_list:
+                menu_text += self.terminal.make_box_string(line)
+            menu_text += self.terminal.make_box_hr()
+
+        menu_text += self.terminal.make_box_hr()
+        global_command_strings = []
+        for global_entry in Menu.global_commands_list:
+            global_command_strings.append(self.make_command_entry_string(global_entry['key'], global_entry['label']))
+
+        menu_text += self.terminal.make_box_string(", ".join(global_command_strings))
+        menu_text += self.terminal.make_box_hr()
+        return menu_text
+
+    def command_entry_is_link(self, command_entry):
+        """
+        entry = {
+               "key" : None,
+              "label": link.filename,
+           "command" : self.get_file_from_archive,
+              "args" : { 'link':link },
+              "test" : None
+        }
+        """
+        if 'args' in command_entry.keys():
+            if 'link' in command_entry['args']:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def validate_menu_keys(self):
 

@@ -7,6 +7,11 @@ import RetroBridgeBBS.rooms as rooms
 #import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives as archives
 
+"""
+This generates a room with a menu to download all of the RetroBridgeBBS.rooms.archives.links
+containted within the list 'files'.
+"""
+
 
 class GenericAppPage(archives.Room):
     archive_name = 'user_entered_url'    # used in filepath, so no weird characters
@@ -19,9 +24,9 @@ class GenericAppPage(archives.Room):
         logging.debug(f"Running a GenericAppPage for the file/s: {self.files}")
         self.menu_list = []
         for link in self.files:
+            link.load_header_info()
             self.menu_list.append(self.create_menu_entry(link))
-        breakpoint()
-        self.do_menu(menu_list=self.menu_list, title="Available Downloads")
+        self.do_menu(menu_list=self.menu_list, title="Available Downloads", menu_type='Download')
         return
 
     def create_menu_entry(self, link):

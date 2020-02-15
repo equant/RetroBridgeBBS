@@ -4,7 +4,7 @@ import RetroBridgeBBS.menu  as menu
 import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives.garden.search_garden
 import RetroBridgeBBS.rooms.archives.user_entered_url
-import RetroBridgeBBS.rooms.archives.setting_up_your_68k_mac_savagetaylor
+import RetroBridgeBBS.rooms.archives.savagetaylor
 
 class FileAreaMainMenu(rooms.Room):
 
@@ -26,7 +26,7 @@ class FileAreaMainMenu(rooms.Room):
             {
                "key" : None,
               "label": "Setting up your vintage (classic) 68k Mac",
-           "command" : RetroBridgeBBS.rooms.archives.setting_up_your_68k_mac_savagetaylor.Savagetaylor,
+           "command" : RetroBridgeBBS.rooms.archives.savagetaylor.Room,
               "test" : None
             },
             {
