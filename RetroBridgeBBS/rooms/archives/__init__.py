@@ -47,6 +47,7 @@ class Link(object):
 
         self.soup_link   = soup_link
         self.base_url    = base_url
+        logging.debug(f"Link() base_url = {base_url}")
         if filename is not None:
             self.filename = filename
         else:
@@ -56,13 +57,21 @@ class Link(object):
         if filesize is not None:
             self.filesize = filesize
         if notes is not None:
+            logging.debug("Link() initialized with notes()")
+            logging.debug(notes)
             self.notes = notes
+        else:
+            self.notes = []
         if description is not None:
             self.description = description
         if label is not None:
             self.label = label
         else:
-            self.label = soup_link.text
+            if soup_link.text.startswith("http"):
+                self.label = ""
+            else:
+                self.label = soup_link.text
+
         self.url = urljoin(base_url, soup_link.attrs['href'])
 
     def __repr__(self):
@@ -169,6 +178,8 @@ class Room(rooms.Room):
                 m = r.match(parsed_url.path.split('/')[-1])
                 if m:
                     f = File(link, base_url=self.url)
+                    #if link.attrs['href'].split("/")[-1] == 'OS_608_100MB.zip':
+                        #breakpoint()
                     files.append(f)
                     break
             for p in Patterns.file_text_patterns:

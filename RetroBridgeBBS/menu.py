@@ -108,12 +108,13 @@ class Menu(object):
 
                 first_line = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 command_length = len(first_line)
-                first_line += f" : {link.label}"
+                first_line += f" : {link.label:.20}"
                 menu_text  += self.terminal.make_box_string(first_line)
 
-                if len(link.notes) > 0:
-                    notes_string = " : ".join(link.notes)
-                    menu_text  += self.terminal.make_box_string(" " * (command_length+3) + notes_string)
+                extra_info_list = [link.filesize] + link.notes
+                extra_info_list.append(link.filesize)
+                extra_string = " : ".join(extra_info_list)
+                menu_text  += self.terminal.make_box_string(" " * (command_length+3) + extra_string)
             else:
                 _string = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 menu_text += self.terminal.make_box_string(_string)
