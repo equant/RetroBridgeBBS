@@ -9,8 +9,4 @@ class Room(archives.Room):
         full_url = dl_url.replace("/sites", "http://mirror.macintosharchive.org")
         return full_url
 
-    def __init__(self, user_session, url=None):
-        if url is None:
-            url = 'https://macintoshgarden.org/tracker'
-        archives.Room.__init__(self, user_session, url)
 
