@@ -11,12 +11,12 @@ class FileAreaMainMenu(rooms.Room):
     def run_room(self):
 
         self.menu_list = [
-            {
-               "key" : None,
-              "label": "Test New Archive System",
-           "command" : RetroBridgeBBS.rooms.archives.Room,
-              "test" : None
-            },
+            #{
+               #"key" : None,
+              #"label": "Test New Archive System",
+           #"command" : RetroBridgeBBS.rooms.archives.Room,
+              #"test" : None
+            #},
             {
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
@@ -25,7 +25,7 @@ class FileAreaMainMenu(rooms.Room):
             },
             {
                "key" : None,
-              "label": "Setting up your vintage (classic) 68k Mac",
+              "label": "Savagetaylor.com: Setting up your 68k Mac [Blog]",
            "command" : RetroBridgeBBS.rooms.archives.savagetaylor.Room,
               "test" : None
             },

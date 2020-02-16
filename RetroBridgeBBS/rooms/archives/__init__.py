@@ -113,7 +113,7 @@ class File(Link):
                     size_in_bytes = int(_r.headers['Content-Length'])
                     self.filesize = f"{round(size_in_bytes / 1000)}k"
                 else:
-                    self.filesize = 'Unk'
+                    self.filesize = '??k'
 
 
 class Room(rooms.Room):
@@ -135,7 +135,7 @@ class Room(rooms.Room):
         self.menu_list = []
         for link in self.extracted_links_dict['files']:
             self.menu_list.append(self.create_menu_entry(link))
-        self.do_menu(menu_list=self.menu_list)
+        self.do_menu(menu_list=self.menu_list, title=self.archive_name)
         return
 
     def parse_soup(self, soup):

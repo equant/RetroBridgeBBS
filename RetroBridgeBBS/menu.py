@@ -4,9 +4,9 @@ class Menu(object):
 
     global_commands_list = [
             {
-                   "key" : 'Q',
-                  "label": "Quit",
-               "command" : "quit",
+                   "key" : 'B',
+                  "label": "Back",
+               "command" : "back",
                   "test" : None,
               "category" : 'System',
             },
@@ -112,9 +112,8 @@ class Menu(object):
                 menu_text  += self.terminal.make_box_string(first_line)
 
                 extra_info_list = [link.filesize] + link.notes
-                extra_info_list.append(link.filesize)
-                extra_string = " : ".join(extra_info_list)
-                menu_text  += self.terminal.make_box_string(" " * (command_length+3) + extra_string)
+                extra_string = "/".join(extra_info_list)
+                menu_text  += self.terminal.make_box_string(" " * command_length + " : " + extra_string)
             else:
                 _string = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 menu_text += self.terminal.make_box_string(_string)
