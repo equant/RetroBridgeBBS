@@ -6,8 +6,9 @@ import queue
 import RetroBridgeBBS.device           # telnet, serial, console device interfaces
 import RetroBridgeBBS.device.manager   # telnet, serial, console device interfaces
 import RetroBridgeBBS.terminal  # ascii, ansi, etc
-import RetroBridgeBBS.rooms  # ascii, ansi, etc
-import RetroBridgeBBS.rooms.main_menu  # ascii, ansi, etc
+import RetroBridgeBBS.rooms
+import RetroBridgeBBS.rooms.main_menu
+import RetroBridgeBBS.rooms.file_area_main_menu
 import RetroBridgeBBS.rooms.login
 #logging.basicConfig(filename='RetroBridgeBBS.log',level=logging.DEBUG)
 
@@ -51,7 +52,8 @@ class UserSession(object):
                 RetroBridgeBBS.rooms.login.Login(self, require_password=False)
 
         #breakpoint()
-        RetroBridgeBBS.rooms.main_menu.MainMenu(self)
+        #RetroBridgeBBS.rooms.main_menu.MainMenu(self)
+        RetroBridgeBBS.rooms.file_area_main_menu.FileAreaMainMenu(self)
         RetroBridgeBBS.rooms.LogOut(self)
         self.device_manager.disconnect_user_session(self)
 
