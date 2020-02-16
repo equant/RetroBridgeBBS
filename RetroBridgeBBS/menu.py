@@ -108,7 +108,7 @@ class Menu(object):
 
                 first_line = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 command_length = len(first_line)
-                first_line += f" : {link.label:.20}"
+                first_line += f" : {link.label:30}"
                 menu_text  += self.terminal.make_box_string(first_line)
 
                 extra_info_list = [link.filesize] + link.notes
