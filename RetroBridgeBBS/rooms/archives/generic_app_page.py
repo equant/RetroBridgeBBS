@@ -14,11 +14,18 @@ containted within the list 'files'.
 
 
 class GenericAppPage(archives.Room):
-    archive_name = 'user_entered_url'    # used in filepath, so no weird characters
+    archive_id = 'generic_app_page'    # used in filepath, so no weird characters
+    archive_name = 'generic_app_page'
 
     def __init__(self, user_session, files=None):
-        self.files = files
+        if files is not None:
+            self.files = files
+        else:
+            self.files = self.get_files()
         rooms.Room.__init__(self, user_session)
+
+    def get_files(self):
+        pass
 
     def run_room(self):
         logging.debug(f"Running a GenericAppPage for the file/s: {self.files}")
@@ -35,7 +42,7 @@ class GenericAppPage(archives.Room):
         """
         entry = {
                "key" : None,
-              "label": link.filename,
+              "label": link.metadata['filename'],
            "command" : self.get_file_from_archive,
               "args" : { 'link':link },
               "test" : None

@@ -24,8 +24,8 @@ if __name__ == "__main__":
 
     device_managers_to_start = [
             { 'name':'Node 0', 'class':RetroBridgeBBS.device.manager.ConsoleManager, 'args':[] },
-            #{ 'name':'Node 1', 'class':RetroBridgeBBS.device.manager.SerialManager, 'args':['/dev/ttyUSB0', 57600]},
-            { 'name':'Node 2', 'class':RetroBridgeBBS.device.manager.TelnetManager, 'args':['', 3030]},
+            #{ 'name':'Node 1', 'class':RetroBridgeBBS.device.manager.SerialManager, 'args':['/dev/ttyUSB1', 57600]},
+            #{ 'name':'Node 2', 'class':RetroBridgeBBS.device.manager.TelnetManager, 'args':['', 3030]},
     ]
 
     config = dict()

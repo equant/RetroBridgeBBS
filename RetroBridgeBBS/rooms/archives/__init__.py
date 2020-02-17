@@ -28,54 +28,44 @@ class Link(object):
     Links is a base class to create File and Directory objects.
     """
 
-    filesize      = None
-    header_loaded = False
-    notes         = []
-    description   = None
-    category      = None
-    category      = None
-    label         = None
 
     def __init__(self, soup_link, base_url,
                        translate_url_function = None,
-                       filename               = None,
-                       label                  = None,
-                       description            = None,
-                       notes                  = None,
-                       filesize               = None,
-                       category               = None):
+                       metadata = None):
 
         self.soup_link   = soup_link
         self.base_url    = base_url
-        logging.debug(f"Link() base_url = {base_url}")
-        if filename is not None:
-            self.filename = filename
-        else:
-            self.filename = soup_link.attrs['href'].split("/")[-1]
-        if category is not None:
-            self.category = category
-        if filesize is not None:
-            self.filesize = filesize
-        if notes is not None:
-            logging.debug("Link() initialized with notes()")
-            logging.debug(notes)
-            self.notes = notes
-        else:
-            self.notes = []
-        if description is not None:
-            self.description = description
-        if label is not None:
-            self.label = label
-        else:
-            if soup_link.text.startswith("http"):
-                self.label = ""
-            else:
-                self.label = soup_link.text
-
         self.url = urljoin(base_url, soup_link.attrs['href'])
 
+        if metadata is not None:
+            self.metadata = metadata
+        else:
+            self.metadata      = {
+                            'filename'      : None,
+                            'filesize'      : None,
+                            'category'      : None,
+                            'rating'        : None,
+                            'label'         : None,
+                            'description'   : None,
+                            'compatability' : None,
+                            'compression_note' : None,
+                            'notes'         : [],
+                        }
+
+        self.header_loaded = False
+
+        if self.metadata['filename'] is None:
+            self.metadata['filename'] = soup_link.attrs['href'].split("/")[-1]
+        if self.metadata['label'] is None:
+            if soup_link.text.startswith("http"):
+                self.metadata['label'] = ""
+            else:
+                self.metadata['label'] = soup_link.text
+
+
     def __repr__(self):
-        return self.filename
+        return self.metadata['filename']
+
 
 class Directory(Link):
     """
@@ -94,10 +84,10 @@ class File(Link):
     def load_header_info(self):
         logging.debug("load_header_info()")
         if self.header_loaded is False:
-            logging.debug(f"Loading header... Checking extension of {self.filename}")
+            logging.debug(f"Loading header... Checking extension of {self.metadata['filename']}")
             self.header_loaded = True
-            if self.filename[-4:] in ['.sit', '.SIT']:
-                logging.debug(f"Filename: {self.filename} matches!")
+            if self.metadata['filename'][-4:] in ['.sit', '.SIT']:
+                logging.debug(f"Filename: {self.metadata['filename']} matches!")
                 # DL Headers and look at files
                 headers = {"Range": "bytes=0-200", 'User-Agent': USER_AGENT}
                 #full_url = _url.replace("/sites", "http://mirror.macintosharchive.org")
@@ -106,19 +96,20 @@ class File(Link):
                     r = re.compile(p[0])
                     m = r.match(header)
                     if m:
-                        self.notes.append(p[1])
-            if self.filesize is None:
+                        self.metadata['notes'].append(p[1])
+            if self.metadata['filesize'] is None:
                 _r = requests.head(self.url, headers={'User-Agent': USER_AGENT})
                 if 'Content-Length' in _r.headers:
                     size_in_bytes = int(_r.headers['Content-Length'])
-                    self.filesize = f"{round(size_in_bytes / 1000)}k"
+                    self.metadata['filesize'] = f"{round(size_in_bytes / 1000)}k"
                 else:
-                    self.filesize = '??k'
+                    self.metadata['filesize'] = '??k'
 
 
 class Room(rooms.Room):
     USER_AGENT = USER_AGENT
-    archive_name = 'archive'    # used in filepath, so no weird characters
+    archive_id = 'archive'    # used in filepath, so no weird characters
+    archive_name = 'archive'
 
     done = False
 
@@ -148,18 +139,18 @@ class Room(rooms.Room):
         import RetroBridgeBBS.rooms.archives.generic_app_page as generic_app_page
         entry = {
                "key" : None,
-              "label": link.filename,
+              "label": link.metadata['filename'],
            "command" : generic_app_page.GenericAppPage,
               "args" : { 'files':[link] },
               "test" : None
         }
         return entry
 
-    def follow_link(self, link):
-        logging.debug(f"Here we are, following the link for {link}!")
-        link.load_header_info()
-        logging.debug(f"{link} size: {link.filesize}")
-        logging.debug(f"{link} notes: {link.notes}")
+    #def follow_link(self, link):
+        #logging.debug(f"Here we are, following the link for {link}!")
+        #link.load_header_info()
+        #logging.debug(f"{link} size: {link.filesize}")
+        #logging.debug(f"{link} notes: {link.notes}")
 
     def extract_links(self, soup):
         """
@@ -212,12 +203,13 @@ class Room(rooms.Room):
         #dl_url  = file_metadata['url']
         #dl_file = file_metadata['name']
         dl_url   = link.url
-        dl_file  = link.filename
+        dl_file  = link.metadata['filename']
         full_url = link.url
+        #breakpoint()
         self.terminal.writeln(f"Starting DL of {dl_file}")
         #full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
-        myfile = requests.get(full_url)
-        local_save_dir = os.path.join(self.bbs.archive_downloads_path, self.archive_name)
+        myfile = requests.get(full_url, headers={'User-Agent': self.USER_AGENT})
+        local_save_dir = os.path.join(self.bbs.archive_downloads_path, self.archive_id)
         pathlib.Path(local_save_dir).mkdir(parents=True, exist_ok=True)
         saved_dl = os.path.join(local_save_dir, f"{dl_file}")
         open(saved_dl, 'wb').write(myfile.content)
@@ -231,101 +223,3 @@ class Room(rooms.Room):
 
 
 
-
-def parse_web_tree(soup):
-    """
-    parse_web_tree isn't used.  It's here for reference.
-    """
-
-    all_links = soup.findAll('a')
-
-    # remove all of the links before (and including)
-    # "Parent Directory"
-    for _idx, _l in enumerate(all_links):
-        if _l.text == 'Parent Directory':
-            break
-    links = all_links[_idx+1:-1]
-
-    all_rows = soup.findAll("tr")
-    size_rows = all_rows[3:-1]
-
-    # Break up links into different groups...
-    # Files
-    # Subcategories
-    # Abstract/s
-    # ignored links
-
-    ignored_links      = []
-    sub_category_links = []
-    file_links         = []
-    abstract_links     = []
-    unsorted_links     = []
-
-    ignore_url_patterns= [
-        '^mailto:'        
-    ]
-    ignore_text_patterns = ['^\s*$']
-
-    sub_category_url_patterns  = ['^_\.*']
-    sub_category_text_patterns = []
-
-    abstract_url_patterns  = []
-    abstract_text_patterns = ['.*abstracts\.txt$']
-
-    file_url_patterns  = ['.*\..*']
-    file_text_patterns = []
-
-    for idx, link in enumerate(links):
-        for p in ignore_url_patterns:
-            r = re.compile(p)
-            m = r.match(link.attrs['href'])
-            if m:
-                ignored_links.append([link, p])
-                break
-        for p in ignore_text_patterns:
-            r = re.compile(p)
-            m = r.match(link.text)
-            if m:
-                ignored_links.append([link, p])
-                break
-
-        for p in abstract_url_patterns:
-            r = re.compile(p)
-            m = r.match(link.attrs['href'])
-            if m:
-                abstract_links.append([link, p])
-                break
-        for p in abstract_text_patterns:
-            r = re.compile(p)
-            m = r.match(link.text)
-            if m:
-                abstract_links.append([link, p])
-                break
-
-        for p in sub_category_url_patterns:
-            r = re.compile(p)
-            m = r.match(link.attrs['href'])
-            if m:
-                sub_category_links.append([link, p])
-                break
-        for p in sub_category_text_patterns:
-            r = re.compile(p)
-            m = r.match(link.text)
-            if m:
-                sub_category_links.append([link, p])
-                break
-
-        for p in file_url_patterns:
-            r = re.compile(p)
-            m = r.match(link.attrs['href'])
-            if m:
-                file_links.append([link, p])
-                break
-        for p in file_text_patterns:
-            r = re.compile(p)
-            m = r.match(link.text)
-            if m:
-                _date = s.findAll('td')[2].text.split(" ")[0]
-                _size = s.findAll('td')[-2].text
-                file_links.append([link, p])
-                break

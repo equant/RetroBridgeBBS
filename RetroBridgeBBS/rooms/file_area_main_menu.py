@@ -5,6 +5,7 @@ import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives.garden.search_garden
 import RetroBridgeBBS.rooms.archives.user_entered_url
 import RetroBridgeBBS.rooms.archives.savagetaylor
+import RetroBridgeBBS.rooms.archives.infomac
 
 class FileAreaMainMenu(rooms.Room):
 
@@ -21,6 +22,12 @@ class FileAreaMainMenu(rooms.Room):
                "key" : "G",
               "label": "Search Macintosh Garden Downloads",
            "command" : RetroBridgeBBS.rooms.archives.garden.search_garden.SearchGarden,
+              "test" : None
+            },
+            {
+               "key" : "I",
+              "label": "Browse Info-Mac Archive",
+           "command" : RetroBridgeBBS.rooms.archives.infomac.Room,
               "test" : None
             },
             {

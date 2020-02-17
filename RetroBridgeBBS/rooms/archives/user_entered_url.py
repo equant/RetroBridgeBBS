@@ -8,7 +8,8 @@ import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives as archives
 
 class UserEnteredUrl(archives.Room):
-    archive_name = 'user_entered_url'    # used in filepath, so no weird characters
+    archive_id = 'user_entered_url'    # used in filepath, so no weird characters
+    archive_name = 'user_entered_url'
 
     def __init__(self, user_session, url=None):
         if url is None:

@@ -85,6 +85,7 @@ class Menu(object):
 
         self.validate_menu_keys()   # doesn't just validate, but fixes them too.
         menu_text = self.terminal.make_box_hr()
+        WIDTH = self.terminal.TERM_WIDTH
 
         if self.title is not None:
             menu_text += self.terminal.make_box_title(self.title)
@@ -94,8 +95,8 @@ class Menu(object):
             import textwrap
             from textwrap import wrap, dedent
             intro_text = self.menu_intro
-            intro_as_list = wrap(raw_desc, WIDTH-4)
-            for line in desc_list:
+            intro_as_list = wrap(intro_text, WIDTH-4)
+            for line in intro_as_list:
                 menu_text += self.terminal.make_box_string(line)
             menu_text += self.terminal.make_box_hr()
 
@@ -108,10 +109,10 @@ class Menu(object):
 
                 first_line = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 command_length = len(first_line)
-                first_line += f" : {link.label:30}"
+                first_line += f" : {link.metadata['label']:30}"
                 menu_text  += self.terminal.make_box_string(first_line)
 
-                extra_info_list = [link.filesize] + link.notes
+                extra_info_list = [link.metadata['filesize']] + link.metadata['notes']
                 extra_string = "/".join(extra_info_list)
                 menu_text  += self.terminal.make_box_string(" " * command_length + " : " + extra_string)
             else:
@@ -122,8 +123,8 @@ class Menu(object):
             import textwrap
             from textwrap import wrap, dedent
             outro_text = self.menu_outro
-            outro_as_list = wrap(raw_desc, WIDTH-4)
-            for line in desc_list:
+            outro_as_list = wrap(outro_text, WIDTH-4)
+            for line in outro_as_list:
                 menu_text += self.terminal.make_box_string(line)
             menu_text += self.terminal.make_box_hr()
 
@@ -175,7 +176,8 @@ class Menu(object):
 
         #self.terminal.color_test()
         self.terminal.writeln(self.menu_text)
-        c = self.terminal.character_prompt("RetroBridgeBBS")
+        #c = self.terminal.character_prompt("RetroBridgeBBS")
+        c = self.terminal.string_prompt("RetroBridgeBBS")
         c = c.upper()
 
         logging.debug(f"Keypress: {c}")

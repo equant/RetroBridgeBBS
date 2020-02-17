@@ -17,11 +17,13 @@ self = foo()
 url = 'https://macintoshgarden.org/games/maze-wars'
 url = 'https://macintoshgarden.org/apps/stuffit-expander-55'
 url = 'https://macintoshgarden.org/games/the-oregon-trail-ii'
+url = 'https://macintoshgarden.org/apps/zterm'
 
 page = requests.get(url, headers={'User-Agent': self.USER_AGENT})
 # html.parser has issues correctly parsing macintoshgarden div tags.
 #soup = BeautifulSoup(page.content, 'html.parser')
-soup = BeautifulSoup(page.content, 'html5lib')
+#soup = BeautifulSoup(page.content, 'html5lib')
+soup = BeautifulSoup(page.content, 'lxml')
 
 descr = soup.findAll("div", {"class": "descr"})
 descr_rows = soup.findAll("tr")
