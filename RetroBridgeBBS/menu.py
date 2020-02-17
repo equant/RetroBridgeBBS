@@ -119,6 +119,11 @@ class Menu(object):
                 _string = self.make_command_entry_string(command_entry['key'], command_entry['label'])
                 menu_text += self.terminal.make_box_string(_string)
 
+        #if self.menu_intro is not None:
+            #if metadata['description'] is not None:
+                #if len(metadata['description'] > 1):
+                    #self.menu_outro = link.metadata['description']
+
         if self.menu_outro is not None:
             import textwrap
             from textwrap import wrap, dedent
@@ -173,19 +178,20 @@ class Menu(object):
 
         if self.menu_text is None:
             self.menu_text = self.generate_menu_text()
+        global_keys     = [x['key'] for x in Menu.global_commands_list]
+        local_menu_keys = [x['key'] for x in self.commands_list]
 
         #self.terminal.color_test()
         self.terminal.writeln(self.menu_text)
+        c = self.terminal.smart_prompt("RetroBridgeBBS", local_menu_keys + global_keys)
         #c = self.terminal.character_prompt("RetroBridgeBBS")
-        c = self.terminal.string_prompt("RetroBridgeBBS")
+        #c = self.terminal.string_prompt("RetroBridgeBBS")
         c = c.upper()
 
         logging.debug(f"Keypress: {c}")
         logging.debug(f"  length: {len(c)}")
         logging.debug(f"    type: {type(c)}")
 
-        global_keys     = [x['key'] for x in Menu.global_commands_list]
-        local_menu_keys = [x['key'] for x in self.commands_list]
         if c in global_keys:
             logging.debug(f"{c} found in global_keys: {global_keys}")
             global_command_idx = global_keys.index(c)

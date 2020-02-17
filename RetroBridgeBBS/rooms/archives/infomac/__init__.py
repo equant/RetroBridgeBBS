@@ -6,6 +6,7 @@ import logging
 import RetroBridgeBBS.rooms as rooms
 import RetroBridgeBBS.file_transfer as transfer
 import RetroBridgeBBS.rooms.archives as archives
+from RetroBridgeBBS.rooms.archives import File, Directory
 
 class Patterns(object):
     file_url_patterns  = ['^.*\.(?!html$|htm$|php$|pdf$)[^\.]+$']
@@ -21,20 +22,78 @@ class Room(archives.Room):
     def __init__(self, user_session, url=None):
         if url is None:
             url = 'http://mirror.macintosharchive.org/archive.info-mac.org/'
+        self.abstract_dict = {}
         archives.Room.__init__(self, user_session, url)
 
     def run_room(self):
         self.get_page(self.url)
         file_links, sub_category_links, abstract_links, ignored_links = self.parse_web_tree(self.soup)
-        breakpoint()
 
-        """
+        if len(abstract_links) == 1:
+            self.abstract_file = File(abstract_links[0][0], base_url=self.url)
+            self.parse_abstract(self.abstract_file)
+
+
         self.menu_list = []
-        for link in self.extracted_links_dict['files']:
+
+        for link, matching_pattern in sub_category_links:
+            _dir = Directory(link, base_url=self.url)
+            self.menu_list.append(self.create_menu_entry_for_directory(_dir))
+
+        for link,p in file_links:
+            #link = File(link, base_url=self.url)
+            if link.metadata['filename'] in self.abstract_dict.keys():
+                link.metadata['description'] = self.abstract_dict[link.metadata['filename']][0:100]
             self.menu_list.append(self.create_menu_entry(link))
+
         self.do_menu(menu_list=self.menu_list, title=self.archive_name)
+
         return
+
+    def parse_abstract(self, abstract):
+        foo = requests.get(abstract.url, headers={'User-Agent': self.USER_AGENT})
+        A = [x.strip() for x in foo.text.split("####")]
+        for entry in A[1:]:
+            if entry.startswith("LINK"):
+                continue
+            try:
+                entry_type, filename = entry.split(r'****')[0].split()
+                entry_type, filename = entry.split(r'****')[0].split()
+                description = " ".join(re.split(r'\s\s+', entry.split('****')[1]))
+                self.abstract_dict[filename] = description
+            except:
+                logging.error("Something went wrong with abstract.txt parsing")
+                breakpoint()
+
+
+    def create_menu_entry_for_directory(self, link):
         """
+        link is a Link instance
+        """
+        import RetroBridgeBBS.rooms.archives.generic_app_page as generic_app_page
+        entry = {
+               "key" : None,
+              "label": link.metadata['label'],
+           "command" : Room,
+              "args" : { 'url':link.url },
+        }
+        return entry
+
+
+    def create_menu_entry(self, link):
+        """
+        link is a Link instance
+        """
+        import RetroBridgeBBS.rooms.archives.generic_app_page as generic_app_page
+        entry = {
+               "key" : None,
+              "label": link.metadata['filename'],
+           "command" : generic_app_page.GenericAppPage,
+              "args" : { 'files':[link] },
+              "test" : None
+        }
+        return entry
+
 
 
     def parse_web_tree(self, soup):
@@ -81,7 +140,6 @@ class Room(archives.Room):
         file_text_patterns = []
 
         for idx, link in enumerate(links):
-            breakpoint()
             for p in ignore_url_patterns:
                 r = re.compile(p)
                 m = r.match(link.attrs['href'])
@@ -125,15 +183,19 @@ class Room(archives.Room):
                 r = re.compile(p)
                 m = r.match(link.attrs['href'])
                 if m:
-                    file_links.append([link, p])
+                    F = File(link, base_url=self.url)
+                    F.metadata['timestamp'] = size_rows[idx].findAll('td')[2].text.split(" ")[0]
+                    F.metadata['filesize'] = size_rows[idx].findAll('td')[-2].text
+                    file_links.append([F, p])
                     break
             for p in file_text_patterns:
                 r = re.compile(p)
                 m = r.match(link.text)
                 if m:
-                    _date = s.findAll('td')[2].text.split(" ")[0]
-                    _size = s.findAll('td')[-2].text
-                    file_links.append([link, p])
+                    #_date = s.findAll('td')[2].text.split(" ")[0]
+                    #_size = s.findAll('td')[-2].text
+                    F = File(link, base_url=self.url)
+                    file_links.append([F, p])
                     break
 
-            return file_links, sub_category_links, abstract_links, ignored_links
+        return file_links, sub_category_links, abstract_links, ignored_links

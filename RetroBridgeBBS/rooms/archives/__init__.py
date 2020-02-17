@@ -69,7 +69,6 @@ class Link(object):
 
 class Directory(Link):
     """
-    Unused.  Deprecated?
     """
     TYPE = 'Directory'
 
