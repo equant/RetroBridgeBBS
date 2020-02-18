@@ -168,8 +168,6 @@ class Room(rooms.Room):
                 m = r.match(parsed_url.path.split('/')[-1])
                 if m:
                     f = File(link, base_url=self.url)
-                    #if link.attrs['href'].split("/")[-1] == 'OS_608_100MB.zip':
-                        #breakpoint()
                     files.append(f)
                     break
             for p in Patterns.file_text_patterns:
@@ -204,7 +202,6 @@ class Room(rooms.Room):
         dl_url   = link.url
         dl_file  = link.metadata['filename']
         full_url = link.url
-        #breakpoint()
         self.terminal.writeln(f"Starting DL of {dl_file}")
         #full_url = self.massage_download_url(dl_url, file_metadata=file_metadata)
         myfile = requests.get(full_url, headers={'User-Agent': self.USER_AGENT})

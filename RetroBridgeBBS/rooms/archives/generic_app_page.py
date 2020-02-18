@@ -17,7 +17,10 @@ class GenericAppPage(archives.Room):
     archive_id = 'generic_app_page'    # used in filepath, so no weird characters
     archive_name = 'generic_app_page'
 
-    def __init__(self, user_session, files=None):
+    def __init__(self, user_session, files=None, menu_title="Available Downloads", menu_intro=None, menu_outro=None):
+        self.menu_intro = menu_intro
+        self.menu_outro = menu_outro
+        self.menu_title = menu_title
         if files is not None:
             self.files = files
         else:
@@ -33,7 +36,11 @@ class GenericAppPage(archives.Room):
         for link in self.files:
             link.load_header_info()
             self.menu_list.append(self.create_menu_entry(link))
-        self.do_menu(menu_list=self.menu_list, title="Available Downloads", menu_type='Download')
+        self.do_menu(menu_list  = self.menu_list,
+                     title      = self.menu_title,
+                     menu_intro = self.menu_intro,
+                     menu_outro = self.menu_outro,
+                     menu_type  = 'Download')
         return
 
     def create_menu_entry(self, link):

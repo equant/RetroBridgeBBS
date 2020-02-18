@@ -33,19 +33,22 @@ class Room(archives.Room):
             self.abstract_file = File(abstract_links[0][0], base_url=self.url)
             self.parse_abstract(self.abstract_file)
 
-
         self.menu_list = []
 
         for link, matching_pattern in sub_category_links:
             _dir = Directory(link, base_url=self.url)
             self.menu_list.append(self.create_menu_entry_for_directory(_dir))
 
+
         for link,p in file_links:
             #link = File(link, base_url=self.url)
             if link.metadata['filename'] in self.abstract_dict.keys():
-                link.metadata['description'] = self.abstract_dict[link.metadata['filename']][0:100]
+                if link.metadata['filename'] == 'robots.txt':
+                    continue
+                desc = self.abstract_dict[link.metadata['filename']].strip()[0:1300]
+                link.metadata['description'] = desc
+                menu_intro = desc
             self.menu_list.append(self.create_menu_entry(link))
-
         self.do_menu(menu_list=self.menu_list, title=self.archive_name)
 
         return
@@ -89,7 +92,7 @@ class Room(archives.Room):
                "key" : None,
               "label": link.metadata['filename'],
            "command" : generic_app_page.GenericAppPage,
-              "args" : { 'files':[link] },
+           "args" : { 'files':[link], 'menu_intro':link.metadata['description'], 'menu_title':f"{self.archive_name} Download: {link.metadata['filename']}" },
               "test" : None
         }
         return entry

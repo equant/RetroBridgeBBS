@@ -53,15 +53,23 @@ class BaseTerminal(object):
         self.write(f"{prompt}" + self.PROMPT_CHARACTER)
         typed = ""
         limit = len(max(possible_strings, key=len))
+        logging.debug(f"smart_prompt(): limit is {limit}")
         while len(typed) <= limit:
             typed_character = self.read()
+            logging.debug(f"smart_prompt(): typed character: '{typed_character}'")
+            if typed_character in (self.CRLF, '\n', '\r', '\t', '\r\x00', self.NL, '', '\r\x00', b'\r\x00'):
+                logging.debug(f"smart_prompt(): leaving early (#1) with ({typed_character})")
+                break
+            if "\x00" in typed_character:
+                logging.debug(f"smart_prompt(): leaving early (#2) with ({typed_character})")
+                break
             typed += typed_character
             possible_matches = [x for x in possible_strings if x.startswith(typed)]
+            logging.debug(f"smart_prompt(): possible_matches...")
+            logging.debug(f"{possible_matches}")
             if len(possible_matches) < 2:
                 break
-            if typed_character in (self.CRLF, '\n', '\r', '\t', '\r\x00'):
-                break
-        return typed_character
+        return typed
 
     def character_prompt(self, prompt):
         self.write(f"{prompt}" + self.PROMPT_CHARACTER)

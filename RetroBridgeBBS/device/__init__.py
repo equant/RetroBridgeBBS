@@ -28,8 +28,10 @@ class BaseDeviceIOClass(object):
     def read(self):
         input_character = input()
         if type(input_character) == bytes:
+            logging.debug(f"DeviceIO(): input_character is bytes")
             return input_character.decode()
         else:
+            logging.debug(f"DeviceIO(): input_character is not bytes")
             return input_character
 
 
