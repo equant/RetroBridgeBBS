@@ -43,6 +43,7 @@ _Some of this is implemented, some is not_
 * Search and download files from supported online archives
     * Supported archives:
         * Macintosh Garden [http://www.macintoshgarden.org/]
+        * InfoMac Archive
 * .SIT algorithm identification 
     * Examines headers of compressed .SIT files _before_ you download them and lets you know if they use early (pre 5.5) or later StuffIt algorithms so you don't download something you can't uncompress on an old Macintosh.
 * Transfer files to your retro computer
@@ -80,6 +81,18 @@ For this to be useful, you are expected to have:
 git clone https://github.com/equant/RetroBridgeBBS
 sudo pip install pyserial
 sudo pip install beautifulsoup4
+```
+
+### Installing the X/Y/ZMODEM Tools
+
+#### Arch linux
+```
+sudo pacman -S lrzsz
+```
+
+#### Ubuntu
+```
+sudo apt install lrzsz
 ```
 
 ### Starting the bbs
