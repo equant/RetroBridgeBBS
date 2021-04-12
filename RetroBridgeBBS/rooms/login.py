@@ -21,3 +21,4 @@ class Login(rooms.Room):
         else:
             user = users.User(username)
         self.user_session.user = user
+
