@@ -1,6 +1,4 @@
 """
-This script is still in the testing phases, and is not intended for prime time.
-
 Useful:
     python -m serial.tools.list_ports -v
 """
